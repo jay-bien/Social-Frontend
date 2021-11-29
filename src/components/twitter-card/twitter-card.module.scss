@@ -1,0 +1,36 @@
+
+.twitter-card{
+
+
+    &-footer{
+        &__icon{
+            width: 1.5em;
+            height: 1.5em;
+
+            path{
+              stroke: red;
+              background-color: red;
+            }
+
+            stroke: red;
+
+        }
+    }
+
+    
+ 
+}
+
+.icon{
+  width: 1.5em;
+  height: 1.5em;
+
+  path{
+    stroke: red;
+    background-color: red;
+  }
+
+  stroke: red;
+
+
+}

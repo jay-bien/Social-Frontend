@@ -6,27 +6,7 @@ import './header.module.scss';
 import { AuthModalContext, UserContext, PostFormContext } from '../../context';
 
 
-const initialTopics = [
-    "Love",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-    "Tech",
-]
+
 
 
 
@@ -92,17 +72,7 @@ const Header = ( props ) => {
             </nav>
 
 
-            <div className="header__links swiper">
-            <ul className="header__links-list swiper-wrapper">
-                {
-                    initialTopics && initialTopics.length && initialTopics.map( ( link, idx) =>
-                        <a href="#j" key={idx}> {link} </a>
-                    )
-                }
-  
 
-            </ul>
-            </div>
         </header>
     )
 }

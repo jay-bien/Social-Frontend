@@ -81,7 +81,6 @@ try{
 
 
 <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
-<h1> Register </h1>
 
   <div className="sm:mx-auto sm:w-full sm:max-w-md">
 
@@ -91,7 +90,9 @@ try{
       Already registered?
       <Link
         href="/signin"
-      />
+      >
+          Sign in instead
+        </Link>
     </p>
   </div>
 
@@ -154,62 +155,10 @@ try{
 
 
 
-            <form>
-            <label>
-              <span className="auth-modal__email">
-                Email
-              </span>
-              <input
-              onChange={ e => { setEmail( e.target.value ) } }
-              value={ email }
-                className=""
-                >
-              
-              </input>
-              </label>
-            <label>
-              <span className="auth-modal__password">
-                Password
-              </span>
-              <input
-              onChange={ e => { setPassword( e.target.value ) } }
-              value={ password }
-                className=""
-                >
-              
-              </input>
-
-            </label>
-        
-                <label>
-                  <span className="auth-modal__password-confirm">
-                    Password Confirmation
-                  </span>
-                  <input
-                  onChange={ e => { setPasswordConfirm( e.target.value ) } }
-                  value={ passwordConfirm }
-                    className=""
-                    >
-                  
-                  </input>
-    
-                </label>
-
-
-           
-                <button
-                onClick={(e)=> { e.preventDefault(); onSignup()} }
-              >
-                Register
-              </button>
-
-
-
-          </form>
+       
 
           </div>
-            { visibleClass}
-            { modalType }
+   
         </div>
       </main>
       </div>

@@ -7,37 +7,40 @@ import axios from 'axios';
 import Link from 'next/link';
 
 
-const [ email, setEmail ] = React.useState('');
-const [ password, setPassword ] = React.useState('');
-const [ error, setError ] = React.useState('');
-const [ loading, setLoading ] = React.useState(false);
-const [ modalType, setModalType ] = React.useState('login');
 
 
 
 
-
-const Index = ( props ) => {
+const Index = () => {
   const router = useRouter();
  
-console.log({ props });
+  const [ email, setEmail ] = React.useState('');
+  const [ password, setPassword ] = React.useState('');
+  const [ passwordConfirm, setPasswordConfirm ] = React.useState('');
+  const [ error, setError ] = React.useState('');
+  const [ loading, setLoading ] = React.useState(false);
 
 
 
 
-
-}
-const onLogin = async () => {
+const onLogin = async ( ) => {
 const body = {
-  email,password
+  email,
+  password,
 }
-const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + '/signin/',
-body,
-{});
+try{
+  const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + '/signin/',
+  body,
+  {} );
+  
+  if( response.status === 201 ){
+    user.setUser( response.data );
+  }
+  console.log({ response });
+} catch( e ){
+  console.log({ e });
+}
 
-if( response.status === 200 ){
-  console.log(response.data);
-  user.setUser( response.data );
 }
 
 
@@ -47,7 +50,7 @@ if( response.status === 200 ){
     <Main
       meta={
         <Meta
-          title="Signin"
+          title="DAPP Signup"
           description=""
         />
       }
@@ -69,30 +72,26 @@ if( response.status === 200 ){
 
 
 <div className="max-w-7xl m-auto">
-<h1> Sign In </h1>
 </div>
-<div className={ visibleClass }>
+<div className="">
           <div className="modal_backdrop">
 
 
 <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
-<button
-              onClick={ () => modalContext.setShow(! modalContext.show )}
-            >
-              Exit modal
-            </button>
-           <h2>Login</h2>
-            
-      
+
   <div className="sm:mx-auto sm:w-full sm:max-w-md">
 
     <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
-    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
+    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      Login to your account
+      </h2>
     <p className="mt-2 text-center text-sm text-gray-600 max-w">
-      Not Registered?
+      Not registered?
       <Link
-      href="signup"
-      />
+        href="/signup"
+      >
+          Signup instead
+        </Link>
     </p>
   </div>
 
@@ -121,7 +120,9 @@ if( response.status === 200 ){
           </div>
         </div>
 
-\
+
+
+
 
 
         <div>
@@ -135,77 +136,10 @@ if( response.status === 200 ){
 
 
 
-            <form>
-            <label>
-              <span className="auth-modal__email">
-                Email
-              </span>
-              <input
-              onChange={ e => { setEmail( e.target.value ) } }
-              value={ email }
-                className=""
-                >
-              
-              </input>
-              </label>
-            <label>
-              <span className="auth-modal__password">
-                Password
-              </span>
-              <input
-              onChange={ e => { setPassword( e.target.value ) } }
-              value={ password }
-                className=""
-                >
-              
-              </input>
-
-            </label>
-            {
-              modalType === 'register' && (
-                <label>
-                  <span className="auth-modal__password-confirm">
-                    Password Confirmation
-                  </span>
-                  <input
-                  onChange={ e => { setPasswordConfirm( e.target.value ) } }
-                  value={ passwordConfirm }
-                    className=""
-                    >
-                  
-                  </input>
-    
-                </label>
-              )
-            }
-
-            {
-              modalType ==='login' &&
-              (
-                <button
-                onClick={(e)=> { e.preventDefault(); onLogin()} }
-              >
-                Login
-              </button>
-              )
-            }
-            {
-              modalType ==='register' &&
-              (
-                <button
-                onClick={(e)=> { e.preventDefault(); onSignup()} }
-              >
-                Register
-              </button>
-              )
-            }
-
-
-          </form>
+           
 
           </div>
-            { visibleClass}
-            { modalType }
+   
         </div>
       </main>
       </div>
@@ -216,14 +150,3 @@ if( response.status === 200 ){
 
 
 export default Index;
-
-
-
-
-
-
-
-
-
-
-

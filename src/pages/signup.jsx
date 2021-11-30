@@ -19,7 +19,7 @@ const Index = () => {
   const [ email, setEmail ] = React.useState('');
   const [ password, setPassword ] = React.useState('');
   const [ passwordConfirm, setPasswordConfirm ] = React.useState('');
-  const [ error, setError ] = React.useState('');
+  const [ errors, setErrors ] = React.useState('');
   const [ loading, setLoading ] = React.useState(false);
   const [ registerInfo, setRegisterInfo ] = useState({})
 
@@ -45,13 +45,21 @@ try{
 
 
 
-  console.log({ response });
   if( response.status === 201 ){
     console.log('SUCCESS');
+    const user = response.data;
   }
-  console.log({ response });
 } catch( e ){
-  console.log({ e });
+  console.log(" bad reqiuest ")
+  const errors = e.response.data;
+  console.log( typeof errors );
+  console.log({ errors });
+
+  if( Array.isArray( errors.errors )){
+    console.log(" is array ");
+    setErrors( errors.errors )
+  }
+
 }
 
 }
@@ -100,6 +108,22 @@ try{
           Sign in instead
         </Link>
     </p>
+  </div>
+
+  <div className="errors">
+      { errors && errors.map( ( err, idx) => {
+        return(
+        <div class="p-2">
+          <div class="inline-flex items-center bg-white leading-none text-pink-600 rounded-full p-2 shadow text-teal text-sm">
+            <span class="inline-flex bg-pink-600 text-white rounded-full h-6 px-3 justify-center items-center">Pink</span>
+            <span class="inline-flex px-2">
+              { idx }
+              { err.msg }
+              </span>
+          </div>
+        </div>
+        )
+      })}
   </div>
 
   <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

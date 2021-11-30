@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import styles from './text-card.module.scss';
 
@@ -30,10 +31,26 @@ export default function TextCard( props ) {
 
           
               <div >
+                <Link
+                href={
+                  {
+                    pathname: "/post",
+                    query:{
+                      title: title,
+                      id: id,
+                      content
+                    }
+                  }
+                }
+
+                className="hover:cursor-pointer"
+
+                >
                 <div  className={ styles.textCardImg}>
                 <h1>{ title }</h1> 
           
-                  </div>  
+                  </div> 
+                </Link>
                   <div className="text-card-body text-gray-900 py-5">
                     
 

@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { Meta } from '../layout/Meta';
@@ -15,7 +15,6 @@ import useRequest  from '../hooks/useRequest';
 
 
 const Index = () => {
-  const router = useRouter();
  
   const [ email, setEmail ] = React.useState('');
   const [ password, setPassword ] = React.useState('');
@@ -31,17 +30,23 @@ const Index = () => {
   const { doRequest, errors } = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + '/signup/',
     method: 'post',
-    body: {
-      email, password, passwordConfirm
-    }
+    body: registerInfo,
   })
 
 
 const onSignup = async (e  ) => {
   e.preventDefault();
 
-  doRequest();
+  console.log({registerInfo });
+  const response = await doRequest();
+  console.log({ response });
 
+  if(!errors){
+    console.log("No errors")
+  }
+  if( !errors && response.id  ){
+    router.push('/')
+  }
    
 
 

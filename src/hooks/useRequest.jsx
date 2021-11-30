@@ -2,15 +2,22 @@ import axios from 'axios';
 import { useState } from 'react';
 
 
-export default ( { 
-  url, method, body
+const useRequest =  ( { 
+  url, method, body, onSuccess
 } ) => {
 
   const [ errors, setErrors ] = useState( null );
 
   const doRequest = async  ( ) => {
+
+    console.log({ body }, {method }, { url }, { onSuccess});
     try{
+      setErrors( null );
       const response = await axios[method]( url, body );
+      console.log({ response });
+      if( onSuccess ){
+        onSuccess( response.data );
+      }
       return response.data;
     } catch( e ){
 
@@ -38,3 +45,5 @@ export default ( {
 
   return { doRequest, errors }
 }
+
+export default useRequest;

@@ -21,23 +21,33 @@ const Index = () => {
   const [ passwordConfirm, setPasswordConfirm ] = React.useState('');
   const [ error, setError ] = React.useState('');
   const [ loading, setLoading ] = React.useState(false);
+  const [ registerInfo, setRegisterInfo ] = useState({})
+
+  const onChange = ( el ) => {
+    setRegisterInfo({ ...registerInfo, [el.target.name]: el.target.value });
+    console.log({ registerInfo})
+  }
 
 
+const onSignup = async (e  ) => {
+  e.preventDefault();
+
+   
 
 
-const onSignup = async ( ) => {
-const body = {
-  email,
-  password,
-  passwordConfirm
-}
 try{
-  const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + '/signup/',
-  body,
-  {} );
-  
+  let response = await axios.post( 
+      process.env.NEXT_PUBLIC_API_URL + '/signup/', {
+      ...registerInfo
+  });
+
+ 
+
+
+
+  console.log({ response });
   if( response.status === 201 ){
-    user.setUser( response.data );
+    console.log('SUCCESS');
   }
   console.log({ response });
 } catch( e ){
@@ -70,10 +80,6 @@ try{
    
 
         
-
-
-
-
 <div className="max-w-7xl m-auto">
 </div>
 <div className="">
@@ -98,11 +104,12 @@ try{
 
   <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-      <form className="mb-0 space-y-6" action="#" method="POST">
+      <form className="mb-0 space-y-6" onSubmit={ onSignup } method="POST">
         <div>
           <label for="email" className="block text-sm font-medium text-gray-700">Email address</label>
           <div className="mt-1">
-            <input 
+            <input
+            onChange={ onChange } 
             id="email" name="email" type="email" autoComplete="email" required 
             className="w-full border border-grey-400 px-3 py-2 rounded-lg shadow-sm
             focus:outline-none focus:border-indigo-500" 
@@ -113,7 +120,8 @@ try{
         <div>
           <label for="password" className="block text-sm font-medium text-gray-700">Password</label>
           <div className="mt-1">
-            <input 
+            <input
+            onChange={  onChange } 
             className="w-full border border-grey-400 px-3 py-2 rounded-lg shadow-sm
             focus:outline-none focus:border-indigo-500" 
             id="password" name="password" type="password" autoComplete="current-password" required
@@ -124,7 +132,8 @@ try{
             <div>
             <label for="password2" className="block text-sm font-medium text-gray-700">Password Confirmation</label>
             <div className="mt-1">
-              <input 
+              <input
+              onChange={ onChange } 
               className="w-full border border-grey-400 px-3 py-2 rounded-lg shadow-sm
               focus:outline-none focus:border-indigo-500" 
               id="password2" name="password2" type="password" required
@@ -134,7 +143,7 @@ try{
 
 
 
-        <div class="flex items-center">
+        <div className="flex items-center">
           <input id="terms-and-privacy" name="terms-and-privacy" type="checkbox" className="" />
           <label for="terms-and-privacy" className="ml-2 block text-sm text-gray-900"
             >I agree to the

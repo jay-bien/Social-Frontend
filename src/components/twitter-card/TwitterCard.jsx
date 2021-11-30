@@ -9,13 +9,12 @@ import {
 export default function TwitterCard( props ) {
     const { data, onLike, onDislike, onDelete } = props;
 
-    console.log({ data });
-    console.log( data.title );
+
 
     const [ cardInfo, setCardInfo ] = useState({});
 
     useEffect(() => {
-      setCardInfo( prevState => setCardInfo( data), console.log({ cardInfo }) );
+      setCardInfo( prevState => setCardInfo( data) );
 
       return () => {
       

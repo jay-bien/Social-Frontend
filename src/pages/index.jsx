@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import { UserContext, AuthModalContext, PostFormContext } from '../context';
 import {  TwitterCard, TextCard, QACard, Header, AuthModal, PostModal } from '../components';
+import { parseCookies } from "../helpers/cookies"
 
 
 
@@ -167,7 +168,7 @@ const Index = () => {
         
 
 
-
+  
 
 <div className="comments max-w-7xl m-auto ">
 { allComments && allComments.length  && allComments.map( ( comment, index ) => {
@@ -230,3 +231,16 @@ export default Index;
 
 
 
+Index.getInitialProps = ({ req, res }) => {
+  console.log("huzzah");
+
+  console.log(req?.headers);
+  const data = parseCookies(req)
+
+
+  return {
+    
+  }
+
+
+}

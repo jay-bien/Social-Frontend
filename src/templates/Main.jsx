@@ -1,12 +1,58 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState} from 'react';
 
 import Link from 'next/link';
 
 import { AppConfig } from '../utils/AppConfig';
 
 
+import axios from 'axios';
 
-const Main = (props ) => (
+
+
+const Main = (props ) => {
+
+
+
+  const [ user, setUser ] = useState(null)
+
+
+  useEffect( async () => {
+
+    const fUsr = await localStorage.getItem('user');
+    console.log({fUsr});
+    if( fUsr){
+      const usr = JSON.parse( fUsr )
+      console.warn("User Exists");
+      setUser( usr );
+    }
+
+    const fetchUser =  async ( ) => {
+      try{
+        const response = await fetch( process.env.NEXT_PUBLIC_API_URL + '/currentUser/', {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        });
+        const json = await response.json();
+        return json;
+      } catch( err ) {
+        console.log( err );
+      }
+      return [];
+    }
+
+
+    return () => {
+    }
+  }, [ ])
+
+ 
+  
+  return (
+
+
   <div className="antialiased w-full text-gray-700 px-1 bg-white">
     {props.meta}
 
@@ -46,6 +92,10 @@ const Main = (props ) => (
 </svg>
     </Link>
 
+      {
+        user && user.email
+      }
+
   </div>
 </nav>
            
@@ -60,6 +110,8 @@ const Main = (props ) => (
 
 
     </div>
-);
+)};
+
+
 
 export { Main };

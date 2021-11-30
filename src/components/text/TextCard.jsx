@@ -12,10 +12,9 @@ export default function TextCard( props ) {
     const [ cardInfo, setCardInfo ] = useState({});
 
     useEffect(() => {
-      setCardInfo( prevState => setCardInfo( data), console.log({ cardInfo }) );
+      setCardInfo( prevState => setCardInfo( data) );
       
 
-      console.log(cardInfo.categories)
       return () => {
       
       }
@@ -39,10 +38,11 @@ export default function TextCard( props ) {
                     
 
                     {
-                      cardInfo && cardInfo.categories && cardInfo.categories.map( cat => {
+                      cardInfo && cardInfo.categories && cardInfo.categories.map( ( cat, idx ) => {
                         return(
 
                           <span
+                          key={idx }
                           class="
                             text-xs
                             px-2

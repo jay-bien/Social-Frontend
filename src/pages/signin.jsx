@@ -99,7 +99,7 @@ try{
     <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
       <form className="mb-0 space-y-6" action="#" method="POST">
         <div>
-          <label for="email" className="block text-sm font-medium text-gray-700">Email address</label>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
           <div className="mt-1">
             <input 
             id="email" name="email" type="email" autoComplete="email" required 
@@ -110,7 +110,7 @@ try{
         </div>
 
         <div>
-          <label for="password" className="block text-sm font-medium text-gray-700">Password</label>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
           <div className="mt-1">
             <input 
             className="w-full border border-grey-400 px-3 py-2 rounded-lg shadow-sm

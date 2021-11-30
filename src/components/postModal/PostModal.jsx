@@ -7,7 +7,7 @@ import './post-modal.module.scss';
 export default function PostModal( props ) {
 
 
- console.log({ props });
+
 
 
     const postModalContext = useContext(PostFormContext );
@@ -30,19 +30,15 @@ export default function PostModal( props ) {
     const [ loading, setLoading ] = useState(false);
     const [ error, setError ] = useState(false);
     const { categories } = props;
-    console.log({ categories });
    
 
     const onChange = ( el ) => {
         setPostInfo({ ...postInfo, [el.target.name]: el.target.value });
-        console.log({ postInfo})
       }
     
       const postData = async ( link, title, content ) => {
-        console.log( ` fetch ${link}`);
     
     
-        console.log({ link })
     
         return await fetch( process.env.NEXT_PUBLIC_API_URL + '/post/', {
           method: 'post',

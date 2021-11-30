@@ -6,8 +6,8 @@ import { Main } from '../templates/Main';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useRequest  from '../hooks/useRequest';
-
-
+import cookieCutter from 'cookie-cutter';
+import cookieJs from 'js-cookie';
 
 
 
@@ -41,10 +41,24 @@ const onSignup = async (e  ) => {
   const response = await doRequest();
   console.log({ response });
 
-  if(!errors){
-    console.log("No errors")
-  }
-  if( !errors && response.id  ){
+  if( response ){
+    
+
+    const usr = JSON.stringify( response )
+    localStorage && localStorage.setItem('user', usr )
+
+    console.log( response.headers );
+    console.log('where are cookies ')
+    const cookies = cookieCutter.get('Set-Cookie');
+    console.log({ cookies });
+    const cook1 = cookieJs.get('Set-Cookie');
+    const cook2 = cookieJs.get('jwt');
+    const cook3 = cookieJs.get('id');
+
+    console.log({ cook1}, {cook2}, {cook3});
+
+
+
     router.push('/')
   }
    
@@ -134,7 +148,7 @@ const onSignup = async (e  ) => {
     <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
       <form className="mb-0 space-y-6" onSubmit={ onSignup } method="POST">
         <div>
-          <label for="email" className="block text-sm font-medium text-gray-700">Email address</label>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
           <div className="mt-1">
             <input
             onChange={ onChange } 
@@ -146,7 +160,7 @@ const onSignup = async (e  ) => {
         </div>
 
         <div>
-          <label for="password" className="block text-sm font-medium text-gray-700">Password</label>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
           <div className="mt-1">
             <input
             onChange={  onChange } 
@@ -158,7 +172,7 @@ const onSignup = async (e  ) => {
         </div>
 
             <div>
-            <label for="password2" className="block text-sm font-medium text-gray-700">Password Confirmation</label>
+            <label htmlFor="password2" className="block text-sm font-medium text-gray-700">Password Confirmation</label>
             <div className="mt-1">
               <input
               onChange={ onChange } 

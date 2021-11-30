@@ -5,6 +5,7 @@ import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import useRequest  from '../hooks/useRequest';
 
 
 
@@ -19,7 +20,6 @@ const Index = () => {
   const [ email, setEmail ] = React.useState('');
   const [ password, setPassword ] = React.useState('');
   const [ passwordConfirm, setPasswordConfirm ] = React.useState('');
-  const [ errors, setErrors ] = React.useState('');
   const [ loading, setLoading ] = React.useState(false);
   const [ registerInfo, setRegisterInfo ] = useState({})
 
@@ -28,39 +28,49 @@ const Index = () => {
     console.log({ registerInfo})
   }
 
+  const { doRequest, errors } = useRequest({
+    url: process.env.NEXT_PUBLIC_API_URL + '/signup/',
+    method: 'post',
+    body: {
+      email, password, passwordConfirm
+    }
+  })
+
 
 const onSignup = async (e  ) => {
   e.preventDefault();
 
+  doRequest();
+
    
 
 
-try{
-  let response = await axios.post( 
-      process.env.NEXT_PUBLIC_API_URL + '/signup/', {
-      ...registerInfo
-  });
+// try{
+//   let response = await axios.post( 
+//       process.env.NEXT_PUBLIC_API_URL + '/signup/', {
+//       ...registerInfo
+//   });
 
  
 
 
 
-  if( response.status === 201 ){
-    console.log('SUCCESS');
-    const user = response.data;
-  }
-} catch( e ){
-  console.log(" bad reqiuest ")
-  const errors = e.response.data;
-  console.log( typeof errors );
-  console.log({ errors });
+//   if( response.status === 201 ){
+//     console.log('SUCCESS');
+//     const user = response.data;
+//   }
+// } catch( e ){
+//   console.log(" bad reqiuest ")
+//   const errors = e.response.data;
+//   console.log( typeof errors );
+//   console.log({ errors });
 
-  if( Array.isArray( errors.errors )){
-    console.log(" is array ");
-    setErrors( errors.errors )
-  }
+//   if( Array.isArray( errors.errors )){
+//     console.log(" is array ");
+//     setErrors( errors.errors )
+//   }
 
-}
+// }
 
 }
 
@@ -111,19 +121,8 @@ try{
   </div>
 
   <div className="errors">
-      { errors && errors.map( ( err, idx) => {
-        return(
-        <div class="p-2">
-          <div class="inline-flex items-center bg-white leading-none text-pink-600 rounded-full p-2 shadow text-teal text-sm">
-            <span class="inline-flex bg-pink-600 text-white rounded-full h-6 px-3 justify-center items-center">Pink</span>
-            <span class="inline-flex px-2">
-              { idx }
-              { err.msg }
-              </span>
-          </div>
-        </div>
-        )
-      })}
+    { errors }
+
   </div>
 
   <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

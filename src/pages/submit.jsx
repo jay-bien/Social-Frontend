@@ -179,7 +179,7 @@ const Submit = ( props ) => {
   <div className="App">
 
 
-    <main className="main bg-gray-100">
+    <main className="main">
 
 
 
@@ -188,8 +188,8 @@ const Submit = ( props ) => {
 
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
 
-          <section className="text-gray-600 body-font">
-              <h3> Create New Post  </h3>
+          <section className="text-gray-800 body-font">
+              <h3 className="font-bold text-center"> Create New Post  </h3>
            
 
  

@@ -37,9 +37,7 @@ const Index = () => {
 const onSignup = async (e  ) => {
   e.preventDefault();
 
-  console.log({registerInfo });
   const response = await doRequest();
-  console.log({ response });
 
   if( response ){
     
@@ -47,15 +45,12 @@ const onSignup = async (e  ) => {
     const usr = JSON.stringify( response )
     localStorage && localStorage.setItem('user', usr )
 
-    console.log( response.headers );
-    console.log('where are cookies ')
+
     const cookies = cookieCutter.get('Set-Cookie');
-    console.log({ cookies });
     const cook1 = cookieJs.get('Set-Cookie');
     const cook2 = cookieJs.get('jwt');
     const cook3 = cookieJs.get('id');
 
-    console.log({ cook1}, {cook2}, {cook3});
 
 
 
@@ -113,7 +108,7 @@ const onSignup = async (e  ) => {
     <div className="App">
 
 
-      <main className="main">
+      <main className="">
    
 
         
@@ -123,7 +118,7 @@ const onSignup = async (e  ) => {
           <div className="modal_backdrop">
 
 
-<div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
+<div className="min-h-screen flex flex-col justify-center py-12 px-6 lg:px-8">
 
   <div className="sm:mx-auto sm:w-full sm:max-w-md">
   <h1 className="text-6xl font-bold mx-auto text-center">

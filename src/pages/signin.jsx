@@ -72,7 +72,7 @@ localStorage && localStorage.setItem('user', usr);
     <div className="App">
 
 
-      <main className="main">
+      <main className="">
    
 
         
@@ -86,7 +86,7 @@ localStorage && localStorage.setItem('user', usr);
           <div className="modal_backdrop">
 
 
-<div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
+<div className="min-h-screen  flex flex-col justify-center py-12 px-6 lg:px-8">
 
   <div className="sm:mx-auto sm:w-full sm:max-w-md">
     <h1 className="text-6xl font-bold mx-auto text-center">

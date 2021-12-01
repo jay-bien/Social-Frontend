@@ -126,8 +126,11 @@ const onSignup = async (e  ) => {
 <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
 
   <div className="sm:mx-auto sm:w-full sm:max-w-md">
+  <h1 className="text-6xl font-bold mx-auto text-center">
+        DAP WIKI
+    </h1>
 
-    <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
+    {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" /> */}
     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
     <p className="mt-2 text-center text-sm text-gray-600 max-w">
       Already registered?

@@ -46,12 +46,12 @@ export default function TextCard( props ) {
                 className="hover:cursor-pointer"
 
                 >
-                <div  className={ styles.textCardImg}>
-                <h1>{ title }</h1> 
+                <div  className="h-56 bg-red-500 bg-opacity-10 rounded-lg flex justify-center items-center">
+                  <h1 className="text-red-900 text-center font-semibold  ">{ title }</h1> 
           
                   </div> 
                 </Link>
-                  <div className="text-card-body text-gray-900 py-5">
+                  <div className="text-card-body text-white py-5">
                     
 
                     {
@@ -68,6 +68,7 @@ export default function TextCard( props ) {
                             text-red-800
                             rounded
                             py-0.5
+                            mr-3
                           "
                         >
                           { cat }

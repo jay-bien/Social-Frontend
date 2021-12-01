@@ -1,10 +1,11 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import useRequest from '../hooks/useRequest';
 
 
 const categories = [
@@ -34,24 +35,33 @@ const Submit = ( props ) => {
     title: '',
     url: '',
     content: '',
-    type: '',
     tags: [],
     categories: []
   });
+  const [ user, setUser ] = useState("null");
   const [ formType, setFormType ] = useState("text");
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState(false);
+
+  const { doRequest, errors } = useRequest({
+    url: process.env.NEXT_PUBLIC_API_URL + '/post/',
+    method: 'post',
+    body: {
+      ...postInfo,
+      type: formType,
+      userId: user.id
+    }
+  })
+
  
 
   const onChange = ( el ) => {
       setPostInfo({ ...postInfo, [el.target.name]: el.target.value });
-      console.log({ postInfo})
     } 
   
     const postData = async ( link, title, content, categories, type ) => {
   
   
-      console.log({ link })
   
       return await fetch( process.env.NEXT_PUBLIC_API_URL + '/post/', {
         method: 'post',
@@ -74,7 +84,6 @@ const Submit = ( props ) => {
       const name = e.target.name;
       const isChecked = e.target.checked;
       const selectedCategories = postInfo.categories;
-      console.log({ name });
 
       if( isChecked ){
         const state = [ ...selectedCategories ];
@@ -89,8 +98,7 @@ const Submit = ( props ) => {
         })
       }
 
-      console.log({ selectedCategories });
-      console.log({ postInfo });
+
     }
   
   
@@ -98,13 +106,32 @@ const Submit = ( props ) => {
         e.preventDefault();
         setLoading( true );
         setError( false );
-        try{
-          const data = await postData( postInfo.link, postInfo.title, postInfo.content, postInfo.categories, formType );
-          console.log({ data });
-          setLoading( false );
-        } catch( e ){
+
+        const response = await doRequest();
+
+        if( response && response.data ){
+
+          setPostInfo(
+            {
+              title: '',
+              url: '',
+              content: '',
+              type: 'text',
+              tags: [],
+              categories: []
+            }
+          )
+          router.push('/');
+        } else {
 
         }
+        // try{
+        //   const data = await postData( postInfo.link, postInfo.title, postInfo.content, postInfo.categories, formType );
+        //   console.log({ data });
+        //   setLoading( false );
+        // } catch( e ){
+
+        // }
  
       };
 
@@ -116,6 +143,21 @@ const Submit = ( props ) => {
           ("sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-indigo-500 tracking-wider rounded-t")
           : ("sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider")
       }
+
+
+      useEffect( ()=> {
+
+
+        const user = localStorage.getItem('user');
+        if( user ){
+          const parsed = JSON.parse( user );
+          setUser( parsed );
+        }
+
+        return ()=>{
+
+        }
+      }, [  ])
 
 
       
@@ -147,7 +189,9 @@ const Submit = ( props ) => {
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
 
           <section className="text-gray-600 body-font">
-              <h3> Create New Post </h3>
+              <h3> Create New Post  </h3>
+           
+
  
 <div className="container px-5 py-6 mx-auto flex flex-wrap flex-col">
   <div className="flex mx-auto flex-wrap mb-20 ">
@@ -185,6 +229,9 @@ const Submit = ( props ) => {
 
 </div>
 </section>
+<div>
+{errors}
+</div>
 <Form 
   onChange={ onChange }
   onSubmit={ onSubmit }
@@ -296,8 +343,8 @@ Category
       
 
 
-    <button onClick={onSubmit}>
-      Post
+    <button className="btn mt-5" onClick={onSubmit}>
+      Send Post
     </button>
   </form>
   )

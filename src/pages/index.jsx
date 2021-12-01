@@ -162,7 +162,7 @@ const Index = () => {
     <div className="App">
 
 
-      <main className="main bg-white">
+      <main className="pt-10">
    
 
         
@@ -179,7 +179,7 @@ const Index = () => {
       onLike={ onLike }
       onDislike={ onDislike }
       onDelete={ onDelete }
-    key={ index } data={ comment }
+      key={ index } data={ comment }
       />
     )
 

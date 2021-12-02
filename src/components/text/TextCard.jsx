@@ -4,7 +4,7 @@ import styles from './text-card.module.scss';
 
 
 import {
-  Chat, ThumbUp, ThumbDown, BookMark, PaperAirplane, Remove
+  Chat, ThumbUp, ThumbDown, BookMark, PaperAirplane, Remove, Text
   } from '../icons';
 
 export default function TextCard( props ) {
@@ -47,6 +47,8 @@ export default function TextCard( props ) {
 
                 >
                 <div  className="h-56 bg-red-500 bg-opacity-10 rounded-lg flex justify-center items-center p-4 relative overflow-hidden">
+                <Text className={ styles.textIcon} />
+
                   <div className={ styles.imgPattern}>
                   <h1 className="text-red-900 text-center font-semibold  ">{ title }</h1> 
                   </div>

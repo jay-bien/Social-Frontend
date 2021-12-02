@@ -8,6 +8,11 @@ import { AppConfig } from '../utils/AppConfig';
 import axios from 'axios';
 import router from 'next/router';
 
+import {
+  Login, Logout, DocumentAdd,
+  UserAdd, User, Setttings
+ } from '../components/icons'
+
 
 
 const Main = (props ) => {
@@ -87,14 +92,19 @@ const Main = (props ) => {
     </div>
   </div> 
   <div className="navbar-end align-middle">
+    <div data-tip="New Post"
+    className="tooltip tooltip-bottom">
     <Link
       className="hover:cursor-pointer"
       href="/submit"
     >
-<button className="btn mr-3">
-    Submit Post
+<button className="btn btn-secondary mr-6">
+    <DocumentAdd
+        className="text-green-500"
+    />
 </button>
     </Link>
+    </div>
 {  !user &&  <Link
       className=""
       href="/signin"
@@ -104,23 +114,55 @@ const Main = (props ) => {
   Signin
 </button> 
     </Link>}
-{  !user &&  <Link
+{  !user &&  
+
+<div data-tip="Sign Up" class="tooltip tooltip-bottom">
+
+<Link
       className="hover:cursor-pointer"
       href="/signup"
     > 
-<button class="btn"
+<button class="btn btn-primary"
 >
-  Signup
+  <UserAdd  className="text-blue-500"/>
 </button> 
-    </Link>}
+    </Link>
+</div>
+
+
+    }
 
       {
         user && (
-<button class="btn"
+          <div data-tip="Settings" class="tooltip tooltip-bottom">
+
+<Link
+href="/"
+>
+  <button className="btn btn-primary mr-6">
+  <Setttings
+    className="text-green-600"
+  />
+  </button>
+</Link>
+</div>
+
+
+
+        )
+      }
+
+      {
+        user && (
+          <div data-tip="Signout" class="tooltip tooltip-bottom">
+
+<button class="btn btn-danger color-red-500"
   onClick={ onSignout }
 >
-  Sign Out
+  <Logout className="text-red-300 h-6 w-6" />
 </button> 
+</div>
+
 
 
         )

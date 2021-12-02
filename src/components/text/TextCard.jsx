@@ -46,8 +46,10 @@ export default function TextCard( props ) {
                 className="hover:cursor-pointer"
 
                 >
-                <div  className="h-56 bg-red-500 bg-opacity-10 rounded-lg flex justify-center items-center p-4">
+                <div  className="h-56 bg-red-500 bg-opacity-10 rounded-lg flex justify-center items-center p-4 relative overflow-hidden">
+                  <div className={ styles.imgPattern}>
                   <h1 className="text-red-900 text-center font-semibold  ">{ title }</h1> 
+                  </div>
           
                   </div> 
                 </Link>
@@ -79,6 +81,11 @@ export default function TextCard( props ) {
                     }
 
 
+                  </div>
+                  <div className="overflow-hidden h-35">
+                    <p className="line-clamp-3">
+                      {content}
+                    </p>
                   </div>
                   <div className="text-card-footer text-grey-600 flex justify-between py-3">
                     <span className="flex">

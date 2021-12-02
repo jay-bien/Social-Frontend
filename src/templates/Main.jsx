@@ -66,7 +66,7 @@ const Main = (props ) => {
 
     <div className="max-w-7xl mx-auto">
 
-<header className="header shadow-lg bg-white" { ...props }>
+<header className="header shadow-lg bg-white rounded-lg" { ...props }>
             <nav className="navbar text-neutral-content max-w-7xl m-auto">
   <div className="px-2 mx-2 navbar-start">
 

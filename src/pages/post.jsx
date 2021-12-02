@@ -9,7 +9,7 @@ import styles from '../styles/post.module.scss';
 
 import {
   Chat, ThumbUp, ThumbDown, BookMark, PaperAirplane, Remove
-  } from '../components/icons';
+} from '../components/icons';
 
 
 const categories = [
@@ -33,48 +33,49 @@ const categories = [
 
 
 
-const Submit = ( props ) => {
+const Submit = (props) => {
 
-  
 
-    const { query } = useRouter();
-    const { title, content, likes, id, dislikes, categories } = query;
+
+  const { query } = useRouter();
+  const { title, content, likes, id, dislikes, categories } = query;
 
   return (
     <Main
-    meta={
-      <Meta
-        title="Dapp Post"
-        description=""
-      />
-    }
-  >
-
-    
+      meta={
+        <Meta
+          title="Dapp Post"
+          description=""
+        />
+      }
+    >
 
 
 
-  <div className="App">
 
 
-    <main className="main bg-gray-100">
-    <div >
-   
-                <div  className={styles.img}>
-                <h1 className="font-extrabold">{ title }</h1> 
-                <p> { content}</p>
-          
-                  </div> 
-                  <div className="text-card-body text-gray-900 py-5">
-                    
+      <div className="App min-h-screen">
 
-                    {
-                      categories && categories.length && categories.map( ( cat, idx ) => {
-                        return(
 
-                          <span
-                          key={idx }
-                          class="
+        <main className="main">
+          <div >
+
+            <div className="bg-white border-2 border-gray-300 rounded-lg max-w-prose m-auto p-4 relative">
+              <h1 className="font-extrabold">{title}</h1>
+              <p>
+                {content}
+              </p>
+
+              <div className="flex justify-center items-center p-4 relative">
+
+
+                {
+                  categories && categories.length && categories.map((cat, idx) => {
+                    return (
+
+                      <span
+                        key={idx}
+                        class="
                             text-xs
                             px-2
                             font-medium
@@ -83,71 +84,75 @@ const Submit = ( props ) => {
                             rounded
                             py-0.5
                           "
-                        >
-                          { cat }
-                        </span>
-
-                        )
-                      })
-                    }
-
-
-                  </div>
-                  <div className="text-card-footer text-grey-600 flex justify-between py-3">
-                    <span className="flex">
-                    <ThumbUp
-                    className={ styles.icon }
-                      onClick={ null}
-                      />
-                    { likes && likes ? likes : 0 } 
-                    </span>
-
-
-<span className="flex">
-                    <ThumbDown 
-                      className={ styles.icon }
-                      onClick={ null }
-                      />
-                    { dislikes&& dislikes  ? dislikes : 0}
-                    
-                     </span>
-                  <span>
-      
-                    <Remove
-                      className={ styles.icon }
-
-                    onClick={ null }
-                      />
+                      >
+                        {cat}
                       </span>
-                      <span>
-          
-                      </span>
-                
-                    </div>
+
+                    )
+                  })
+                }
+
+<div className="max-w-prose w-full m-auto text-grey-600 flex justify-between py-3">
+              <span className="flex">
+                <ThumbUp
+                  className="h-8 w-8"
+                  onClick={null}
+                />
+                {likes && likes ? likes : 0}
+              </span>
 
 
-                    <div>
+              <span className="flex">
+                <ThumbDown
+                  className="h-8 w-8"
+                  onClick={null}
+                />
+                {dislikes && dislikes ? dislikes : 0}
 
-                    <form>
+              </span>
+              <span>
 
-                    <div className="form-control">
+                <Remove
+                  className="h-8 w-8"
+
+                  onClick={null}
+                />
+              </span>
+              <span>
+
+              </span>
+
+            </div>
+
+              </div>
+
+            </div>
+
+           
+
+
+            <div>
+
+              <form className="max-w-prose m-auto">
+
+                <div className="form-control">
                   <label className="label">
-                  <span className="label-text">Comment</span>
-                  </label> 
+                    <span className="label-text">Comment</span>
+                  </label>
                   <textarea className="textarea h-24 textarea-bordered textarea-primary bg-white"
-                   placeholder="Text required"
-                   name="comment"
-                   onChange={ ()=>{}}
-                   ></textarea>
-                  </div> 
-                  <button>
-                    Submit
-                  </button>
-                    </form>
-                    </div>
+                    placeholder="Text required"
+                    name="comment"
+                    onChange={() => { }}
+                  ></textarea>
                 </div>
-          
-      </main>
+                <button className="btn btn-primary mt-4">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </main>
       </div>
     </Main>
   )
@@ -157,7 +162,7 @@ const Submit = ( props ) => {
 
 
 
- 
+
 
 
 export default Submit

@@ -83,7 +83,7 @@ export default function TwitterCard( props ) {
 
           
               <div className="twitter-card">
-                <div className="h-56 bg-gray-100 border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
+                <div className="h-56 bg-white border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
                   {
                     renderImage()
                   }

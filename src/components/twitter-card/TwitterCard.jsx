@@ -36,7 +36,7 @@ export default function TwitterCard( props ) {
         return(
           <img 
           src={ data.link.metadata.twitter_card.images[ 0].url }
-          className="twitter-card-header-img"
+          className="h-full"
           alt="twitter-card-header-img"
         />
         )
@@ -45,7 +45,7 @@ export default function TwitterCard( props ) {
         return(
           <img 
           src={ data.link.metadata.open_graph.images[ 0 ].url }
-          className="twitter-card-header-img"
+          className="h-full"
           alt="twitter-card-header-img"
         />
         )
@@ -54,7 +54,7 @@ export default function TwitterCard( props ) {
         return(
           <img 
           src={ images[ 0].url }
-          className="twitter-card-header-img"
+          className="h-full" 
           alt="twitter-card-header-img"
         />
         )
@@ -64,7 +64,7 @@ export default function TwitterCard( props ) {
         return(
           <img 
           src={ favIcon}
-          className="twitter-card-header-img"
+          className="h-full"
           alt="twitter-card-header-img"
         />
         )
@@ -83,7 +83,7 @@ export default function TwitterCard( props ) {
 
           
               <div className="twitter-card">
-                <div className="twitter-card-header">
+                <div className="h-56 bg-gray-100 border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
                   {
                     renderImage()
                   }

@@ -27,8 +27,10 @@ a:hover {
 .twitter-card-header-img{
   width: 100%;
   height: 14rem;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: .6em;
+  background-color: lightgrey;
+  border: 1px solid gray;
 }
 
 .comments{

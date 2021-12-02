@@ -208,7 +208,7 @@ const Main = (props) => {
                   <div data-tip="Settings" class="tooltip tooltip-bottom">
 
                     <Link
-                      href="/"
+                      href="/settings"
                     >
                       <button className="btn btn-primary mr-6">
                         <Setttings

@@ -25,13 +25,12 @@ export default function TwitterCard( props ) {
     let { likes, dislikes, id } = data;
 
     let title = data.title;
-    let description = data.content  | data.link?.metadata?.description | "";
+    let description = data.content  || data.link?.metadata?.description || "";
     const link = data.link.url;
     let images = null;
     const favIcon = data.link.metadata.favicon;
 
     const renderImage = () => {
-      console.log(favIcon);
 
       if( data.link?.metadata?.twitter_card?.images){
         return(
@@ -91,15 +90,16 @@ export default function TwitterCard( props ) {
 
           
                   </div>  
-                  <div className="twitter-card-body text-gray-900 py-5">
-                  <h1>{ title }</h1> 
-                  {
-                      cardInfo && cardInfo.categories && cardInfo.categories.map( cat => {
+                  <div className="text-card-body text-white py-5">
+                    
+                    <div className="mb-b h-8 flex flex-nowrap flex-row overscroll-x-auto">
+                    {
+                      cardInfo && cardInfo.categories && cardInfo.categories.map( ( cat, idx ) => {
                         return(
 
                           <span
+                          key={idx }
                           class="
-                          mr-1
                             text-xs
                             px-2
                             font-medium
@@ -107,6 +107,8 @@ export default function TwitterCard( props ) {
                             text-red-800
                             rounded
                             py-0.5
+                            mr-3
+                            hover:cursor-pointer
                           "
                         >
                           { cat }
@@ -115,6 +117,16 @@ export default function TwitterCard( props ) {
                         )
                       })
                     }
+                    </div>
+
+                    
+
+
+                  </div>
+                  <div className="overflow-hidden h-32">
+                    <p className="line-clamp-3">
+                      { description && description || "" }
+                    </p>
                   </div>
                   <div className="twitter-card-footer text-gray-600 flex justify-between py-3">
                     <span className="flex">

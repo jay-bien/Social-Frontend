@@ -57,7 +57,7 @@ export default function TextCard( props ) {
                 </Link>
                   <div className="text-card-body text-white py-5">
                     
-
+                    <div className="mb-b h-8 flex flex-nowrap flex-row overscroll-x-auto">
                     {
                       cardInfo && cardInfo.categories && cardInfo.categories.map( ( cat, idx ) => {
                         return(
@@ -73,6 +73,7 @@ export default function TextCard( props ) {
                             rounded
                             py-0.5
                             mr-3
+                            hover:cursor-pointer
                           "
                         >
                           { cat }
@@ -81,10 +82,13 @@ export default function TextCard( props ) {
                         )
                       })
                     }
+                    </div>
+
+                    
 
 
                   </div>
-                  <div className="overflow-hidden h-35">
+                  <div className="overflow-hidden h-32 bg-red-300">
                     <p className="line-clamp-3">
                       {content}
                     </p>

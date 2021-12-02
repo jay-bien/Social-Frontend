@@ -168,7 +168,15 @@ const Index = () => {
         
 
 
-  
+<div className="max-w-7xl m-auto rounded-lg p-4 border-2 border-gray-400 mb-20">
+  <h1 className="text-6xl font-semibold">Welcome to <span className="text-primary font-bold">DAP</span></h1>
+    <p>
+      Your local community for sharing content you find useful.
+    </p>
+    <p>
+      Education, finance, we encourage you to share your resources here.
+    </p>
+</div>
 
 <div className="comments max-w-7xl m-auto ">
 { allComments && allComments.length  && allComments.map( ( comment, index ) => {

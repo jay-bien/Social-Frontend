@@ -110,9 +110,9 @@ const Main = (props) => {
                 className=""
                 href="/signin"
               >
-                <button class="btn mr-3"
+                <button class="btn btn-primary mr-3"
                 >
-                  Signin
+                  Sign In
                 </button>
               </Link>}
               {!user &&
@@ -125,7 +125,7 @@ const Main = (props) => {
                   >
                     <button class="btn btn-primary"
                     >
-                      <UserAdd className="text-blue-500" />
+                    Sign Up
                     </button>
                   </Link>
                 </div>

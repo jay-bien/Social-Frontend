@@ -47,7 +47,6 @@ export default function TextCard( props ) {
 
                 >
                 <div  className="h-56 hover:cursor-pointer bg-white border-2 border-gray-300 rounded-lg flex justify-center items-center p-4 relative overflow-hidden">
-                <Text className={ styles.textIcon} />
 
                   <h1 className="text-gray-800 text-center font-semibold  ">{ title }</h1> 
           

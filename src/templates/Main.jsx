@@ -10,7 +10,8 @@ import router from 'next/router';
 
 import {
   Login, Logout, DocumentAdd,
-  UserAdd, User, Setttings
+  UserAdd, User, Setttings,
+  Link as LinkIcon, Text
 } from '../components/icons'
 
 
@@ -145,28 +146,57 @@ const Main = (props) => {
                     <div className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52 grid">
                       <div className="flex">
                         <div class="avatar">
-                          <div className="mb-8 rounded-box w-14 h-14 ring ring-primary ring-offset-base-100 ring-offset-2">
+                          <div className="mb-8 rounded-box w-14 h-14 ring ring-primary ring-offset-base-100 ring-offset-1">
                             <img
                               src="http://daisyui.com/tailwind-css-component-profile-1@56w.png"
                             />
-                            <div className="flex flex-col">
+                          </div>
+   
+                        </div>
+                        <div className="flex flex-col ml-3">
+                              <p className="text-gray-800 max-w-max text-wrap whitespace-pre-wrap overflow-ellipsis">
+                                {user.email} 
+                              </p>
                               <p className="text-blue-500">
-                                {user.email} Welcome
+                                100 DAPS
                               </p>
                             </div>
-                          </div>
-                        </div>
 
                       </div>
-                      <ul tabindex="0" className="">
-                        <li>
-                          <a className="text-blue-500">My Profile</a>
-                        </li>
-                        <li>
-                          <a className="text-blue-500">Subscribed Categories</a>
-                        </li>
+                        <div className="divider m-0 text-base-content">stats</div>
 
-                      </ul>
+                        <ul className="">
+                          <li className="flex">
+                            <Text 
+                              className="text-red-400 h-4 w-4"
+                            />
+                            <p className="text-gray-800">
+                              20 Text Posts
+                            </p>
+                          </li>
+                          <li className="flex">
+                            <LinkIcon
+                                className="text-red-600 h-4 w-4"
+                            />
+                            <p className="text-gray-800">
+                              10 Link Posts
+                            </p>
+                          </li>
+                          <li className="flex">
+                            <p className="text-gray-800">
+                              100 Likes
+                            </p>
+                          </li>
+                          <li className="flex">
+                            <p className="text-gray-800">
+                              30 Comments
+                            </p>
+                          </li>
+                        </ul>
+
+                     
+
+
                     </div>
                   </div>
 

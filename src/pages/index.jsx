@@ -181,6 +181,27 @@ const Index = () => {
     <p>
       Education, finance, we encourage you to share your resources here.
     </p>
+
+    <p> 
+      Please be courteous and respectful. You can find our community
+      guidelines <span className="hover:cursor-pointer text-primary">Here</span>
+
+    </p>
+</div>
+
+<div className="max-w-7xl m-auto">
+  <h2 className="text-5xl">
+      Filter by topic
+  </h2>
+<div className="flex flex-row flex-wrap m-auto mb-10">
+  { 
+  categories && categories.map( cat => (
+    <div className="hover:cursor-pointer hover:bg-secondary hover:font-semibold hover:text-red-50 categories rounded-lg px-10 border-2 border-secondary m-2 text-gray-800">
+        <p className=" my-0 py-0">#{ cat }</p>
+    </div>
+  ))}
+
+</div>
 </div>
 
 <div className="comments max-w-7xl m-auto ">

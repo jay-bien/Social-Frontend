@@ -83,6 +83,7 @@ const Main = (props) => {
                 </span>
 
               </Link>
+
             </div>
             <div className="hidden px-2 mx-2 navbar-center lg:flex">
               <div className="flex items-stretch">
@@ -108,7 +109,7 @@ const Main = (props) => {
                 </Link>
               </div>
               {!user && (
-              <div data-tip="Signin" class="tooltip tooltip-bottom">
+              <div data-tip="Signin" className="tooltip tooltip-bottom">
 
               <Link
                 className=""
@@ -123,7 +124,7 @@ const Main = (props) => {
               )}
               {!user &&
 
-                <div data-tip="Sign Up" class="tooltip tooltip-bottom">
+                <div data-tip="Sign Up" className="tooltip tooltip-bottom">
 
                   <Link
                     className="hover:cursor-pointer"

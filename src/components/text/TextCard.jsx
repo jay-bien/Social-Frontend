@@ -94,7 +94,7 @@ export default function TextCard( props ) {
                     <span className="flex">
                     <ThumbUp 
                       onClick={ (e) => onLike( id )}
-                      className={styles.icon}
+                      className="hover:cursor-pointer h-12 w-12"
                       />
                     { likes ? likes : 0 } 
                     </span>
@@ -103,7 +103,7 @@ export default function TextCard( props ) {
 <span className="flex">
                     <ThumbDown 
                       onClick={ () => onDislike( id ) }
-                      className={styles.icon}
+                      className="hover:cursor-pointer h-12 w-12"
                       />
                     { dislikes ? dislikes : 0}
                     
@@ -112,8 +112,8 @@ export default function TextCard( props ) {
       
                     <Remove
                     onClick={ () => onDelete( id )}
-                    className={styles.icon}
-                      />
+                    className="hover:cursor-pointer h-12 w-12"
+                    />
                       </span>
                       <span>
           

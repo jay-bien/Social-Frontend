@@ -10,6 +10,8 @@ import {
 export default function TwitterCard( props ) {
     const { data, onLike, onDislike, onDelete } = props;
 
+    console.log({ data });
+
 
 
     const [ cardInfo, setCardInfo ] = useState({});
@@ -72,7 +74,8 @@ export default function TwitterCard( props ) {
                       title: title,
                       id: id,
                       content: description,
-                      img: renderImage()
+                      img: renderImage(),
+                      link
                     }
                   }
               }
@@ -129,11 +132,11 @@ export default function TwitterCard( props ) {
                       { description && description || "" }
                     </p>
                   </div>
-                  <div className="twitter-card-footer text-gray-600 flex justify-between py-3">
+                  <div className="text-gray-600 flex justify-between py-3">
                     <span className="flex">
                     <ThumbUp 
                       onClick={ (e) => onLike( id )}
-                      className={styles.icon}
+                      className="hover:cursor-pointer h-12 w-12"
                     />
                     <p>
                     { likes ? likes : 0 } 
@@ -145,7 +148,7 @@ export default function TwitterCard( props ) {
 <span className="flex">
                     <ThumbDown 
                       onClick={ () => onDislike( id ) }
-                      className={styles.icon}
+                      className="hover:cursor-pointer h-12 w-12"
                     />
                     <p>
                     { dislikes ? dislikes : 0}
@@ -157,7 +160,7 @@ export default function TwitterCard( props ) {
       
                     <Remove
                     onClick={ () => onDelete( id )}
-                    className={styles.icon}
+                    className="hover:cursor-pointer h-12 w-12"
                     />
                       </span>
                       <span>

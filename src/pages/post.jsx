@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/post.module.scss';
 
 import {
-  Chat, ThumbUp, ThumbDown, BookMark, PaperAirplane, Remove
+  Chat, ThumbUp, ThumbDown,
+  BookMark, PaperAirplane, Remove,
+  ExternalLink
 } from '../components/icons';
 
 
@@ -38,7 +40,10 @@ const Submit = (props) => {
 
 
   const { query } = useRouter();
-  const { title, content, likes, id, dislikes, categories, img } = query;
+  const { title, content, likes, id, dislikes, categories, img, link } = query;
+  const [user, setUser] = useState(null);
+
+
 
   return (
     <Main
@@ -128,9 +133,21 @@ const Submit = (props) => {
                       onClick={null}
                     />
                   </span>
-                  <span>
+                  {
+                    link && (
+                      <span>
+                      <a href={link} target="_blank">
+                      <ExternalLink
+                        className="h-9 w-9 text-gray-800"
+  
+                        onClick={null}
+                      />
+                      </a>
+                    </span>
+                    )
+                  }
 
-                  </span>
+
 
                 </div>
 
@@ -139,24 +156,48 @@ const Submit = (props) => {
 
               <div className="border-gray-300 border-t-2 my-10">
 
-                <form className="max-w-prose m-auto mt-10">
 
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text text-gray-800">
-                        Share Comment
+                {
+                  !user && (
+                    <Link
+                      href="/signin"
+                    >
+                      <div className="hover:cursor-pointer max-w-prose m-auto mt-10 ">
+                      <label className="label">
+                        <span className="label-text text-gray-800">
+                          Share Comment
                         </span>
-                    </label>
-                    <textarea className="textarea h-24 textarea-bordered textarea-gray-500 bg-white border-gray-500"
-                      placeholder="Text required"
-                      name="comment"
-                      onChange={() => { }}
-                    ></textarea>
-                  </div>
-                  <button className="btn mt-4">
-                    Submit
-                  </button>
-                </form>
+                      </label>
+                      <div className="h-20 rounded-lg border-2 border-gray-400" />
+</div>
+                    </Link>
+                  )
+                }
+
+                {
+                  user && (
+                    <form className="max-w-prose m-auto mt-10">
+
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text text-gray-800">
+                            Share Comment
+                          </span>
+                        </label>
+                        <textarea className="textarea h-24 textarea-bordered textarea-gray-500 bg-white border-gray-500"
+                          placeholder="Text required"
+                          name="comment"
+                          onChange={() => { }}
+                        ></textarea>
+                      </div>
+                      <button className="btn mt-4">
+                        Submit
+                      </button>
+                    </form>
+                  )
+                }
+
+
               </div>
             </div>
 

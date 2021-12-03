@@ -176,7 +176,7 @@ const Main = (props) => {
                           </li>
                           <li className="flex">
                             <LinkIcon
-                                className="text-red-600 h-4 w-4"
+                                className="hover:cursor-pointer text-red-600 h-4 w-4"
                             />
                             <p className="text-gray-800">
                               10 Link Posts

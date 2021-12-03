@@ -66,14 +66,14 @@ const Submit = (props) => {
                 {content}
               </p>
 
-              { img && (
+              {img && (
                 <div className="h-52">
-                          <img 
-                          src={ img }
-                          className="h-full object-contain m-auto"
-                          alt="twitter-card-header-img"
-                        />
-              </div>
+                  <img
+                    src={img}
+                    className="h-full object-contain m-auto"
+                    alt="twitter-card-header-img"
+                  />
+                </div>
               )}
 
               <div className="flex justify-center items-center p-4 relative">
@@ -102,65 +102,70 @@ const Submit = (props) => {
                   })
                 }
 
-<div className="max-w-prose w-full m-auto text-grey-600 flex justify-between py-3">
-              <span className="flex">
-                <ThumbUp
-                  className="h-8 w-8"
-                  onClick={null}
-                />
-                {likes && likes ? likes : 0}
-              </span>
+                <div className="max-w-prose w-full m-auto text-grey-600 flex justify-between py-3">
+                  <span className="flex">
+                    <ThumbUp
+                      className="h-8 w-8"
+                      onClick={null}
+                    />
+                    {likes && likes ? likes : 0}
+                  </span>
 
 
-              <span className="flex">
-                <ThumbDown
-                  className="h-8 w-8"
-                  onClick={null}
-                />
-                {dislikes && dislikes ? dislikes : 0}
+                  <span className="flex">
+                    <ThumbDown
+                      className="h-8 w-8"
+                      onClick={null}
+                    />
+                    {dislikes && dislikes ? dislikes : 0}
 
-              </span>
-              <span>
+                  </span>
+                  <span>
 
-                <Remove
-                  className="h-8 w-8"
+                    <Remove
+                      className="h-8 w-8"
 
-                  onClick={null}
-                />
-              </span>
-              <span>
+                      onClick={null}
+                    />
+                  </span>
+                  <span>
 
-              </span>
+                  </span>
 
-            </div>
+                </div>
 
               </div>
 
+
+              <div className="border-gray-300 border-t-2 my-10">
+
+                <form className="max-w-prose m-auto mt-10">
+
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text text-gray-800">
+                        Share Comment
+                        </span>
+                    </label>
+                    <textarea className="textarea h-24 textarea-bordered textarea-gray-500 bg-white border-gray-500"
+                      placeholder="Text required"
+                      name="comment"
+                      onChange={() => { }}
+                    ></textarea>
+                  </div>
+                  <button className="btn mt-4">
+                    Submit
+                  </button>
+                </form>
+              </div>
             </div>
 
-           
-
-
-            <div>
-
-              <form className="max-w-prose m-auto">
-
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Comment</span>
-                  </label>
-                  <textarea className="textarea h-24 textarea-bordered textarea-primary bg-white"
-                    placeholder="Text required"
-                    name="comment"
-                    onChange={() => { }}
-                  ></textarea>
-                </div>
-                <button className="btn btn-primary mt-4">
-                  Submit
-                </button>
-              </form>
-            </div>
           </div>
+
+
+
+
+
 
         </main>
       </div>

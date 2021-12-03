@@ -176,7 +176,7 @@ const Submit = ( props ) => {
 
 
 
-  <div className="App">
+  <div className="App min-h-screen">
 
 
     <main className="main">

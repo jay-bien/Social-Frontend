@@ -46,7 +46,7 @@ export default function TextCard( props ) {
                 className="hover:cursor-pointer"
 
                 >
-                <div  className="h-56 hover:cursor-pointer bg-white border-2 border-gray-300 rounded-lg flex justify-center items-center p-4 relative overflow-hidden">
+                <div  className="h-56 hover:cursor-pointer hover:border-secondary bg-white border-2 border-gray-300 rounded-lg flex justify-center items-center p-4 relative overflow-hidden">
 
                   <h1 className="text-gray-800 text-center font-semibold  ">{ title }</h1> 
           

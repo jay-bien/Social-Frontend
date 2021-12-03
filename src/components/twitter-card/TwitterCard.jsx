@@ -80,7 +80,7 @@ export default function TwitterCard( props ) {
                 className="hover:cursor-pointer"
 
                 >
-                <div className="h-56 bg-white border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
+                <div className="hover:cursor-pointer hover:border-secondary h-56 bg-white border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
             
                             <img 
                       src={ renderImage() }

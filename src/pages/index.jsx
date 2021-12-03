@@ -179,7 +179,7 @@ const Index = () => {
       Your local community for sharing content you find useful.
     </p>
     <p>
-      Education, finance, we encourage you to share your resources here.
+      Education, finance, candlemaking, whatever, we encourage you to share your resources here.
     </p>
 
     <p> 

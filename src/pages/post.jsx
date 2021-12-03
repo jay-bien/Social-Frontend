@@ -38,7 +38,7 @@ const Submit = (props) => {
 
 
   const { query } = useRouter();
-  const { title, content, likes, id, dislikes, categories } = query;
+  const { title, content, likes, id, dislikes, categories, img } = query;
 
   return (
     <Main
@@ -65,6 +65,16 @@ const Submit = (props) => {
               <p>
                 {content}
               </p>
+
+              { img && (
+                <div className="h-52">
+                          <img 
+                          src={ img }
+                          className="h-full object-contain m-auto"
+                          alt="twitter-card-header-img"
+                        />
+              </div>
+              )}
 
               <div className="flex justify-center items-center p-4 relative">
 

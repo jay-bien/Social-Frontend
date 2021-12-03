@@ -169,7 +169,12 @@ const Index = () => {
 
 
 <div className="max-w-7xl m-auto rounded-lg p-4 border-2 border-gray-400 mb-20">
-  <h1 className="text-6xl font-semibold">Welcome to <span className="text-primary font-bold">DAP</span></h1>
+  <h1 className="text-6xl font-semibold text-primary">
+    Welcome to 
+    <span className="text-secondary font-bold ml-2">
+      DAP
+    </span>
+    </h1>
     <p>
       Your local community for sharing content you find useful.
     </p>

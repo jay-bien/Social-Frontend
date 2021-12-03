@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './twitter-card.module.scss';
+import Link from 'next/link';
 
 
 import {
@@ -34,39 +35,19 @@ export default function TwitterCard( props ) {
 
       if( data.link?.metadata?.twitter_card?.images){
         return(
-          <img 
-          src={ data.link.metadata.twitter_card.images[ 0].url }
-          className="h-full"
-          alt="twitter-card-header-img"
-        />
+          data.link.metadata.twitter_card.images[ 0].url
         )
       }
       if( data?.link?.metadata?.open_graph?.images){
-        return(
-          <img 
-          src={ data.link.metadata.open_graph.images[ 0 ].url }
-          className="h-full"
-          alt="twitter-card-header-img"
-        />
-        )
+        return( data.link.metadata.open_graph.images[ 0 ].url)
       }
       if( images && images.length ){
-        return(
-          <img 
-          src={ images[ 0].url }
-          className="h-full" 
-          alt="twitter-card-header-img"
-        />
-        )
+        return( images[ 0].url )
       }
 
       if( favIcon ){
         return(
-          <img 
-          src={ favIcon}
-          className="h-full"
-          alt="twitter-card-header-img"
-        />
+          favIcon
         )
       }
 
@@ -83,13 +64,33 @@ export default function TwitterCard( props ) {
 
           
               <div className="twitter-card">
-                <div className="h-56 bg-white border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
+                                <Link
+                href={
                   {
-                    renderImage()
+                    pathname: "/post",
+                    query:{
+                      title: title,
+                      id: id,
+                      content: description,
+                      img: renderImage()
+                    }
                   }
+              }
+
+                className="hover:cursor-pointer"
+
+                >
+                <div className="h-56 bg-white border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
+            
+                            <img 
+                      src={ renderImage() }
+                      className="h-full"
+                      alt="twitter-card-header-img"
+                    />
 
           
-                  </div>  
+                  </div> 
+              </Link>
                   <div className="text-card-body text-white py-5">
                     
                     <div className="mb-b h-8 flex flex-nowrap flex-row overscroll-x-auto">

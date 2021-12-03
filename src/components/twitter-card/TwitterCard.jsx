@@ -10,7 +10,6 @@ import {
 export default function TwitterCard( props ) {
     const { data, onLike, onDislike, onDelete } = props;
 
-    console.log({ data });
 
 
 

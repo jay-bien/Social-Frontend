@@ -24,14 +24,12 @@ const Index = () => {
 
   const onChange = ( el ) => {
     setRegisterInfo({ ...registerInfo, [el.target.name]: el.target.value });
-    console.log({ registerInfo})
   }
 
 
 
 const onLogin = async ( e ) => {
   e.preventDefault();
-  console.log({email}, {password})
 const body = {
   email,
   password,
@@ -41,7 +39,6 @@ try{
   registerInfo,
   {} );
   
-  console.log({ response });
   const user = response.data;
   const usr = JSON.stringify( user );
 localStorage && localStorage.setItem('user', usr);

@@ -11,7 +11,8 @@ import router from 'next/router';
 import {
   Login, Logout, DocumentAdd,
   UserAdd, User, Setttings,
-  Link as LinkIcon, Text
+  Link as LinkIcon, Text, 
+  ThumbUp, ThumbDown, Chat
 } from '../components/icons'
 
 
@@ -106,7 +107,10 @@ const Main = (props) => {
                   </button>
                 </Link>
               </div>
-              {!user && <Link
+              {!user && (
+              <div data-tip="Signin" class="tooltip tooltip-bottom">
+
+              <Link
                 className=""
                 href="/signin"
               >
@@ -114,7 +118,9 @@ const Main = (props) => {
                 >
                   Sign In
                 </button>
-              </Link>}
+              </Link>
+              </div>
+              )}
               {!user &&
 
                 <div data-tip="Sign Up" class="tooltip tooltip-bottom">
@@ -143,7 +149,7 @@ const Main = (props) => {
                       />
                     </div>
 
-                    <div className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52 grid">
+                    <div className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-60 grid">
                       <div className="flex">
                         <div class="avatar">
                           <div className="mb-8 rounded-box w-14 h-14 ring ring-primary ring-offset-base-100 ring-offset-1">
@@ -154,41 +160,58 @@ const Main = (props) => {
    
                         </div>
                         <div className="flex flex-col ml-3">
-                              <p className="text-gray-800 max-w-max text-wrap whitespace-pre-wrap overflow-ellipsis">
-                                {user.email} 
+                              <p className="text-gray-white font-bold max-w-max text-wrap whitespace-pre-wrap overflow-ellipsis">
+                                Jay
                               </p>
                               <p className="text-blue-500">
-                                100 DAPS
+                                100 DAPS POINTS
                               </p>
                             </div>
 
                       </div>
                         <div className="divider m-0 text-base-content">stats</div>
 
-                        <ul className="">
-                          <li className="flex">
+                        <ul className="flex flex-col gap-3 mt-6">
+                          <li className="flex flex-row">
                             <Text 
                               className="text-red-400 h-4 w-4"
                             />
-                            <p className="text-gray-800">
+                            <p className="text-white">
                               20 Text Posts
                             </p>
                           </li>
-                          <li className="flex">
+                          <li className="flex flex-row">
                             <LinkIcon
                                 className="hover:cursor-pointer text-red-600 h-4 w-4"
                             />
-                            <p className="text-gray-800">
-                              10 Link Posts
+                            <p className="text-white">
+                              10 Links Posted
                             </p>
                           </li>
-                          <li className="flex">
-                            <p className="text-gray-800">
+                          <li className="flex flex-row">
+                            <ThumbUp
+                                className="hover:cursor-pointer text-white h-4 w-4"
+
+                            />
+                            <p className="text-white">
                               100 Likes
                             </p>
                           </li>
-                          <li className="flex">
-                            <p className="text-gray-800">
+                          <li className="flex flex-row">
+                            <ThumbDown
+                                className="hover:cursor-pointer text-white h-4 w-4"
+
+                            />
+                            <p className="text-white">
+                              100 Disikes
+                            </p>
+                          </li>
+                          <li className="flex flex-row">
+                            <Chat
+                                className="hover:cursor-pointer text-white h-4 w-4"
+
+                            />
+                            <p className="text-white">
                               30 Comments
                             </p>
                           </li>

@@ -115,6 +115,7 @@ const Index = () => {
     }
     const onDislike = async ( id ) => {
       try{
+        const aux = await localStorage.getItem("aux");
         let dec = JSON.parse( aux );
 
         const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/down`, {

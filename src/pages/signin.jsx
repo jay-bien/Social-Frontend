@@ -39,9 +39,11 @@ try{
   registerInfo,
   {} );
   
-  const user = response.data;
+  const { user, auxillaryId } = response.data;
   const usr = JSON.stringify( user );
+  const aux = JSON.stringify( auxillaryId );
 localStorage && localStorage.setItem('user', usr);
+localStorage && localStorage.setItem('aux', aux);
   router.push('/');
 } catch( e ){
   console.log({ e });

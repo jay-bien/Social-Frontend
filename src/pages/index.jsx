@@ -7,7 +7,6 @@ import axios from 'axios';
 
 import { UserContext, AuthModalContext, PostFormContext } from '../context';
 import {  TwitterCard, TextCard, QACard, Header, AuthModal, PostModal } from '../components';
-import { parseCookies } from "../helpers/cookies"
 
 
 
@@ -89,13 +88,18 @@ const Index = () => {
 
     const onLike = async ( id ) => {
       try{
-        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/up` );
-        const post = response.data;
+        const aux = await localStorage.getItem("aux");
+        let dec = JSON.parse( aux );
+        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/up`, {
+         auxillaryID: dec
+        } );
+        const data = response.data;
         
         setAllComments( comments => {
            return comments.map( comment => {
-            if( comment.id === id ){
-              comment.likes += 1;
+            if( comment.id === data.id ){
+              comment.dislikes = data.dislikes;
+              comment.likes = data.likes;
             }
             return comment;
           })
@@ -111,13 +115,18 @@ const Index = () => {
     }
     const onDislike = async ( id ) => {
       try{
-        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/down` );
-        const post = response.data;
+        let dec = JSON.parse( aux );
+
+        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/down`, {
+          auxillaryID: dec
+         } );        
+         const data = response.data;
 
         setAllComments( comments => {
           return comments.map( comment => {
-           if( comment.id === id ){
-             comment.dislikes += 1;
+           if( comment.id === data.id ){
+             comment.dislikes = data.dislikes;
+             comment.likes = data.likes;
            }
            return comment;
          })
@@ -195,8 +204,14 @@ const Index = () => {
   </h2>
 <div className="flex flex-row flex-wrap m-auto mb-10">
   { 
-  categories && categories.map( cat => (
-    <div className="hover:cursor-pointer hover:bg-secondary hover:font-semibold hover:text-red-50 categories rounded-lg px-10 border-2 border-secondary m-2 text-gray-800">
+  categories && categories.map( ( cat, idx ) => (
+    <div key={ idx }
+    className="hover:cursor-pointer 
+    hover:bg-secondary hover:font-semibold 
+    hover:text-red-50 categories 
+    rounded-lg px-10 border-2 
+    border-secondary m-2 text-gray-800"
+    >
         <p className=" my-0 py-0">#{ cat }</p>
     </div>
   ))}
@@ -264,17 +279,11 @@ export default Index;
 
 
 
+export async function getStaticProps(context) {
 
-Index.getInitialProps = ({ req, res }) => {
-  console.log("huzzah");
-
-  console.log(req?.headers);
-  const data = parseCookies(req)
-
+  console.log({ context });
 
   return {
-    
+    props: {}, // will be passed to the page component as props
   }
-
-
 }

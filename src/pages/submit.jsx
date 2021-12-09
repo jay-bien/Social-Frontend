@@ -254,7 +254,6 @@ const Submit = ( props ) => {
 const Form = props => {
 
   const { formType, onChange, toggleCheckBox, onSubmit, categories } = props;
-  console.log({ props });
 
   return(
       <form className="post-form bg-white py-8 sm:w-full w-100w">

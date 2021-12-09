@@ -41,8 +41,10 @@ const onSignup = async (e  ) => {
 
   if( response ){
     
+    const auxillaryId = response.auxillaryId;
 
-    const usr = JSON.stringify( response )
+    localStorage && localStorage.setItem("auxillaryId", JSOOn.stringify( auxillaryId ));
+    const usr = JSON.stringify( response.user )
     localStorage && localStorage.setItem('user', usr )
 
 

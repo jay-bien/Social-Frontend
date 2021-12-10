@@ -8,13 +8,14 @@ import axios from 'axios';
 import { UserContext, AuthModalContext, PostFormContext } from '../context';
 import {  TwitterCard, TextCard, QACard, Header, AuthModal, PostModal } from '../components';
 
-
+import {Clock, Fire, SortAscending, SortDescending } from '../components/icons'
 
 const Index = () => {
   const router = useRouter();
   const [ user, setUser ] = useState(null);
   const [ showAuthModal, setShowAuthModal ] = useState(false);
   const [ showPostModal, setShowPostModal ] = useState(false);
+  const [ loading, setLoading ] = useState( false );
 
   const [ allComments, setAllComments ] = useState([]);
 
@@ -24,16 +25,16 @@ const Index = () => {
     "Education",
     "Tech",
     "Business",
-    "World business",
+    "World Business",
     "Science",
     "gaming,",
     "Sports",
     "Lifestyle",
     "Career",
-    "offbeat",
+    "Offbeat",
     "Fashion",
     "Travel",
-    "Reatail",
+    "Retail",
     "Media",
     "Social Networks",
 ]
@@ -57,12 +58,19 @@ const Index = () => {
     }
     const fetchAllComments =  async ( ) => {
       try{
-        const response = await fetch( process.env.NEXT_PUBLIC_API_URL + '/post/', {
+
+
+
+        const body = JSON.stringify({
+          category: "all"
+        })
+        const response = await fetch( process.env.NEXT_PUBLIC_API_URL + '/post', {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
           },
+          data: body
         });
         const json = await response.json();
         return json.comments;
@@ -117,11 +125,11 @@ const Index = () => {
       try{
         const aux = await localStorage.getItem("aux");
         let dec = JSON.parse( aux );
-
         const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/down`, {
           auxillaryID: dec
-         } );        
-         const data = response.data;
+         } );
+        const data = response.data;
+        
 
         setAllComments( comments => {
           return comments.map( comment => {
@@ -148,8 +156,42 @@ const Index = () => {
         console.log({ e });
 
       }
+    }
+
+    const onFilter = async ( category ) => {
+
+      console.log({ category });
+
+      const body = JSON.stringify({
+        category: category
+      })
+      try{
+        setLoading( true );
+        const response = await axios({
+          method: "get",
+          headers:{
+            'Content-Type' : 'application/json' 
+          },
+          url: process.env.NEXT_PUBLIC_API_URL + "/post", 
+          data: body
+        });
+        const data = response.data;
+
+        let filter = data.comments.filter(
+          comment => (
+            comment.categories.includes( category )
+          )
+        )
 
 
+        setAllComments( filter );
+        setLoading( false );
+
+
+
+      } catch( e ){
+        console.log({ e });
+      }
     }
 
 
@@ -207,6 +249,7 @@ const Index = () => {
   { 
   categories && categories.map( ( cat, idx ) => (
     <div key={ idx }
+    onClick={ () => onFilter( cat ) }
     className="hover:cursor-pointer 
     hover:bg-secondary hover:font-semibold 
     hover:text-red-50 categories 
@@ -216,6 +259,24 @@ const Index = () => {
         <p className=" my-0 py-0">#{ cat }</p>
     </div>
   ))}
+
+</div>
+</div>
+<div className="max-w-7xl m-auto">
+  <h2 className="text-5xl">
+      Sort
+  </h2>
+<div className="flex flex-row flex-wrap m-auto mb-10">
+    <span>
+      By Time <Clock />
+    </span>
+    <span>
+      By Popularity <Fire />
+    </span>
+    <span>
+     <SortAscending />
+     <SortDescending />
+    </span>
 
 </div>
 </div>

@@ -31,8 +31,34 @@ const categories = [
 
 const Settings = ( props ) => {
 
-  
+  const [ history, setHistory ] = useState({});
+  const [ user, setUser ] = useState("null");
+  const [ aux, setAux ] = useState(null)
 
+  
+  const { doRequest, errors } = useRequest({
+    url: process.env.NEXT_PUBLIC_API_URL + '/history',
+    method: 'post',
+    body: {
+      auxillaryId:  aux,
+      userId: user.id
+    }
+  })
+
+
+
+  useEffect( async () => {
+    const user = await localStorage.getItem('user');
+    const aux = await localStorage.getItem('aux');
+
+    console.log({ aux });
+
+
+    let res = await doRequest();
+    console.log({ res });
+
+  }, [])
+    
 
       
 
@@ -62,7 +88,11 @@ const Settings = ( props ) => {
 
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
             <h1>Settings</h1>
-          
+            {
+              history && history.comments && history.comments.map( vote => (
+                JSON.stringify( vote )
+              ))
+            }
           </div>
           
       </main>

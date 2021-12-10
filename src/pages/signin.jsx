@@ -37,9 +37,12 @@ const body = {
 try{
   const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + '/signin/',
   registerInfo,
-  {} );
+  {
+    withCredentials: true
+  } );
   
   const { user, auxillaryId } = response.data;
+  console.log({ response });
   const usr = JSON.stringify( user );
   const aux = JSON.stringify( auxillaryId );
 localStorage && localStorage.setItem('user', usr);

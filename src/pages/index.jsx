@@ -160,7 +160,6 @@ const Index = () => {
 
     const onFilter = async ( category ) => {
 
-      console.log({ category });
 
       const body = JSON.stringify({
         category: category
@@ -176,6 +175,11 @@ const Index = () => {
           data: body
         });
         const data = response.data;
+        if( category === "All"){
+          setAllComments( data.comments );
+          setLoading( false );
+          return;
+        }
 
         let filter = data.comments.filter(
           comment => (

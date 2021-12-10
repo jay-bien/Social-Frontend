@@ -24,7 +24,6 @@ const Index = () => {
 
   const onChange = ( el ) => {
     setRegisterInfo({ ...registerInfo, [el.target.name]: el.target.value });
-    console.log({ registerInfo})
   }
 
   const { doRequest, errors } = useRequest({
@@ -40,10 +39,10 @@ const onSignup = async (e  ) => {
   const response = await doRequest();
 
   if( response ){
-    
+    console.log( response );
     const auxillaryId = response.auxillaryId;
 
-    localStorage && localStorage.setItem("auxillaryId", JSOOn.stringify( auxillaryId ));
+    localStorage && localStorage.setItem("auxillaryId", JSON.stringify( auxillaryId ));
     const usr = JSON.stringify( response.user )
     localStorage && localStorage.setItem('user', usr )
 

@@ -13,7 +13,13 @@ const useRequest =  ( {
     console.log({ body }, {method }, { url }, { onSuccess});
     try{
       setErrors( null );
-      const response = await axios[method]( url, body );
+      // const response = await axios[method]( url, body, );
+      const response = await axios({
+        method,
+        data: body,
+        url,
+        withCredentials: true
+      })
       console.log({ response });
       if( onSuccess ){
         onSuccess( response.data );

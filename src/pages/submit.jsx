@@ -43,7 +43,7 @@ const Submit = ( props ) => {
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState(false);
 
-  const { doRequest, errors } = useRequest({
+  const [errors, doRequest ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + '/post/',
     method: 'post',
     body: {

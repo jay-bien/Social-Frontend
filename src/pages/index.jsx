@@ -106,10 +106,12 @@ const Index = () => {
         } );
 
         const data = response.data;
+        console.log({ data });
         
         setAllComments( comments => {
            return comments.map( comment => {
-            if( comment.id === data.id ){
+            if( comment.id === data.commentId ){
+              console.log({ data });
               comment.dislikes = data.dislikes;
               comment.likes = data.likes;
             }
@@ -137,10 +139,11 @@ const Index = () => {
 
         setAllComments( comments => {
           return comments.map( comment => {
-           if( comment.id === data.id ){
-             comment.dislikes = data.dislikes;
-             comment.likes = data.likes;
-           }
+            if( comment.id === data.commentId ){
+              console.log({ data });
+              comment.dislikes = data.dislikes;
+              comment.likes = data.likes;
+            }
            return comment;
          })
        })

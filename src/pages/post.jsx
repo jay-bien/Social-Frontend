@@ -45,6 +45,12 @@ const Submit = (props) => {
 
 
 
+  useEffect( async () => {
+
+    const user = await localStorage.getItem("user");
+    setUser( user );
+  })
+
   return (
     <Main
       meta={

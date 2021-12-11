@@ -204,6 +204,36 @@ const Index = () => {
       }
     }
 
+    const onBookmark = async ( id ) => {
+
+      try{
+        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/bookmark/${id}`,
+        {},
+        {
+          withCredentials: true
+        } );
+
+        const data = response.data;
+        console.log({ data });
+        
+        setAllComments( comments => {
+           return comments.map( comment => {
+            if( comment.id === data.commentId ){
+              console.log({ data });
+              comment.dislikes = data.dislikes;
+              comment.likes = data.likes;
+            }
+            return comment;
+          })
+        })
+        
+      } catch( err ) {
+        console.log( err );
+      }
+      return {};
+
+    }
+
 
   return (
     <Main
@@ -300,6 +330,7 @@ const Index = () => {
       onLike={ onLike }
       onDislike={ onDislike }
       onDelete={ onDelete }
+      onBookmark={ onBookmark }
       key={ index } data={ comment }
       />
     )
@@ -312,6 +343,7 @@ const Index = () => {
       onDislike={ onDislike }
       onDelete={ onDelete }
     key={ index } data={ comment }
+    onBookmark={ onBookmark }
 
       />
     )
@@ -323,6 +355,8 @@ const Index = () => {
       onDislike={ onDislike }
       onDelete={ onDelete }
      key={ index } data={ comment }
+     onBookmark={ onBookmark }
+
     />
     )
 

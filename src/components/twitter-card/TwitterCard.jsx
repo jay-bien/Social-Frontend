@@ -8,9 +8,9 @@ import {
   } from '../icons';
 
 export default function TwitterCard( props ) {
-    const { data, onLike, onDislike, onDelete } = props;
+    const { data, onLike, onDislike, onDelete , onBookmark} = props;
 
-
+    let bookmarked = false;
 
 
     const [ cardInfo, setCardInfo ] = useState({});
@@ -154,6 +154,13 @@ export default function TwitterCard( props ) {
 
                     </p>
                     
+                     </span>
+<span className="flex">
+                    <BookMark 
+                      onClick={ () => onBookmark( id ) }
+                      className={`hover:cursor-pointer h-12 w-12 ${bookmarked ? 'bookmarked': ''}`}
+                    />
+    
                      </span>
                   <span>
       

@@ -8,7 +8,7 @@ import {
   } from '../icons';
 
 export default function TextCard( props ) {
-    const { data, onLike, onDislike, onDelete } = props;
+    const { data, onLike, onDislike, onDelete, onBookmark } = props;
 
     const [ cardInfo, setCardInfo ] = useState({});
 
@@ -106,6 +106,17 @@ export default function TextCard( props ) {
                       className="hover:cursor-pointer h-12 w-12"
                       />
                     { dislikes ? dislikes : 0}
+                    
+                     </span>
+                     <span className="flex">
+                    <BookMark 
+                      onClick={ () => onBookmark( id ) }
+                      className="hover:cursor-pointer h-12 w-12"
+                    />
+                    <p>
+                    { dislikes ? dislikes : 0}
+
+                    </p>
                     
                      </span>
                   <span>

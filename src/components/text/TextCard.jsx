@@ -31,26 +31,20 @@ export default function TextCard( props ) {
 
           
               <div >
-                <Link
-                href={
-                  {
-                    pathname: "/post",
-                    query:{
-                      title: title,
-                      id: id,
-                      content
-                    }
-                  }
+          
+                  <Link
+                href="post/[pid]"
+                as={
+                  `/post/${data.id}`
                 }
-
-                className="hover:cursor-pointer"
-
-                >
+                      > 
+                      <a>
                 <div  className="h-56 hover:cursor-pointer hover:border-secondary bg-white border-2 border-gray-300 rounded-lg flex justify-center items-center p-4 relative overflow-hidden">
 
                   <h1 className="text-gray-800 text-center font-semibold  ">{ title }</h1> 
           
                   </div> 
+                  </a>
                 </Link>
                   <div className="text-card-body text-white py-5">
                     

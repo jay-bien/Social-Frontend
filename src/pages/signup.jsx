@@ -26,7 +26,7 @@ const Index = () => {
     setRegisterInfo({ ...registerInfo, [el.target.name]: el.target.value });
   }
 
-  const { doRequest, errors } = useRequest({
+  const  [ doRequest, errors ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + '/signup/',
     method: 'post',
     body: registerInfo,

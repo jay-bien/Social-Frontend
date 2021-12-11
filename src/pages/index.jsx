@@ -9,6 +9,7 @@ import { UserContext, AuthModalContext, PostFormContext } from '../context';
 import {  TwitterCard, TextCard, QACard, Header, AuthModal, PostModal } from '../components';
 
 import {Clock, Fire, SortAscending, SortDescending } from '../components/icons'
+import useRequest from '../hooks/useRequest';
 
 const Index = () => {
   const router = useRouter();
@@ -94,13 +95,16 @@ const Index = () => {
    
     }, []);
 
+
     const onLike = async ( id ) => {
+
       try{
-        const aux = await localStorage.getItem("aux");
-        let dec = JSON.parse( aux );
-        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/up`, {
-         auxillaryID: dec
+        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/up`,
+        {},
+        {
+          withCredentials: true
         } );
+
         const data = response.data;
         
         setAllComments( comments => {
@@ -123,11 +127,11 @@ const Index = () => {
     }
     const onDislike = async ( id ) => {
       try{
-        const aux = await localStorage.getItem("aux");
-        let dec = JSON.parse( aux );
-        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/down`, {
-          auxillaryID: dec
-         } );
+        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/down`,
+        {},
+        {
+          withCredentials: true
+        } );
         const data = response.data;
         
 

@@ -38,7 +38,7 @@ const Settings = ( props ) => {
   
   const { doRequest, errors } = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + '/history',
-    method: 'post',
+    method: 'get',
     body: {
       auxillaryId:  aux,
       userId: user.id
@@ -48,10 +48,7 @@ const Settings = ( props ) => {
 
 
   useEffect( async () => {
-    const user = await localStorage.getItem('user');
-    const aux = await localStorage.getItem('aux');
 
-    console.log({ aux });
 
 
     let res = await doRequest();

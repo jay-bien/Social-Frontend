@@ -140,7 +140,6 @@ const Index = () => {
         setAllComments( comments => {
           return comments.map( comment => {
             if( comment.id === data.commentId ){
-              console.log({ data });
               comment.dislikes = data.dislikes;
               comment.likes = data.likes;
             }

@@ -36,13 +36,9 @@ const Settings = ( props ) => {
   const [ aux, setAux ] = useState(null)
 
   
-  const { doRequest, errors } = useRequest({
+  const [ errors, doRequest ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + '/history',
-    method: 'get',
-    body: {
-      auxillaryId:  aux,
-      userId: user.id
-    }
+    method: 'get'
   })
 
 

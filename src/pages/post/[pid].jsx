@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-import { Meta } from '../layout/Meta';
-import { Main } from '../templates/Main';
+import { Meta } from '../../layout/Meta';
+import { Main } from '../../templates/Main';
 import axios from 'axios';
-import styles from '../styles/post.module.scss';
 
 import {
   Chat, ThumbUp, ThumbDown,
   BookMark, PaperAirplane, Remove,
   ExternalLink
-} from '../components/icons';
+} from '../../components/icons';
 
 
 const categories = [
@@ -35,14 +34,17 @@ const categories = [
 
 
 
-const Submit = (props) => {
+const Post = (props) => {
 
-
+  console.log({ props });
 
   const { query } = useRouter();
-  const { title, content, likes, id, dislikes, categories, img, link } = query;
+  const { title, content, likes, id, dislikes, categories, img, link } = props.post.comment;
   const [user, setUser] = useState(null);
 
+
+  const router = useRouter();
+  if (router.isFallback)  return <div>Loading...</div>;
 
 
   useEffect( async () => {
@@ -218,13 +220,32 @@ const Submit = (props) => {
       </div>
     </Main>
   )
+};
+
+
+
+// export async function getStaticPaths() {
+
+//   console.log("get oaths");
+//   return {
+//     paths: [{ params: { postSlug: 'sth' } }, { params: { postSlug: 'sth-else' } }],
+//     fallback: true,
+//   };
+// }
+  
+
+
+export async function getServerSideProps( context ) {
+
+  const params = context.params;
+  const postId = params.pid;
+  console.log({ params });
+  const response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post/' + postId );
+  return {
+    props: { post: response.data },
+  }
 }
 
 
 
-
-
-
-
-
-export default Submit
+export default Post

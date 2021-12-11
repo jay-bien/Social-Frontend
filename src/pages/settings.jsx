@@ -36,6 +36,7 @@ const Settings = ( props ) => {
   const [ history, setHistory ] = useState({});
   const [ votes, setVotes ] = useState([])
   const [ comments, setComments ] = useState([])
+  const [ bookmarks, setBookmarks ] = useState([]);
   const [ user, setUser ] = useState("null");
   const [ aux, setAux ] = useState(null)
 
@@ -80,6 +81,7 @@ const Settings = ( props ) => {
     setComments( res.comments );
     setVotes( res.votes );
     setHistory( res );
+    setBookmarks( res.bookmarks );
     console.log({ res });
 
   }, [])
@@ -114,30 +116,37 @@ const Settings = ( props ) => {
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
             <h1>Settings</h1>
             {
-              comments && comments.map( comment => {
+              comments && comments.map( ( comment, idx) => {
                 const { title, id, description, link} = comment;
 
                 return(
-                  <p>
+                  <p key={ id }>
                   You made a post 
                   <Link
-                href={
-                  {
-                    pathname: "/post",
-                    query:{
-                      title: title,
-                      id: id,
-                      content: description,
-                      img: renderImage( comment ),
-                      link
-                    }
-                  }
-              }
+                href="post/[pid]"
+                as={
+                  `/post/${id}`
+                }
 
-                className="hover:cursor-pointer"
+                  // {
+                  //   pathname: "/post",
+                  //   query:{
+                  //     title: title,
+                  //     id: id,
+                  //     content: description,
+                  //     img: renderImage( comment ),
+                  //     link
+                  //   }
+                  // }
+              // }
 
-                > 
+
+                >
+                  <a className="hover:cursor-pointer"
+>
                   { title }
+
+                    </a> 
                 </Link>
                 </p>
                 )
@@ -147,11 +156,39 @@ const Settings = ( props ) => {
               )
             }
             { 
-            votes && votes.map( vote => (
-              <h1>
+            votes && votes.map( ( vote, idx) => (
+              <h1 key={ idx }>
                 You voted on a post;
               </h1>
             ))
+}
+{
+  bookmarks && bookmarks.map( ( book, idx ) => {
+    const id = book.id;
+    return(
+      <h1 key={ idx }>
+      You Bookmarked
+      <Link
+      href={
+        {
+          pathname: "/post",
+          query:{
+            id: id,
+          }
+        }
+    }
+
+      className="hover:cursor-pointer"
+
+      > 
+        { "Link askdld" }
+      </Link>
+
+</h1>
+
+    )
+  })
+
 }
           </div>
           

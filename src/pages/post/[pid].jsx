@@ -36,15 +36,39 @@ const categories = [
 
 const Post = (props) => {
 
-  console.log({ props });
 
   const { query } = useRouter();
-  const { title, content, likes, id, dislikes, categories, img, link } = props.post.comment;
+  const { title, content, likes, id, dislikes, categories, img, link , favIcon} = props.post.comment;
   const [user, setUser] = useState(null);
 
 
   const router = useRouter();
   if (router.isFallback)  return <div>Loading...</div>;
+
+  const renderImage = (  ) => {
+
+
+    if( link?.metadata?.twitter_card?.images){
+      console.log("should pick up on images");
+      return(
+        link.metadata.twitter_card.images[ 0].url
+      )
+    }
+    if( link?.metadata?.open_graph?.images){
+      return( link.metadata.open_graph.images[ 0 ].url)
+    }
+    if( img && img.length ){
+      return( img[ 0].url )
+    }
+
+    if( link?.metadata?.favIcon ){
+      return(
+        link.metadata.favIcon
+      )
+    }
+
+
+  };
 
 
   useEffect( async () => {
@@ -79,16 +103,15 @@ const Post = (props) => {
                 {content}
               </p>
 
-              {img && (
+              {link && (
                 <div className="h-52">
                   <img
-                    src={img}
+                    src={renderImage( )}
                     className="h-full object-contain m-auto"
                     alt="twitter-card-header-img"
                   />
                 </div>
               )}
-
               <div className="flex justify-center items-center p-4 relative">
 
 

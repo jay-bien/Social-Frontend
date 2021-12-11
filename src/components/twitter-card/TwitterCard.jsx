@@ -16,6 +16,7 @@ export default function TwitterCard( props ) {
     const [ cardInfo, setCardInfo ] = useState({});
 
     useEffect(() => {
+      console.log({ data })
       setCardInfo( prevState => setCardInfo( data) );
 
       return () => {
@@ -65,23 +66,13 @@ export default function TwitterCard( props ) {
 
           
               <div className="twitter-card">
-                                <Link
-                href={
-                  {
-                    pathname: "/post",
-                    query:{
-                      title: title,
-                      id: id,
-                      content: description,
-                      img: renderImage(),
-                      link
-                    }
-                  }
-              }
-
-                className="hover:cursor-pointer"
-
-                >
+                  <Link
+                href="post/[pid]"
+                as={
+                  `/post/${data.id}`
+                }
+                      > 
+                      <a>
                 <div className="hover:cursor-pointer hover:border-secondary h-56 bg-white border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
             
                             <img 
@@ -91,7 +82,8 @@ export default function TwitterCard( props ) {
                     />
 
           
-                  </div> 
+                  </div>
+                  </a> 
               </Link>
                   <div className="text-card-body text-white py-5">
                     

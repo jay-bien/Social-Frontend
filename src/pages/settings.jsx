@@ -127,20 +127,6 @@ const Settings = ( props ) => {
                 as={
                   `/post/${id}`
                 }
-
-                  // {
-                  //   pathname: "/post",
-                  //   query:{
-                  //     title: title,
-                  //     id: id,
-                  //     content: description,
-                  //     img: renderImage( comment ),
-                  //     link
-                  //   }
-                  // }
-              // }
-
-
                 >
                   <a className="hover:cursor-pointer"
 >
@@ -156,32 +142,42 @@ const Settings = ( props ) => {
               )
             }
             { 
-            votes && votes.map( ( vote, idx) => (
+            votes && votes.map( ( vote, idx) => {
+              const id = vote.commentId;
+              return(
+       <Link
+              href="post/[pid]"
+              as={
+                `/post/${id}`
+              }
+              >
+                <a>
               <h1 key={ idx }>
                 You voted on a post;
               </h1>
-            ))
+                </a>
+                </Link>
+              )
+            }
+       
+
+            )
 }
 {
   bookmarks && bookmarks.map( ( book, idx ) => {
-    const id = book.id;
+    const { id, commentId } = book;
     return(
       <h1 key={ idx }>
       You Bookmarked
       <Link
-      href={
-        {
-          pathname: "/post",
-          query:{
-            id: id,
-          }
-        }
-    }
-
-      className="hover:cursor-pointer"
-
-      > 
-        { "Link askdld" }
+                href="post/[pid]"
+                as={
+                  `/post/${commentId}`
+                }
+                      > 
+                      <a>
+                                { 'A Post' }
+                      </a>
       </Link>
 
 </h1>

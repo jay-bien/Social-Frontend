@@ -9,6 +9,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import useRequest from '../hooks/useRequest';
 
+import {
+  ThumbUp
+ } from '../components/icons';
+
 
 const categories = [
   "Psychadelics",
@@ -107,6 +111,11 @@ const Settings = ( props ) => {
 
 
     <main className="main">
+      <Sidebar
+
+      >
+
+      </Sidebar>
 
 
 
@@ -195,6 +204,44 @@ const Settings = ( props ) => {
 }
 
 
+const Sidebar = props => {
+
+
+  return(
+    <div 
+    className='fixed top-0 
+    left-0 h-screen w-16 bg-gray-900
+    text-white-100
+    '>
+
+      <SidebarIcon
+    
+      icon={ <ThumbUp /> }
+      />
+      <SidebarIcon
+    
+      icon={ <ThumbUp /> }
+      />
+
+    </div>
+  )
+}
+
+
+const SidebarIcon = ( props ) => {
+
+  const { icon, text ="💡" } = props;
+
+  return(
+    <div 
+    className="sidebar-icon group">
+      { icon }
+
+      <span className='sidebar-tooltip group-hover:scale-100'>{text}</span>
+    </div>
+  )
+
+}
 
 
 

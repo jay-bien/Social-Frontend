@@ -356,6 +356,7 @@ const Index = () => {
       onDelete={ onDelete }
      key={ index } data={ comment }
      onBookmark={ onBookmark }
+     
 
     />
     )

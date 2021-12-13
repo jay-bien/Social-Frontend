@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Meta } from '../../layout/Meta';
 import { Main } from '../../templates/Main';
 import axios from 'axios';
+import track from 'react-tracking';
 
 import {
   Chat, ThumbUp, ThumbDown,
@@ -37,10 +38,11 @@ const categories = [
 const Post = (props) => {
 
 
+
+  console.log({ props });
   const { query } = useRouter();
   const { title, content, likes, id, dislikes, categories, img, link , favIcon} = props.post.comment;
   const [user, setUser] = useState(null);
-
 
   const router = useRouter();
   if (router.isFallback)  return <div>Loading...</div>;
@@ -49,7 +51,6 @@ const Post = (props) => {
 
 
     if( link?.metadata?.twitter_card?.images){
-      console.log("should pick up on images");
       return(
         link.metadata.twitter_card.images[ 0].url
       )
@@ -167,7 +168,7 @@ const Post = (props) => {
                   {
                     link && (
                       <span>
-                      <a href={link} target="_blank">
+                      <a href={ link.url } target="_blank">
                       <ExternalLink
                         className="h-9 w-9 text-gray-800"
   

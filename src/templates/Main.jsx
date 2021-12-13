@@ -10,10 +10,14 @@ import router from 'next/router';
 
 import {
   Login, Logout, DocumentAdd,
-  UserAdd, User, Setttings,
+  UserAdd, User, Settings,
   Link as LinkIcon, Text, 
   ThumbUp, ThumbDown, Chat
 } from '../components/icons'
+
+import {
+Sidebar
+} from '../components';
 
 
 
@@ -235,7 +239,7 @@ const Main = (props) => {
                       href="/settings"
                     >
                       <button className="btn btn-primary mr-6">
-                        <Setttings
+                        <Settings
                           className="text-green-600"
                         />
                       </button>
@@ -268,10 +272,14 @@ const Main = (props) => {
 
 
         </header>
+        <nav>
+        <Sidebar />
+
+        </nav>
 
       </div>
 
-      <div className="py-5 text-xl content">{props.children}</div>
+      <div className="py-5 ml-20 text-xl content">{props.children}</div>
 
 
     </div>

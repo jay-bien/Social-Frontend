@@ -174,6 +174,35 @@ const Moon  = props => (
 </svg>
 )
 
+const Hashtag = props => (
+  <svg { ...props }
+  xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+</svg>
+)
+
+const Collections = props => (
+  <svg
+    {...props}
+  xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+</svg>
+)
+
+const QuestionMarkCircle = props => (
+  <svg { ...props }
+  xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+)
+
+const Support = props => (
+  <svg { ...props }
+   xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+</svg>
+)
+
 export{
     ThumbUp, ThumbDown, BookMark, PaperAirplane,
     Login, Write, Chat, Logout, Remove,
@@ -181,5 +210,6 @@ export{
     Backspace, ExternalLink, DocumentAdd, 
     UserAdd, User, Setttings,
     SortAscending, SortDescending,
-    Clock, Fire
+    Clock, Fire, Sun, Moon, Hashtag,
+    Collections, QuestionMarkCircle, Support
 }

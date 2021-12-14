@@ -13,6 +13,8 @@ import {
   ExternalLink
 } from '../../components/icons';
 
+import onLike from '../../helpers/onLike';
+
 
 const categories = [
   "Psychadelics",
@@ -39,13 +41,15 @@ const Post = (props) => {
 
 
 
-  console.log({ props });
   const { query } = useRouter();
   const { title, content, likes, id, dislikes, categories, img, link , favIcon} = props.post.comment;
   const [user, setUser] = useState(null);
 
+  const [ postLikes, setPostLikes ] = useState( likes );
+  const [ postDislikes, setPostDislikes ] = useState( dislikes );
+
   const router = useRouter();
-  if (router.isFallback)  return <div>Loading...</div>;
+  if (router.isFallback)  return <div> Loading...</div>;
 
   const renderImage = (  ) => {
 
@@ -70,6 +74,25 @@ const Post = (props) => {
 
 
   };
+
+  const onPostLike = async ( id ) => {
+
+
+    try{
+      const post = await onLike( id );
+      console.log({
+        post
+      });
+      const{ commentId, likes, dislikes } = post;
+      setPostDislikes( dislikes );
+      setPostLikes( likes );
+
+    } catch( e ){
+      console.log({ e });
+    }
+
+
+  }
 
 
   useEffect( async () => {
@@ -146,9 +169,9 @@ const Post = (props) => {
                   <span className="flex">
                     <ThumbUp
                       className="h-8 w-8"
-                      onClick={null}
+                      onClick={()=>onPostLike( id )}
                     />
-                    {likes && likes ? likes : 0}
+                    {postLikes ? postLikes : 0}
                   </span>
 
 
@@ -157,7 +180,7 @@ const Post = (props) => {
                       className="h-8 w-8"
                       onClick={null}
                     />
-                    {dislikes && dislikes ? dislikes : 0}
+                    {postDislikes ? postDislikes : 0}
 
                   </span>
                   <span>

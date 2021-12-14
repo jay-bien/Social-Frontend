@@ -48,9 +48,9 @@ const Sidebar = (props) => {
             <SidebarIcon text="Saves" icon={<BookMark />} />
           </a>
         </Link>
-        <Link href="/my/likes">
+        <Link href="/my/votes">
           <a>
-            <SidebarIcon text="Likes" icon={<ThumbDown />} />
+            <SidebarIcon text="Votes" icon={<ThumbUp />} />
           </a>
         </Link>
         <Link href="/my/profile">

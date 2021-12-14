@@ -140,8 +140,8 @@ const Submit = ( props ) => {
       const renderFormTypeClassNames = ( type ) =>{
           return type === formType 
           ?
-          ("sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-indigo-500 tracking-wider rounded-t")
-          : ("sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider")
+          ("sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-indigo-500 tracking-wider rounded-t dark:bg-gray-900 dark:text-white")
+          : ("sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider ")
       }
 
 
@@ -186,9 +186,14 @@ const Submit = ( props ) => {
 
 
 
-          <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
+          <div 
+          className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10
+           mt-8 sm:mx-auto sm:w-full sm:max-w-3xl
+           dark:bg-transparent">
 
-          <section className="text-gray-800 body-font">
+          <section 
+          className="text-gray-800 body-font
+          dark:text-gray-300">
               <h3 className="font-bold text-center"> Create New Post  </h3>
            
 
@@ -256,16 +261,20 @@ const Form = props => {
   const { formType, onChange, toggleCheckBox, onSubmit, categories } = props;
 
   return(
-      <form className="post-form bg-white py-8 sm:w-full w-100w">
+      <form 
+      className="post-form bg-white py-8 sm:w-full w-100w
+      dark:bg-transparent dark:border-2 dark:border-gray-900 rounded-lg p-3
+      dark:text-gray-300">
 
 <div className="form-control">
-                  <label className="label">
-                      <span className="label-text">Title</span>
+                  <label className="label ">
+                      <span className="label-text dark:text-gray-300">Title</span>
                   </label> 
                   <input type="text" placeholder="title"
                   name="title"
                   onChange={ onChange }
-                  className="input input-primary input-bordered bg-white"
+                  className="input input-primary input-bordered bg-white
+                  dark:bg-gray-700"
                   />
                   </div> 
           
@@ -273,10 +282,11 @@ const Form = props => {
               ( formType === "text" || formType === "qa") &&
               (
                   <div className="form-control">
-                  <label className="label">
-                  <span className="label-text">Content (optional)</span>
+                  <label className="label ">
+                  <span className="label-text dark:text-gray-300">Content (optional)</span>
                   </label> 
-                  <textarea className="textarea h-24 textarea-bordered textarea-primary bg-white"
+                  <textarea className="textarea h-24 textarea-bordered textarea-primary bg-white
+                  dark:bg-gray-700"
                    placeholder="Content (optional)"
                    name="content"
                    onChange={ onChange }
@@ -290,10 +300,11 @@ const Form = props => {
               (
                   <div className="form-control">
                   <label className="label">
-                      <span className="label-text">Link</span>
+                      <span className="label-text dark:text-gray-300">Link</span>
                   </label> 
                   <input type="text" placeholder="link"
-                   className="input input-primary input-bordered bg-white"
+                   className="input input-primary input-bordered bg-white
+                   dark:bg-gray-700"
                    name="link"
                    onChange={ onChange }
                   />
@@ -343,7 +354,7 @@ Category
 
 
     <button className="btn mt-5" onClick={onSubmit}>
-      Send Post
+      Submit Post
     </button>
   </form>
   )

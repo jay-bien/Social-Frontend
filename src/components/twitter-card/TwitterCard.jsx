@@ -124,10 +124,12 @@ export default function TwitterCard( props ) {
                   </div>
                   <div className="overflow-hidden h-32">
                     <p className="line-clamp-3">
-                      { description && description || "" }
+                      { title && title|| "" }
                     </p>
                   </div>
-                  <div className="text-gray-600 flex justify-between py-3">
+                  <div 
+                  className="text-gray-700 flex justify-between py-3
+                  dark:text-gray-300">
                     <span className="flex">
                     <ThumbUp 
                       onClick={ (e) => onLike( id )}

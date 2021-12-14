@@ -273,7 +273,8 @@ const Index = () => {
     hover:bg-secondary hover:font-semibold 
     hover:text-red-50 categories 
     rounded-lg px-10 border-2 
-    border-secondary m-2 text-gray-800"
+    border-secondary m-2 text-gray-800
+    dark:text-gray-300"
     >
         <p className=" my-0 py-0">#{ cat }</p>
     </div>

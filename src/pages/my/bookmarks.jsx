@@ -104,9 +104,16 @@ const Settings = (props) => {
         bookmarks && bookmarks.map( (bkmk, idx ) => {
 
           const comment = bkmk.commentId;
+          
 
           return(
-            <div className="flex flex-row mb-3 p-6 border-b-2 border-gray-200">
+            <Link
+            href="../post/[pid]"
+            as={
+              `../post/${comment.id}`
+            }
+            >
+            <div className={ `flex flex-row rounded-lg p-6 border-b-2 border-gray-200 ${ idx % 2 === 0 ? 'bg-gray-100' : null}` }>
             <h5 className="w-20">
             {
                comment.type === "link" && (
@@ -134,6 +141,7 @@ const Settings = (props) => {
             { dayjs( bkmk.createdAt ).fromNow() }
             </h5>
           </div>
+          </Link>
           )
         })
       }
@@ -142,102 +150,11 @@ const Settings = (props) => {
 
   </div>
 
-  <div class="overflow-x-auto">
-  <table class="table w-full">
-    <thead>
-      <tr>
   
-        <th>Type</th> 
-        <th>Title</th> 
-        <th>Saved</th> 
-        <th></th>
-      </tr>
-    </thead> 
-    <tbody>
-      {
-        bookmarks && bookmarks.map( ( bkmk, idx ) => {
-
-          const comment = bkmk.commentId;
-  
-
-
-
-          return(
-
-            <tr>
-
-        <td>
-          <div class="flex items-center space-x-3">
-            <div class="avatar">
-            {
-               comment.type === "link" && (
-                 <LinkIcon
-                 />
-               )
-             }
-             {
-               comment.type === "text" && (
-                 <Text
-                 />
-               )
-             }
-            </div> 
-            <div>
-
-            </div>
-          </div>
-        </td> 
-        <td  className="truncate">
-          {
-            comment.title 
-            }
-    
-
-          <br/>
-          { comment.categories && comment.categories.map( cat => (
-                <span class="badge badge-outline badge-sm mr-2">{ cat }</span>
-          ))} 
-        </td> 
-        <td>
-          { dayjs( bkmk.createdAt ).fromNow() }
-
-          </td> 
-     
-      </tr>
-          )
-        })
-      }
-      
-   
-    </tbody> 
-    <tfoot>
-      <tr>
-        <th>Image</th> 
-        <th>Title</th> 
-        <th>Type</th> 
-        <th></th>
-      </tr>
-    </tfoot>
-  </table>
-</div>
 
 
             
-           
-            {bookmarks &&
-              bookmarks.map((book, idx) => {
-                const { id, commentId } = book;
 
-                return (
-                  <h1 key={idx}>
-                    You Bookmarked
-                    {/* {JSON.stringify( book )} */}
-                    <Link href="post/[pid]" as={`/post/${commentId}`}>
-                      <a>{"A Post"}</a>
-                    </Link>
-                  </h1>
-                );
-              })}
           </div>
         </main>
       </div>

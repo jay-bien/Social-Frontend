@@ -88,11 +88,59 @@ const Settings = (props) => {
       }
     >
       <div className="App min-h-screen">
-        <main className="main">
+        <main className="main max-w-7xl">
 
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full">
-            <h1>My Bookmarks</h1>
+            <h1 className="mb-6 font-bold">My Bookmarks</h1>
 
+  <div className="">
+    <div className="">
+      <div className="flex flex-row bg-gray-200 p-6 rounded-lg mb-10 font-semibold">
+        <h5 className="w-20">Type</h5>
+        <h5 className="flex-1">Title</h5>
+        <h5 className="w-200">Saved</h5>
+      </div>
+      {
+        bookmarks && bookmarks.map( (bkmk, idx ) => {
+
+          const comment = bkmk.commentId;
+
+          return(
+            <div className="flex flex-row mb-3 p-6 border-b-2 border-gray-200">
+            <h5 className="w-20">
+            {
+               comment.type === "link" && (
+                 <LinkIcon
+                 />
+               )
+             }
+             {
+               comment.type === "text" && (
+                 <Text
+                 />
+               )
+             }
+            </h5>
+            <h5 className="flex-1 ">
+              {
+                comment.title
+              }
+                        <br/>
+          { comment.categories && comment.categories.map( cat => (
+                <span class="badge badge-outline badge-sm mr-2">{ cat }</span>
+          ))} 
+            </h5>
+            <h5 className="w-200">
+            { dayjs( bkmk.createdAt ).fromNow() }
+            </h5>
+          </div>
+          )
+        })
+      }
+
+    </div>
+
+  </div>
 
   <div class="overflow-x-auto">
   <table class="table w-full">

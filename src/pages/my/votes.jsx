@@ -90,12 +90,16 @@ const Settings = (props) => {
       <div className="App min-h-screen">
         <main className="main max-w-7xl">
 
-          <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full">
+          <div 
+          className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full
+          dark:bg-gray-800 dark:text-white">
             <h1 className="mb-6 font-bold">My Votes</h1>
 
   <div className="">
     <div className="">
-      <div className="flex flex-row bg-gray-200 p-6 rounded-lg mb-10 font-semibold">
+      <div 
+      className="flex flex-row bg-gray-200 p-6 rounded-lg mb-10 font-semibold
+      dark:bg-gray-700">
         <h5 className="w-20">Type</h5>
         <h5 className="flex-1">Title</h5>
         <h5 className="w-200">Saved</h5>
@@ -116,7 +120,8 @@ const Settings = (props) => {
             <div 
             className={ `flex flex-row rounded-lg p-6 border-b-2 
             border-gray-200 ${ idx % 2 === 0 ? 'bg-gray-100' : null}
-            hover:cursor-pointer hover:bg-primary hover:bg-opacity-5` }>
+            hover:cursor-pointer hover:bg-primary hover:bg-opacity-5
+            dark:${ idx % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'}` }>
             <h5 className="w-20">
             {
                comment.type === "link" && (

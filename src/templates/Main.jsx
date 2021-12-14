@@ -93,7 +93,9 @@ const Main = (props) => {
             <div className="hidden px-2 mx-2 navbar-center lg:flex">
               <div className="flex items-stretch">
                 {user && (
-                  <p className="text-gray-900">
+                  <p 
+                  className="text-gray-900
+                  dark:text-gray-300">
                     Welcome {user.email}
                   </p>
                 )}

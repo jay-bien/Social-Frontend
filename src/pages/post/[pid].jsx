@@ -116,10 +116,8 @@ const Post = (props) => {
                   />
                 </div>
               )}
-              <div className="flex justify-center items-center p-4 relative">
-
-
-                {
+              <div>
+              {
                   categories && categories.length && categories.map((cat, idx) => {
                     return (
 
@@ -141,6 +139,8 @@ const Post = (props) => {
                     )
                   })
                 }
+              </div>
+              <div className="flex justify-center items-center p-4 relative">
 
                 <div className="max-w-prose w-full m-auto flex justify-between py-3">
                   <span className="flex">

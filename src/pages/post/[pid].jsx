@@ -14,6 +14,7 @@ import {
 } from '../../components/icons';
 
 import onLike from '../../helpers/onLike';
+import onDislike from '../../helpers/onDislike';
 
 
 const categories = [
@@ -84,8 +85,27 @@ const Post = (props) => {
         post
       });
       const{ commentId, likes, dislikes } = post;
-      setPostDislikes( dislikes );
       setPostLikes( likes );
+      setPostDislikes( dislikes );
+
+
+    } catch( e ){
+      console.log({ e });
+    }
+
+
+  }
+  const onPostDislike = async ( id ) => {
+
+
+    try{
+      const post = await onDislike( id );
+      console.log({
+        post
+      });
+      const{ commentId, likes, dislikes } = post;
+      setPostLikes( likes );
+      setPostDislikes( dislikes );
 
     } catch( e ){
       console.log({ e });
@@ -178,7 +198,7 @@ const Post = (props) => {
                   <span className="flex">
                     <ThumbDown
                       className="h-8 w-8"
-                      onClick={null}
+                      onClick={ ( ) => onPostDislike( id ) }
                     />
                     {postDislikes ? postDislikes : 0}
 

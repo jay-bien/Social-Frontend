@@ -22,6 +22,7 @@ const Sidebar = (props) => {
     <div
       className="fixed top-0 p-3
     left-0 h-screen w-20 bg-gray-100 text-gray-800
+    shadow-2xl
     dark:bg-gray-900
     dark:text-white-100 flex flex-col justify-between
     "
@@ -59,11 +60,6 @@ const Sidebar = (props) => {
           </a>
         </Link>
 
-        <Link href="/settings">
-          <a>
-            <SidebarIcon text="Settings" icon={ <QuestionMarkCircle />} />
-          </a>
-        </Link>
         <Link href="/settings">
           <a>
             <SidebarIcon text="Settings" icon={ <Settings />} />

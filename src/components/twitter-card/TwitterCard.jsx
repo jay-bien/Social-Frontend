@@ -73,7 +73,10 @@ export default function TwitterCard( props ) {
                 }
                       > 
                       <a>
-                <div className="hover:cursor-pointer hover:border-secondary h-56 bg-white border-2 border-gray-300 rounded-lg flex place-items-center justify-center align-middle">
+                <div 
+                className="hover:cursor-pointer hover:border-red-400 h-56 bg-white border-2 
+                border-gray-300 rounded-lg overflow-hidden flex place-items-center justify-center align-middle
+                dark:bg-gray-600 dark:text-gray-100">
             
                             <img 
                       src={ renderImage() }
@@ -104,6 +107,7 @@ export default function TwitterCard( props ) {
                             py-0.5
                             mr-3
                             hover:cursor-pointer
+                            dark:text-white dark:bg-primary
                           "
                         >
                           { cat }

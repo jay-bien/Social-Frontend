@@ -34,7 +34,6 @@ const Main = (props) => {
   useEffect(async () => {
 
     const fUsr = await localStorage.getItem('user');
-    console.log({ fUsr });
     if (fUsr) {
       const usr = JSON.parse(fUsr)
       console.warn("User Exists");
@@ -75,12 +74,16 @@ const Main = (props) => {
   return (
 
 
-    <div className="antialiased w-full text-gray-700 px-1 bg-white">
+    <div 
+      className="antialiased w-full text-gray-700 px-1 bg-white
+      dark:bg-gray-800 dark:text-gray-100">
       {props.meta}
 
       <div className="max-w-7xl mx-auto">
 
-        <header className="header shadow-lg bg-white rounded-lg" {...props}>
+        <header 
+        className="header shadow-lg bg-white rounded-lg
+        dark:bg-gray-800" {...props}>
           <nav className="navbar text-neutral-content max-w-7xl m-auto">
             <div className="px-2 mx-2 navbar-start">
 

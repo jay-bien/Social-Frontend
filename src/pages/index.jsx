@@ -17,6 +17,7 @@ const Index = () => {
   const [ showAuthModal, setShowAuthModal ] = useState(false);
   const [ showPostModal, setShowPostModal ] = useState(false);
   const [ loading, setLoading ] = useState( false );
+  const [ bookMarked, setBookmarked ] = useState([]);
 
   const [ allComments, setAllComments ] = useState([]);
 
@@ -281,45 +282,7 @@ const Index = () => {
     </p>
 </div>
 
-<div className="max-w-7xl m-auto">
-  <h2 className="text-5xl">
-      Filter by topic
-  </h2>
-<div className="flex flex-row flex-wrap m-auto mb-10">
-  { 
-  categories && categories.map( ( cat, idx ) => (
-    <div key={ idx }
-    onClick={ () => onFilter( cat ) }
-    className="hover:cursor-pointer 
-    hover:bg-secondary hover:font-semibold 
-    hover:text-red-50 categories 
-    rounded-lg px-10 border-2 
-    border-secondary m-2 text-gray-800"
-    >
-        <p className=" my-0 py-0">#{ cat }</p>
-    </div>
-  ))}
 
-</div>
-</div>
-<div className="max-w-7xl m-auto">
-  <h2 className="text-5xl">
-      Sort
-  </h2>
-<div className="flex flex-row flex-wrap m-auto mb-10">
-    <span>
-      By Time <Clock />
-    </span>
-    <span>
-      By Popularity <Fire />
-    </span>
-    <span>
-     <SortAscending />
-     <SortDescending />
-    </span>
-
-</div>
-</div>
 
 <div className="comments max-w-7xl m-auto ">
 { allComments && allComments.length  && allComments.map( ( comment, index ) => {

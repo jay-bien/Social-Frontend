@@ -39,9 +39,16 @@ export default function TextCard( props ) {
                 }
                       > 
                       <a>
-                <div  className="h-56 hover:cursor-pointer hover:border-secondary bg-white border-2 border-gray-300 rounded-lg flex justify-center items-center p-4 relative overflow-hidden">
+                <div  
+                className="h-56 hover:cursor-pointer hover:border-secondary
+                 bg-white border-2 text-gray-800 border-gray-300 rounded-lg flex justify-center
+                  items-center p-4 relative overflow-hidden
+                  dark:text-white dark:bg-gray-900 dark:border-gray-600
+                  dark:hover:border-red-400">
 
-                  <h1 className="text-gray-800 text-center font-semibold  ">{ title }</h1> 
+                  <h1 
+                  className="text-center font-semibold  
+                  ">{ title }</h1> 
           
                   </div> 
                   </a>
@@ -65,6 +72,7 @@ export default function TextCard( props ) {
                             py-0.5
                             mr-3
                             hover:cursor-pointer
+                            dark:bg-red-300
                           "
                         >
                           { cat }

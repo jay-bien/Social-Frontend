@@ -98,8 +98,11 @@ const Post = (props) => {
         <main className="main">
           <div >
 
-            <div className="bg-white border-2 border-gray-300 rounded-lg max-w-prose m-auto p-4 relative">
-              <h1 className="font-extrabold">{title}</h1>
+            <div 
+            className="bg-white border-2 border-gray-300 rounded-lg
+             max-w-prose m-auto p-4 relative text-gray-800
+             dark:bg-gray-800 dark:border-gray-900 dark:text-gray-100">
+              <h1 className="font-extrabold text-default">{title}</h1>
               <p>
                 {content}
               </p>
@@ -139,7 +142,7 @@ const Post = (props) => {
                   })
                 }
 
-                <div className="max-w-prose w-full m-auto text-grey-600 flex justify-between py-3">
+                <div className="max-w-prose w-full m-auto flex justify-between py-3">
                   <span className="flex">
                     <ThumbUp
                       className="h-8 w-8"
@@ -208,15 +211,19 @@ const Post = (props) => {
 
                 {
                   user && (
-                    <form className="max-w-prose m-auto mt-10">
+                    <form 
+                    className="max-w-prose m-auto mt-10 text-gray-800
+                    dark:text-gray-100">
 
                       <div className="form-control">
                         <label className="label">
-                          <span className="label-text text-gray-800">
+                          <span className="label-text dark:text-gray-100">
                             Share Comment
                           </span>
                         </label>
-                        <textarea className="textarea h-24 textarea-bordered textarea-gray-500 bg-white border-gray-500"
+                        <textarea 
+                        className="textarea h-24 textarea-bordered textarea-gray-500 bg-white border-gray-500
+                        dark:bg-gray-700"
                           placeholder="Text required"
                           name="comment"
                           onChange={() => { }}

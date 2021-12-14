@@ -113,7 +113,10 @@ const Settings = (props) => {
               `../post/${comment.id}`
             }
             >
-            <div className={ `flex flex-row rounded-lg p-6 border-b-2 border-gray-200 ${ idx % 2 === 0 ? 'bg-gray-100' : null}` }>
+            <div 
+            className={ `flex flex-row rounded-lg p-6 border-b-2 
+            border-gray-200 ${ idx % 2 === 0 ? 'bg-gray-100' : null}
+            hover:cursor-pointer hover:bg-primary hover:bg-opacity-5` }>
             <h5 className="w-20">
             {
                comment.type === "link" && (

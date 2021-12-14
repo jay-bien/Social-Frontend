@@ -115,10 +115,7 @@ export default function TextCard( props ) {
                       onClick={ () => onBookmark( id ) }
                       className="hover:cursor-pointer h-12 w-12"
                     />
-                    <p>
-                    { dislikes ? dislikes : 0}
-
-                    </p>
+ 
                     
                      </span>
                   <span>

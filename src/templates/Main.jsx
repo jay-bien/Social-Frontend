@@ -12,7 +12,8 @@ import {
   Login, Logout, DocumentAdd,
   UserAdd, User, Settings,
   Link as LinkIcon, Text, 
-  ThumbUp, ThumbDown, Chat
+  ThumbUp, ThumbDown, Chat,
+  Sun, Moon
 } from '../components/icons'
 
 import {
@@ -270,7 +271,11 @@ const Main = (props) => {
 
 
 
+            <div className=''>  
+            <Sun />
+            <Moon />
 
+            </div>
         </header>
         <nav>
         <Sidebar />

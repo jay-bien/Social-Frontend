@@ -7,6 +7,10 @@ import { Main } from "../../templates/Main";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useRequest from "../../hooks/useRequest";
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend( relativeTime );
 
 
 
@@ -75,21 +79,21 @@ const Settings = (props) => {
         />
       }
     >
-      <div className="App">
+      <div className="App min-h-screen">
         <main className="main">
 
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
             <h1>My Bookmarks</h1>
 
 
-            <div class="overflow-x-auto">
+  <div class="overflow-x-auto">
   <table class="table w-full">
     <thead>
       <tr>
   
         <th>Imgage</th> 
         <th>Title</th> 
-        <th>Liked</th> 
+        <th>Saved</th> 
         <th></th>
       </tr>
     </thead> 
@@ -98,6 +102,11 @@ const Settings = (props) => {
         bookmarks && bookmarks.map( ( bkmk, idx ) => {
 
           const comment = bkmk.commentId;
+          const created = bkmk.createdAt;
+          const date = new Date( created );
+          console.log({ created });
+          console.log({ date });
+
 
 
           return(
@@ -131,7 +140,10 @@ const Settings = (props) => {
                 <span class="badge badge-outline badge-sm">{ cat }</span>
           ))} 
         </td> 
-        <td>{ bkmk.created_at }</td> 
+        <td>
+          { dayjs( bkmk.createdAt ).fromNow() }
+
+          </td> 
      
       </tr>
           )
@@ -144,7 +156,7 @@ const Settings = (props) => {
       <tr>
         <th>Image</th> 
         <th>Title</th> 
-        <th>Liked</th> 
+        <th>Saved On</th> 
         <th></th>
       </tr>
     </tfoot>

@@ -19,6 +19,7 @@ import {
 import {
 Sidebar
 } from '../components';
+import useDarkMode from '../hooks/useDarkMode';
 
 
 
@@ -26,7 +27,8 @@ const Main = (props) => {
 
 
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [  enabled, setEnabled ] = useDarkMode();
 
 
   useEffect(async () => {
@@ -267,15 +269,23 @@ const Main = (props) => {
               }
 
             </div>
+
+            <div className=' w-12 h-13 bg-red-400 flex align-end'>  
+            <Sun
+
+            onClick={ () => setEnabled( false )}
+            
+            />
+            <Moon
+                        onClick={ () => setEnabled( true )}
+
+            />
+
+            </div>
           </nav>
 
 
 
-            <div className=''>  
-            <Sun />
-            <Moon />
-
-            </div>
         </header>
         <nav>
         <Sidebar />

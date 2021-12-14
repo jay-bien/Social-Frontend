@@ -13,6 +13,11 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend( relativeTime );
 
 
+import {
+  Link as LinkIcon, Text
+ } from '../../components/icons';
+
+
 
 
 
@@ -49,6 +54,8 @@ const Settings = (props) => {
   let favIcon = null;
 
   const renderImage = (data) => {
+
+    console.log({ data });
     if (data.link?.metadata?.twitter_card?.images) {
       return data.link.metadata.twitter_card.images[0].url;
     }
@@ -62,6 +69,7 @@ const Settings = (props) => {
     if (favIcon) {
       return favIcon;
     }
+    return null;
   };
 
   useEffect(async () => {
@@ -82,7 +90,7 @@ const Settings = (props) => {
       <div className="App min-h-screen">
         <main className="main">
 
-          <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
+          <div className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full">
             <h1>My Bookmarks</h1>
 
 
@@ -91,7 +99,7 @@ const Settings = (props) => {
     <thead>
       <tr>
   
-        <th>Imgage</th> 
+        <th>Type</th> 
         <th>Title</th> 
         <th>Saved</th> 
         <th></th>
@@ -102,10 +110,7 @@ const Settings = (props) => {
         bookmarks && bookmarks.map( ( bkmk, idx ) => {
 
           const comment = bkmk.commentId;
-          const created = bkmk.createdAt;
-          const date = new Date( created );
-          console.log({ created });
-          console.log({ date });
+  
 
 
 
@@ -116,28 +121,33 @@ const Settings = (props) => {
         <td>
           <div class="flex items-center space-x-3">
             <div class="avatar">
-              <div class="w-12 h-12 mask mask-squircle">
-                <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component"/>
-              </div>
+            {
+               comment.type === "link" && (
+                 <LinkIcon
+                 />
+               )
+             }
+             {
+               comment.type === "text" && (
+                 <Text
+                 />
+               )
+             }
             </div> 
             <div>
-              <div class="font-bold">
-                    Hart Hagerty
-                  </div> 
-              <div class="text-sm opacity-50">
-                    United States
-                  </div>
+
             </div>
           </div>
         </td> 
-        <td>
-            {
+        <td  className="truncate">
+          {
             comment.title 
             }
-            
+    
+
           <br/>
           { comment.categories && comment.categories.map( cat => (
-                <span class="badge badge-outline badge-sm">{ cat }</span>
+                <span class="badge badge-outline badge-sm mr-2">{ cat }</span>
           ))} 
         </td> 
         <td>
@@ -156,7 +166,7 @@ const Settings = (props) => {
       <tr>
         <th>Image</th> 
         <th>Title</th> 
-        <th>Saved On</th> 
+        <th>Type</th> 
         <th></th>
       </tr>
     </tfoot>

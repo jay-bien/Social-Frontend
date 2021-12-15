@@ -18,6 +18,7 @@ const Index = () => {
   const [ showPostModal, setShowPostModal ] = useState(false);
   const [ loading, setLoading ] = useState( false );
   const [ bookMarked, setBookmarked ] = useState([]);
+  const [ sortBy, setSortBy ] = useState("time");
 
   const [ allComments, setAllComments ] = useState([]);
 
@@ -234,6 +235,26 @@ const Index = () => {
       return {};
 
     }
+    
+
+    const onSort = ( by ) => {
+
+      setSortBy( by );
+
+      if( by === "time" ){
+        const sorted = allComments.sort( ( a, b ) => {
+          return b.created_at - a.created_at 
+        });
+        setAllComments( sorted );
+      } else if( by === "popularity"){
+        const sorted = allComments.sort( ( a, b ) => {
+          console.log( a.likes, b.likes );
+          return b.likes - a.likes
+        });
+
+        setAllComments( sorted );
+      }
+    }
 
 
   return (
@@ -286,19 +307,31 @@ const Index = () => {
   <h2 className="text-5xl flex flex-row">
       Sort
   </h2>
-<div className="flex flex-row flex-wrap m-auto mb-10">
-    <span>
-      By Time <Clock />
-    </span>
-    <span>
-      By Popularity <Fire />
-    </span>
-    <span>
-     <SortAscending />
-     <SortDescending />
-    </span>
 
+
+<div class="dropdown mb-8">
+  <div tabindex="0" class="m-1 btn">Sort by { sortBy }</div> 
+  <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 top-6 rounded-box w-52
+  dark:bg-gray-900 text-gray-400">
+    <li onClick={ () => onSort('time')}>
+      <span 
+      className='flex flex-row justify-start align-middle rounded-lg
+      hover:cursor-pointer hover:bg-gray-200
+      dark:hover:bg-gray-800'>
+        <Clock className="mr-10" /> Time 
+         </span>
+    </li> 
+    <li onClick={ () => onSort('popularity')}>
+    <span 
+      className='flex flex-row justify-start align-middle rounded-lg
+      hover:cursor-pointer hover:bg-gray-200
+      dark:hover:bg-gray-800'>
+    <Fire /> Popularity 
+    </span>
+    </li> 
+  </ul>
 </div>
+
 </div>
 
 <div className="comments max-w-7xl m-auto ">

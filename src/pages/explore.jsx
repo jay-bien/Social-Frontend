@@ -283,7 +283,7 @@ const Index = () => {
 </div>
 </div>
 <div className="max-w-7xl m-auto">
-  <h2 className="text-5xl">
+  <h2 className="text-5xl flex flex-row">
       Sort
   </h2>
 <div className="flex flex-row flex-wrap m-auto mb-10">

@@ -142,7 +142,9 @@ const Settings = (props) => {
               }
                         <br/>
           { comment.categories && comment.categories.map( cat => (
-                <span class="badge badge-outline badge-sm mr-2">{ cat }</span>
+                <span 
+                className="badge badge-outline badge-sm mr-2
+                dark:border-gray-300 dark:text-gray-400">{ cat }</span>
           ))} 
             </h5>
             <h5 className="w-200">

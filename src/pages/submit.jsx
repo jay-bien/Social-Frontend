@@ -330,12 +330,14 @@ Category
               return(
                   <div key={ idx } className="">
                   <label 
-                  className="label-text text-gray-800 mr-2"
+                  className="label-text text-gray-800 mr-2
+                  dark:text-white"
                   for={cat}>{cat}</label> 
                   <input 
                     name={cat}
                     type="checkbox"
-                    className="checkbox checkbox-primary mr-6 text-gray-600"
+                    className="checkbox checkbox-primary mr-6 
+                    "
                     onChange={ toggleCheckBox }
                     />
                   </div>

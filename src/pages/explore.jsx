@@ -30,7 +30,7 @@ const Index = () => {
     "Business",
     "World Business",
     "Science",
-    "gaming,",
+    "Gaming",
     "Sports",
     "Lifestyle",
     "Career",
@@ -248,12 +248,11 @@ const Index = () => {
         setAllComments( sorted );
       } else if( by === "popularity"){
         const sorted = allComments.sort( ( a, b ) => {
-          console.log( a.likes, b.likes );
           return b.likes - a.likes
         });
-
         setAllComments( sorted );
       }
+      return;
     }
 
 
@@ -311,8 +310,9 @@ const Index = () => {
 
 <div class="dropdown mb-8">
   <div tabindex="0" class="m-1 btn">Sort by { sortBy }</div> 
-  <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 top-6 rounded-box w-52
-  dark:bg-gray-900 text-gray-400">
+  <ul tabindex="0" class="p-2 shadow menu dropdown-content 
+  bg-base-100 top-6 rounded-box w-52 text-gray-800
+  dark:bg-gray-900 dark:text-gray-400">
     <li onClick={ () => onSort('time')}>
       <span 
       className='flex flex-row justify-start align-middle rounded-lg

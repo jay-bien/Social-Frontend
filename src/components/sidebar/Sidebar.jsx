@@ -22,7 +22,7 @@ const Sidebar = (props) => {
     <div
       className="fixed top-0 p-3
     left-0 h-screen w-20 bg-gray-100 text-gray-800
-    shadow-2xl
+    shadow-2xl z-50
     dark:bg-gray-900
     dark:text-white-100 flex flex-col justify-between
     "

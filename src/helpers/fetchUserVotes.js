@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const onDislike = async ( id ) => {
+const getVotes = async (  ) => {
 
   try{
-    const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/down`,
+    const response = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/vote`,
     {
       withCredentials: true
     } );
@@ -17,4 +17,4 @@ const onDislike = async ( id ) => {
   }
   return {};
 }
-export default onDislike;
+export default getVotes;

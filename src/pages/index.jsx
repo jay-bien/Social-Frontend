@@ -6,10 +6,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { UserContext, AuthModalContext, PostFormContext } from '../context';
-import {  TwitterCard, TextCard, QACard, Header, AuthModal, PostModal } from '../components';
+import {  TwitterCard, TextCard, QACard, Header, Toast } from '../components';
 
 import {Clock, Fire, SortAscending, SortDescending } from '../components/icons'
 import useRequest from '../hooks/useRequest';
+import useToast from '../hooks/useToast';
+import fetchVotes from '../helpers/fetchUserVotes';
+import onBookmark from '../helpers/onBookmark';
 
 const Index = () => {
   const router = useRouter();
@@ -39,12 +42,21 @@ const Index = () => {
     "Retail",
     "Media",
     "Social Networks",
-]
+];
+
+
+const [ toasts, pushToast ] = useToast();
   
+const getVotes = async () => {
+  const response = await fetchVotes();
+  console.log({ response });
+}
 
 
     useEffect( () => {  
-  
+      pushToast('danger', "test")
+
+      
 
     const fetchUser = async () => {
 
@@ -58,16 +70,17 @@ const Index = () => {
       return {};
 
     }
+
+
+
     const fetchAllComments =  async ( ) => {
       try{
-
-
-
         const body = JSON.stringify({
           category: "all"
         })
         const response = await fetch( process.env.NEXT_PUBLIC_API_URL + '/post', {
           method: 'get',
+          credentials:'same-origin',
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
@@ -92,6 +105,14 @@ const Index = () => {
         .then( comments => {
           setAllComments( comments ) 
         });
+
+      fetchVotes()
+      .then( votes => {
+        console.log({ votes});
+      })
+      .catch( e => {
+        console.log({ e });
+      })
 
    
     }, []);
@@ -205,35 +226,7 @@ const Index = () => {
       }
     }
 
-    const onBookmark = async ( id ) => {
-
-      try{
-        const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/bookmark/${id}`,
-        {},
-        {
-          withCredentials: true
-        } );
-
-        const data = response.data;
-        console.log({ data });
-        
-        setAllComments( comments => {
-           return comments.map( comment => {
-            if( comment.id === data.commentId ){
-              console.log({ data });
-              comment.dislikes = data.dislikes;
-              comment.likes = data.likes;
-            }
-            return comment;
-          })
-        })
-        
-      } catch( err ) {
-        console.log( err );
-      }
-      return {};
-
-    }
+ 
 
 
   return (
@@ -258,8 +251,12 @@ const Index = () => {
       <main className="pt-10">
    
 
-        
 
+<button className='btn'
+onClick={ () => null}
+>
+Push Toast
+</button>
 
 <div className="max-w-7xl m-auto rounded-lg p-4 border-2 border-gray-400 mb-20">
   <h1 className="text-6xl font-semibold text-primary">

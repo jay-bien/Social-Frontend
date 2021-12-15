@@ -5,3 +5,4 @@ export { default as PostModal } from './postModal/PostModal';
 export { default as TextCard } from './text/TextCard';
 export { default as QACard }  from './qa/QACard'
 export { default as Sidebar } from './sidebar/Sidebar';
+export { default as Toast } from './toast/Toast';

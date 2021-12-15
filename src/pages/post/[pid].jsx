@@ -15,6 +15,8 @@ import {
 
 import onLike from '../../helpers/onLike';
 import onDislike from '../../helpers/onDislike';
+import onBookmark from '../../helpers/onBookmark';
+
 
 
 const categories = [
@@ -121,6 +123,8 @@ const Post = (props) => {
     setUser( user );
   })
 
+  let bookmarked = false;
+
   return (
     <Main
       meta={
@@ -171,9 +175,11 @@ const Post = (props) => {
                             px-2
                             font-medium
                             bg-red-500 bg-opacity-10
-                            text-red-800
+                            dark:bg-gray-500 dark:bg-opacity-60
+                            text-red-800 dark:text-red-300
                             rounded
                             py-0.5
+                            mr-2
                           "
                       >
                         {cat}
@@ -186,7 +192,7 @@ const Post = (props) => {
               <div className="flex justify-center items-center p-4 relative">
 
                 <div className="max-w-prose w-full m-auto flex justify-between py-3">
-                  <span className="flex">
+                  <span className="flex hover:cursor-pointer">
                     <ThumbUp
                       className="h-8 w-8"
                       onClick={()=>onPostLike( id )}
@@ -195,7 +201,7 @@ const Post = (props) => {
                   </span>
 
 
-                  <span className="flex">
+                  <span className="flex hover:cursor-pointer">
                     <ThumbDown
                       className="h-8 w-8"
                       onClick={ ( ) => onPostDislike( id ) }
@@ -203,6 +209,13 @@ const Post = (props) => {
                     {postDislikes ? postDislikes : 0}
 
                   </span>
+                  <span className="flex hover:cursor-pointer">
+                    <BookMark 
+                      onClick={ () => onBookmark( id ) }
+                      className={`hover:cursor-pointer h-12 w-12 ${bookmarked ? 'bookmarked': ''}`}
+                    />
+    
+                     </span>
                   <span>
 
                     <Remove

@@ -20,4 +20,4 @@ const onBookmark = async ( id ) => {
   return {};
 
 }
-export default onDislike;
+export default onBookmark;

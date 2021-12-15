@@ -43,8 +43,10 @@ const categories = [
 const Settings = (props) => {
 
   const [ votes, setVotes ] = useState([]);
+  const [ downVotes, setDownvotes ] = useState([]);
+  const [ upVotes, setUpVotes ] = useState([]);
   const [user, setUser] = useState("null");
-
+  const [ voteType, setVoteType ] = useState("up");
 
   const [errors, doRequest] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/history",
@@ -72,9 +74,22 @@ const Settings = (props) => {
     return null;
   };
 
+  const toggleVoteType = () => {
+    if( voteType === "up"){
+      setVoteType("down");
+      setVotes( downVotes );
+    } else {
+      setVoteType("up");
+      setVotes( upVotes );
+    }
+
+  }
+
   useEffect(async () => {
     let res = await doRequest();
-    setVotes(res.votes);
+    setUpVotes( res.upVotes );
+    setDownvotes( res.downVotes );
+    setVotes( res.upVotes );
     console.log({ res });
   }, []);
 
@@ -96,6 +111,12 @@ const Settings = (props) => {
             <h1 className="mb-6 font-bold">My Votes</h1>
 
   <div className="">
+    <button 
+    className="btn mb-5"
+    onClick={()=>toggleVoteType()}
+    >
+      See { voteType === "up" ? "Down" : "Up"} Votes Instead
+    </button>
     <div className="">
       <div 
       className="flex flex-row bg-gray-200 p-6 rounded-lg mb-10 font-semibold

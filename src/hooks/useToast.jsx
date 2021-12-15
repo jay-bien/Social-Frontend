@@ -1,21 +1,25 @@
 import react, { useState, useEffect }  from 'react';
-import {toast} from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+  
+  const useToast = () => {
+    const [ toasts, setToasts ] = useState( null );
+    
+    const notify = () => {
+      const toa = toast("Wow so easy !");
+      setToasts( toa );
+    };
+      
+    const container = (
+      <div>
+    
+        <ToastContainer /> 
+        <ToastContainer />
+      </div>
+    );
 
+    return [container, notify];
 
-
-const useToast = ( ) => {
-
-  const [ toasts, setToasts ] = useState([])
-
-  function pushToast( type, text ){
-    const toa = toast("Test toast", {
-      appearance: 'danger'
-    });
-    setToasts( toa );
   }
 
-
-  return [ toast, pushToast ];
-}
-
-export default useToast;
+  export default useToast;

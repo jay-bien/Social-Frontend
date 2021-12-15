@@ -45,7 +45,7 @@ const Index = () => {
 ];
 
 
-const [ toasts, pushToast ] = useToast();
+const [ toasts, notify ] = useToast();
   
 const getVotes = async () => {
   const response = await fetchVotes();
@@ -54,9 +54,7 @@ const getVotes = async () => {
 
 
     useEffect( () => {  
-      pushToast('danger', "test")
 
-      
 
     const fetchUser = async () => {
 
@@ -252,11 +250,15 @@ const getVotes = async () => {
    
 
 
-<button className='btn'
-onClick={ () => null}
+<button className='btn btn-primary'
+onClick={ () => notify("Toast here")}
 >
 Push Toast
 </button>
+
+{
+  toasts
+}
 
 <div className="max-w-7xl m-auto rounded-lg p-4 border-2 border-gray-400 mb-20">
   <h1 className="text-6xl font-semibold text-primary">

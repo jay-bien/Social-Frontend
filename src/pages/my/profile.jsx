@@ -33,20 +33,6 @@ const Profile = props => {
          dark:bg-transparent">
           <h1 className="mb-6 font-bold">My Profile</h1>
 
-<div className="">
-  <div className="">
-    <div 
-    className="flex flex-row bg-gray-200 p-6 rounded-lg mb-10 font-semibold
-    dark:bg-gray-900">
-      <h5 className="w-20">Type</h5>
-      <h5 className="flex-1">Title</h5>
-      <h5 className="w-200">Saved</h5>
-    </div>
-
-
-  </div>
-
-</div>
 
 
 

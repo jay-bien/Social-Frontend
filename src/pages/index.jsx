@@ -252,7 +252,7 @@ const getVotes = async () => {
     <AuthModalContext.Provider value={{ show: showAuthModal, setShow: setShowAuthModal }}>  
       <PostFormContext.Provider value={{ show: showPostModal, setShow: setShowPostModal }}> 
     <UserContext.Provider value={{ user, setUser }}>
-    <div className="App">
+    <div className="App min-h-screen">
 
 
       <main className="pt-10">

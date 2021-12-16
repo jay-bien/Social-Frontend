@@ -107,7 +107,7 @@ export default function TwitterCard( props ) {
                             py-0.5
                             mr-3
                             hover:cursor-pointer
-                            dark:text-white dark:bg-primary
+                            dark:text-red-800 dark:bg-red-300
                           "
                         >
                           { cat }

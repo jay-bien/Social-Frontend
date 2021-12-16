@@ -1,6 +1,9 @@
 import axios from "axios";
+import { useRouter } from 'next/router';
 
 const onSignout = async (  ) => {
+
+  const router = useRouter();
 
   try{
     const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/signout`,
@@ -12,7 +15,9 @@ const onSignout = async (  ) => {
     const data = response.data;
     if( window ){
       window.localStorage.setItem('user', null);
-    }
+    };
+    router.push('/');
+
     return data;
 
   } catch( err ) {

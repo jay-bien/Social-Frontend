@@ -5,14 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
   const useToast = () => {
     const [ toasts, setToasts ] = useState( null );
     
-    const notify = () => {
-      const toa = toast("Wow so easy !");
-      setToasts( toa );
+    const notify = ( text, type, config ) => {
+      toast[type](text, config);
     };
       
     const container = (
       <div>
-    
         <ToastContainer /> 
         <ToastContainer />
       </div>

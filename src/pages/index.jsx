@@ -143,6 +143,10 @@ const getVotes = async () => {
 
         
       } catch( err ) {
+        const errors = err.response.data.errors;
+        errors && errors.map( err => {
+          notify( err.msg , 'error')
+        })
         console.log( err );
       }
       return {};
@@ -167,7 +171,12 @@ const getVotes = async () => {
          })
        })
       } catch( err ) {
-        console.log( err );
+          const errors = err.response.data.errors;
+          errors && errors.map( err => {
+            notify( err.msg , 'error')
+          })
+        console.log( { err } );
+
       }
       return {};
     }
@@ -250,11 +259,7 @@ const getVotes = async () => {
    
 
 
-<button className='btn btn-primary'
-onClick={ () => notify("Toast here")}
->
-Push Toast
-</button>
+
 
 {
   toasts

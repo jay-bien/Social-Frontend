@@ -17,7 +17,13 @@ import {
 
 } from "../icons";
 
+import onSignout from "../../helpers/onSignout";
+
 const Sidebar = (props) => {
+
+
+  
+
   return (
     <div
       className="fixed top-0 p-3
@@ -75,7 +81,9 @@ const Sidebar = (props) => {
             <SidebarIcon text="Help" icon={<QuestionMarkCircle />} />
           </a>
         </Link>
-          <a>
+          <a
+            onClick={() => onSignout() }
+            >
             <SidebarIcon text="Logout" icon={<Logout />} />
           </a>
       </div>

@@ -1,6 +1,10 @@
 import axios from "axios";
 
+import useToast from '../hooks/useToast';
+
+
 const onBookmark = async ( id ) => {
+
 
   try{
     const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/bookmark/${id}`,
@@ -16,6 +20,7 @@ const onBookmark = async ( id ) => {
     
   } catch( err ) {
     console.log( err );
+ 
   }
   return {};
 

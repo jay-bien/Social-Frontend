@@ -104,14 +104,14 @@ const Main = (props) => {
                 onClick={() => setEnabled(false)}
                 className="w-6 h-6 mr-3
                 text-yellow-400
-                dark:text-white dark:text-opacity-50
+                dark:text-white dark:text-opacity-80
                 hover:cursor-pointer 
                 "
               />
               <Moon 
               className="w-6 h-6
-              text-gray-800 text-opacity-50 
-              dark:text-red-400
+              text-gray-800 text-opacity-60
+              dark:text-red-400 
               hover:cursor-pointer
               "
               onClick={() => setEnabled(true)}

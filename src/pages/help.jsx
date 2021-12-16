@@ -2,6 +2,8 @@ import React from "react";
 
 import { Sidebar } from "../components";
 import { Main } from "../templates/Main";
+import { Meta } from '../layout/Meta';
+
 
 const helpTopics = [
   {
@@ -25,46 +27,73 @@ const helpTopics = [
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
-    icon: "",
-    title: "",
+    icon: "🐞",
+    title: "Reporting Bugs",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
-    icon: "",
-    title: "",
+    icon: "❌",
+    title: "Reporting Content",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
 ];
 
-export default function help() {
+const Help = ( props ) => {
   return (
     <div>
-      <Main>
-        <Sidebar></Sidebar>
-        <h1> Help Page</h1>
+     <Main
+      meta={
+        <Meta
+          title="DAP Help"
+          description="DAP HELP"
+        />
+      }
+    >
 
-        {helpTopics &&
-          helpTopics.map((help) => {
-            return (
-              <div class="collapse w-96 border rounded-box border-base-300 collapse-arrow">
-                <input type="checkbox" />
-                <div class="collapse-title text-xl font-medium">
-                  I open/close with click
-                </div>
-                <div class="collapse-content">
-                  <p>
-                    Collapse content reveals with focus. If you add a checkbox,
-                    you can control it using checkbox instead of focus. Or you
-                    can force-open/force-close using
-                    <span class="badge badge-outline">collapse-open</span> and
-                    <span class="badge badge-outline">collapse-close</span>{" "}
-                    classes.
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-      </Main>
-    </div>
+      
+ 
+
+  
+    <div className="App min-h-screen">
+
+
+      <main className="pt-10">
+   
+
+
+
+<div className="max-w-7xl m-auto">
+  {
+    helpTopics && helpTopics.map( help => {
+      const { title, icon, text } = help;
+
+      return(
+        <div class="collapse border rounded-box border-base-300 collapse-arrow">
+  <input type="checkbox" /> 
+  <div class="collapse-title text-xl font-medium">
+  <span className="mr-6">
+  { icon }
+    </span>
+{ title }
+  </div> 
+  <div class="collapse-content"> 
+    <p>
+        { text }
+      <span class="badge badge-outline">collapse-open</span> and 
+      <span class="badge badge-outline">collapse-close</span> classes.
+    </p>
+  </div>
+</div> 
+      )
+    })
+  }
+  </div>
+  </main>
+  </div>
+
+  </Main>
+  </div>
   );
 }
+
+export default Help;

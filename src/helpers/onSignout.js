@@ -10,6 +10,9 @@ const onSignout = async (  ) => {
     } );
 
     const data = response.data;
+    if( window ){
+      window.localStorage.setItem('user', null);
+    }
     return data;
 
   } catch( err ) {

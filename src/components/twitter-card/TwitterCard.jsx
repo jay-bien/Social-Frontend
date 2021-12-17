@@ -8,16 +8,28 @@ import {
   } from '../icons';
 
 export default function TwitterCard( props ) {
-    const { data, onLike, onDislike, onDelete , onBookmark} = props;
+    const { data, onLike, onDislike, onDelete , onBookmark, sentiment } = props;
 
     let bookmarked = false;
 
 
     const [ cardInfo, setCardInfo ] = useState({});
+    const [ isLiked, setLiked ] = useState( false );
+    const [ isDisliked, setDisliked ] = useState( false );
 
     useEffect(() => {
-      console.log({ data })
+      console.log({ data });
+      console.log({ sentiment });
       setCardInfo( prevState => setCardInfo( data) );
+      if( data.sentiment){
+        console.log('Sentiment:', data.sentiment);
+        if( data.sentiment === "up"){
+          setLiked( true )
+        }
+        if( data.sentiment === "down" ){
+          setDisliked( true );
+        }
+      }
 
       return () => {
       
@@ -77,6 +89,7 @@ export default function TwitterCard( props ) {
                 className="hover:cursor-pointer hover:border-red-400 h-56 bg-white border-2 
                 border-gray-300 rounded-lg overflow-hidden flex place-items-center justify-center align-middle
                 dark:bg-gray-600 dark:text-gray-100">
+                  <h1>{ sentiment && sentiment}</h1>
             
                             <img 
                       src={ renderImage() }
@@ -96,7 +109,7 @@ export default function TwitterCard( props ) {
                         return(
 
                           <span
-                          key={idx }
+                     key={idx }
                           class="
                             text-xs
                             px-2
@@ -133,7 +146,8 @@ export default function TwitterCard( props ) {
                     <span className="flex">
                     <ThumbUp 
                       onClick={ (e) => onLike( id )}
-                      className="hover:cursor-pointer h-12 w-12"
+                      className={ `hover:cursor-pointer h-12 w-12
+                                 ${isLiked ? 'text-red-500':''}`}
                     />
                     <p>
                     { likes ? likes : 0 } 

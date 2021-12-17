@@ -79,8 +79,7 @@ const Help = ( props ) => {
   <div class="collapse-content"> 
     <p>
         { text }
-      <span class="badge badge-outline">collapse-open</span> and 
-      <span class="badge badge-outline">collapse-close</span> classes.
+
     </p>
   </div>
 </div> 

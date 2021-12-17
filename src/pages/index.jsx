@@ -8,11 +8,10 @@ import axios from 'axios';
 import { UserContext, AuthModalContext, PostFormContext } from '../context';
 import {  TwitterCard, TextCard, QACard, Header, Toast } from '../components';
 
-import {Clock, Fire, SortAscending, SortDescending } from '../components/icons'
-import useRequest from '../hooks/useRequest';
 import useToast from '../hooks/useToast';
 import fetchVotes from '../helpers/fetchUserVotes';
 import onBookmark from '../helpers/onBookmark';
+import getUser from '../helpers/getUser';
 
 const Index = () => {
   const router = useRouter();
@@ -47,70 +46,73 @@ const Index = () => {
 
 const [ toasts, notify ] = useToast();
   
-const getVotes = async () => {
-  const response = await fetchVotes();
-  console.log({ response });
+const reconcileVotes = async () => {
+  const votes = await fetchVotes();
+  console.log({ votes });
+  allComments.map( comment => {
+    let interaction = votes.map( vote => vote.commentId
+        ).indexOf(  comment.id );
+    let vote = votes[ interaction ];
+    if( !vote ){
+      return
+    } else {
+      comment.sentiment = vote.direction
+    }
+        console.log({ comment });
+        setAllComments( allComments )
+  })
+}
+
+const fetchAllComments =  async ( ) => {
+  try{
+    const body = JSON.stringify({
+      category: "all"
+    })
+    const response = await fetch( process.env.NEXT_PUBLIC_API_URL + '/post', {
+      method: 'get',
+      credentials:'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      data: body
+    });
+    const json = await response.json();
+    return json.comments;
+  } catch( err ) {
+    console.log( err );
+  }
+  return [];
 }
 
 
     useEffect( () => {  
 
 
-    const fetchUser = async () => {
-
-      try{
-        const response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/currentUser/' );
-        const user = response.data.user;
-        setUser( user );
-      } catch( err ) {
-        console.log( err );
-      }
-      return {};
-
-    }
+    
 
 
 
-    const fetchAllComments =  async ( ) => {
-      try{
-        const body = JSON.stringify({
-          category: "all"
-        })
-        const response = await fetch( process.env.NEXT_PUBLIC_API_URL + '/post', {
-          method: 'get',
-          credentials:'same-origin',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-          data: body
-        });
-        const json = await response.json();
-        return json.comments;
-      } catch( err ) {
-        console.log( err );
-      }
-      return [];
-    }
+
       
 
-      fetchUser()
-         .then( user => {
-          setUser( user );
-         } );
+ 
 
       fetchAllComments()
         .then( comments => {
-          setAllComments( comments ) 
+          setAllComments( comments ); 
         });
 
-      fetchVotes()
-      .then( votes => {
-        console.log({ votes});
-      })
-      .catch( e => {
-        console.log({ e });
-      })
+        getUser().then( user => {
+          console.log({ user });
+        })
+        .catch( e => {
+          console.log({ e });
+        })
+
+        reconcileVotes();
+ 
+
 
    
     }, []);
@@ -299,6 +301,7 @@ const getVotes = async () => {
       onDelete={ onDelete }
       onBookmark={ onBookmark }
       key={ index } data={ comment }
+      sentiment={ comment.sentiment }
       />
     )
 
@@ -318,6 +321,7 @@ const getVotes = async () => {
   } else if( comment.type ==="link"){
     return(
       <TwitterCard 
+      sentiment={ comment.sentiment }
       onLike={ onLike }
       onDislike={ onDislike }
       onDelete={ onDelete }

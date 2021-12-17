@@ -8,12 +8,14 @@ import {
   } from '../icons';
 
 export default function TextCard( props ) {
-    const { data, onLike, onDislike, onDelete, onBookmark } = props;
+    const { data, onLike, onDislike, onDelete, onBookmark, sentiment } = props;
 
     const [ cardInfo, setCardInfo ] = useState({});
 
     useEffect(() => {
       setCardInfo( prevState => setCardInfo( data) );
+      console.log({ sentiment })
+
       
 
       return () => {
@@ -62,7 +64,7 @@ export default function TextCard( props ) {
 
                           <span
                           key={idx }
-                          class="
+                          className="
                             text-xs
                             px-2
                             font-medium

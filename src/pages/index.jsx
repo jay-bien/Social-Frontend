@@ -12,8 +12,9 @@ import useToast from '../hooks/useToast';
 import fetchVotes from '../helpers/fetchUserVotes';
 import onBookmark from '../helpers/onBookmark';
 import getUser from '../helpers/getUser';
+import getComments from '../helpers/getComments';
 
-const Index = () => {
+const Index = ( props ) => {
   const router = useRouter();
   const [ user, setUser ] = useState(null);
   const [ showAuthModal, setShowAuthModal ] = useState(false);
@@ -48,17 +49,38 @@ const [ toasts, notify ] = useToast();
   
 const reconcileVotes = async () => {
   const votes = await fetchVotes();
-  console.log({ votes });
+
+  console.log(" Reconcile votes.");
+  let timer = null;
+  if( ! allComments || allComments.length < 1 ){
+    console.log("Set timer and wait to try again");
+    timer = setTimeout( reconcileVotes, 500 );
+  };
+
+  console.log("Ok should run reconcile votes now");
+  console.log( allComments.length );
+  console.log({ allComments });
+  clearTimeout( timer );
+
   allComments.map( comment => {
+    console.log({ comment });
     let interaction = votes.map( vote => vote.commentId
         ).indexOf(  comment.id );
+
+    console.log( votes[ interaction ]);
     let vote = votes[ interaction ];
+    console.log({ vote });
     if( !vote ){
+      console.log("no vote")
       return
     } else {
-      comment.sentiment = vote.direction
-    }
-        console.log({ comment });
+      console.log('set interaction');
+      comment.sentiment = vote.direction;
+      console.log({ comment });
+
+
+    };
+    console.log({ allComments });
         setAllComments( allComments )
   })
 }
@@ -90,18 +112,20 @@ const fetchAllComments =  async ( ) => {
 
 
     
+      console.log({ props });
 
-
+      setAllComments( props.posts.comments );
 
 
       
 
- 
+      getComments().then(
+        res => {
+          console.log({ res });
+        }
+      )
 
-      fetchAllComments()
-        .then( comments => {
-          setAllComments( comments ); 
-        });
+      
 
         getUser().then( user => {
           console.log({ user });
@@ -356,12 +380,13 @@ export default Index;
 
 
 
+export async function getServerSideProps( context ) {
 
-export async function getStaticProps(context) {
+  const params = context.params;
 
-  console.log({ context });
-
+  const response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post' );
   return {
-    props: {}, // will be passed to the page component as props
+    props: { posts: response.data },
   }
 }
+

@@ -8,7 +8,7 @@ import {
   } from '../icons';
 
 export default function TwitterCard( props ) {
-    const { data, onLike, onDislike, onDelete , onBookmark, sentiment } = props;
+    const { data, onLike, onDislike, onDelete , onBookmark } = props;
 
     let bookmarked = false;
 
@@ -18,16 +18,17 @@ export default function TwitterCard( props ) {
     const [ isDisliked, setDisliked ] = useState( false );
 
     useEffect(() => {
-      console.log({ data });
-      console.log({ sentiment });
       setCardInfo( prevState => setCardInfo( data) );
+      console.log("Card Sentiment", data.sentiment );
       if( data.sentiment){
         console.log('Sentiment:', data.sentiment);
         if( data.sentiment === "up"){
+          console.log("Post is liked")
           setLiked( true )
         }
         if( data.sentiment === "down" ){
           setDisliked( true );
+          console.log("Post is disliked")
         }
       }
 
@@ -89,7 +90,7 @@ export default function TwitterCard( props ) {
                 className="hover:cursor-pointer hover:border-red-400 h-56 bg-white border-2 
                 border-gray-300 rounded-lg overflow-hidden flex place-items-center justify-center align-middle
                 dark:bg-gray-600 dark:text-gray-100">
-                  <h1>{ sentiment && sentiment}</h1>
+
             
                             <img 
                       src={ renderImage() }
@@ -102,6 +103,7 @@ export default function TwitterCard( props ) {
                   </a> 
               </Link>
                   <div className="text-card-body text-white py-5">
+       
                     
                     <div className="mb-b h-8 flex flex-nowrap flex-row overscroll-x-auto">
                     {
@@ -146,8 +148,7 @@ export default function TwitterCard( props ) {
                     <span className="flex">
                     <ThumbUp 
                       onClick={ (e) => onLike( id )}
-                      className={ `hover:cursor-pointer h-12 w-12
-                                 ${isLiked ? 'text-red-500':''}`}
+                      className={ `hover:cursor-pointer h-12 w-12`}
                     />
                     <p>
                     { likes ? likes : 0 } 
@@ -159,7 +160,7 @@ export default function TwitterCard( props ) {
 <span className="flex">
                     <ThumbDown 
                       onClick={ () => onDislike( id ) }
-                      className="hover:cursor-pointer h-12 w-12"
+                      className={`hover:cursor-pointer h-12 w-12`}
                     />
                     <p>
                     { dislikes ? dislikes : 0}

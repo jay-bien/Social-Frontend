@@ -8,14 +8,28 @@ import {
   } from '../icons';
 
 export default function TextCard( props ) {
-    const { data, onLike, onDislike, onDelete, onBookmark, sentiment } = props;
+    const { data, onLike, onDislike, onDelete, onBookmark } = props;
 
     const [ cardInfo, setCardInfo ] = useState({});
+    const [ isLiked, setLiked ] = useState( false );
+    const [ isDisliked, setDisliked ] = useState( false );
+
 
     useEffect(() => {
       setCardInfo( prevState => setCardInfo( data) );
-      console.log({ sentiment })
 
+      console.log("Card Sentiment", data.sentiment );
+      if( data.sentiment){
+        console.log('Sentiment:', data.sentiment);
+        if( data.sentiment === "up"){
+          console.log("Post is liked")
+          setLiked( true )
+        }
+        if( data.sentiment === "down" ){
+          setDisliked( true );
+          console.log("Post is disliked")
+        }
+      }
       
 
       return () => {

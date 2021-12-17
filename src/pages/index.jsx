@@ -49,21 +49,17 @@ const [ toasts, notify ] = useToast();
   
 const reconcileVotes = async () => {
   const votes = await fetchVotes();
+  const comments = props.posts.comments;
 
   console.log(" Reconcile votes.");
   let timer = null;
-  if( ! allComments || allComments.length < 1 ){
-    console.log("Set timer and wait to try again");
-    timer = setTimeout( reconcileVotes, 500 );
+  if( !comments || !comments.length){
+    return;
   };
 
   console.log("Ok should run reconcile votes now");
-  console.log( allComments.length );
-  console.log({ allComments });
-  clearTimeout( timer );
 
-  allComments.map( comment => {
-    console.log({ comment });
+  comments.map( comment => {
     let interaction = votes.map( vote => vote.commentId
         ).indexOf(  comment.id );
 
@@ -71,17 +67,15 @@ const reconcileVotes = async () => {
     let vote = votes[ interaction ];
     console.log({ vote });
     if( !vote ){
-      console.log("no vote")
       return
     } else {
-      console.log('set interaction');
       comment.sentiment = vote.direction;
       console.log({ comment });
 
 
     };
-    console.log({ allComments });
-        setAllComments( allComments )
+
+        setAllComments( comments )
   })
 }
 
@@ -112,7 +106,6 @@ const fetchAllComments =  async ( ) => {
 
 
     
-      console.log({ props });
 
       setAllComments( props.posts.comments );
 
@@ -157,7 +150,7 @@ const fetchAllComments =  async ( ) => {
         setAllComments( comments => {
            return comments.map( comment => {
             if( comment.id === data.commentId ){
-              console.log({ data });
+              comment.sentiment = data.sentiment;
               comment.dislikes = data.dislikes;
               comment.likes = data.likes;
             }
@@ -190,6 +183,7 @@ const fetchAllComments =  async ( ) => {
         setAllComments( comments => {
           return comments.map( comment => {
             if( comment.id === data.commentId ){
+              comment.sentiment = data.sentiment;
               comment.dislikes = data.dislikes;
               comment.likes = data.likes;
             }

@@ -104,7 +104,6 @@ export default function TwitterCard( props ) {
               </Link>
                   <div className="text-card-body text-white py-5">
        
-                    { data.sentiment }
                     <div className="mb-b h-8 flex flex-nowrap flex-row overscroll-x-auto">
                     {
                       cardInfo && cardInfo.categories && cardInfo.categories.map( ( cat, idx ) => {

@@ -149,8 +149,8 @@ const fetchAllComments =  async ( ) => {
           })
         })
         data.sentiment === "up" 
-        ? notify('success', "Successfully liked post." )
-        : notify('success', "Successfully removed liked from post." )
+        ? notify('success', "Upvoted post." )
+        : notify('info', "Removed upvote from post." )
 
   
 
@@ -173,8 +173,8 @@ const fetchAllComments =  async ( ) => {
         } );
         const data = response.data;
         data.sentiment === "down" 
-        ? notify('success', "Successfully Disliked post." )
-        : notify('success', "Successfully removed Dislike." );
+        ? notify('success', "Downvoted post." )
+        : notify('info', "Removed downvote");
 
         setAllComments( comments => {
           return comments.map( comment => {

@@ -4,6 +4,7 @@ const onDislike = async ( id ) => {
 
   try{
     const response = await axios.post( process.env.NEXT_PUBLIC_API_URL + `/vote/${id}/down`,
+    {},
     {
       withCredentials: true
     } );

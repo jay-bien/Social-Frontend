@@ -250,7 +250,10 @@ const Index = () => {
         const sorted = allComments.sort( ( a, b ) => {
           return b.likes - a.likes
         });
-        setAllComments( sorted );
+        const sortedByDislikes = sorted.sort( ( a, b )=> {
+          return a.dislikes - b.dislikes;
+        })
+        setAllComments( sortedByDislikes );
       }
       return;
     }
@@ -324,8 +327,8 @@ const Index = () => {
     <li onClick={ () => onSort('popularity')}>
     <span 
       className='flex flex-row justify-start align-middle rounded-lg
-      hover:cursor-pointer hover:bg-gray-200
-      dark:hover:bg-gray-800'>
+      hover:cursor-pointer  hover:bg-gray-200
+      dark:hover:bg-gray-800 dark:text-white'>
     <Fire /> Popularity 
     </span>
     </li> 

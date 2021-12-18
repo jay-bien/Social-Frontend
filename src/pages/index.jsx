@@ -100,6 +100,18 @@ const fetchAllComments =  async ( ) => {
   }
   return [];
 }
+const onPostSave = async ( id ) => {
+  try{
+    const res = await onBookmark( id );
+    console.log({ res });
+    res.userBookmark 
+    ? notify("success", "Saved post.")
+    : notify("success", "Removed saved post.")
+
+  } catch( e ){
+    notify("error", "An error has occured");
+  }
+}
 
 
     useEffect( () => {  
@@ -320,7 +332,7 @@ const fetchAllComments =  async ( ) => {
       onLike={ onLike }
       onDislike={ onDislike }
       onDelete={ onDelete }
-      onBookmark={ onBookmark }
+      onBookmark={ onPostSave }
       key={ index } data={ comment }
       sentiment={ comment.sentiment }
       />
@@ -335,7 +347,7 @@ const fetchAllComments =  async ( ) => {
       onDislike={ onDislike }
       onDelete={ onDelete }
     key={ index } data={ comment }
-    onBookmark={ onBookmark }
+    onBookmark={ onPostSave }
 
       />
     )
@@ -350,7 +362,7 @@ const fetchAllComments =  async ( ) => {
       onDislike={ onDislike }
       onDelete={ onDelete }
      key={ index } data={ comment }
-     onBookmark={ onBookmark }
+     onBookmark={ onPostSave }
      
 
     />
@@ -383,11 +395,20 @@ export default Index;
 
 export async function getServerSideProps( context ) {
 
-  const params = context.params;
+  const { params, req } = context;
+
+  const headers = req.headers;
+  
 
   const response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post' );
+  const userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+  {
+    withCredentials: true,
+    headers
+  } );
+
   return {
-    props: { posts: response.data },
+    props: { posts: response.data, user: userResponse.data },
   }
 }
 

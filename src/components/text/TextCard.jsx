@@ -64,7 +64,10 @@ export default function TextCard( props ) {
 
                   <h1 
                   className="text-center font-semibold  
-                  ">{ title }</h1> 
+                  ">
+                    {data.sentiment}
+                    { title }
+                    </h1> 
           
                   </div> 
                   </a>

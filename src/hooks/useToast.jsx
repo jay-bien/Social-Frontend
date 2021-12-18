@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
   const useToast = () => {
     const [ toasts, setToasts ] = useState( null );
     
-    const notify = ( text, type, config ) => {
+    const notify = ( type, text, config ) => {
       toast[type](text, config);
     };
       

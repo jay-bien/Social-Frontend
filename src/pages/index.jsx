@@ -109,15 +109,6 @@ const fetchAllComments =  async ( ) => {
 
       setAllComments( props.posts.comments );
 
-
-      
-
-      getComments().then(
-        res => {
-          console.log({ res });
-        }
-      )
-
       
 
         getUser().then( user => {
@@ -157,6 +148,9 @@ const fetchAllComments =  async ( ) => {
             return comment;
           })
         })
+        data.sentiment === "up" 
+        ? notify('success', "Successfully liked post." )
+        : notify('success', "Successfully removed liked from post." )
 
   
 
@@ -178,7 +172,9 @@ const fetchAllComments =  async ( ) => {
           withCredentials: true
         } );
         const data = response.data;
-        
+        data.sentiment === "down" 
+        ? notify('success', "Successfully Disliked post." )
+        : notify('success', "Successfully removed Dislike." );
 
         setAllComments( comments => {
           return comments.map( comment => {
@@ -189,12 +185,16 @@ const fetchAllComments =  async ( ) => {
             }
            return comment;
          })
-       })
+       });
+
+
+
       } catch( err ) {
-          const errors = err.response.data.errors;
-          errors && errors.map( err => {
-            notify( err.msg , 'error')
-          })
+        console.log({ err });
+          // const errors = err.response.data.errors;
+          // errors && errors.map( err => {
+          //   notify( err.msg , 'error')
+          // })
         console.log( { err } );
 
       }
@@ -281,11 +281,12 @@ const fetchAllComments =  async ( ) => {
 
 
 
+<div className="max-w-7xl m-auto rounded-lg p-4 border-2 border-gray-400 mb-20">
+
+
 {
   toasts
 }
-
-<div className="max-w-7xl m-auto rounded-lg p-4 border-2 border-gray-400 mb-20">
   <h1 className="text-6xl font-semibold text-primary">
     Welcome to 
     <span className="text-secondary font-bold ml-2">
@@ -313,6 +314,8 @@ const fetchAllComments =  async ( ) => {
 
   if( comment.type ==="text"){
     return(
+      <div>
+        { comment.sentiment }
       <TextCard 
       onLike={ onLike }
       onDislike={ onDislike }
@@ -321,6 +324,7 @@ const fetchAllComments =  async ( ) => {
       key={ index } data={ comment }
       sentiment={ comment.sentiment }
       />
+      </div>
     )
 
   } else if( comment.type==="qa"){
@@ -338,6 +342,8 @@ const fetchAllComments =  async ( ) => {
 
   } else if( comment.type ==="link"){
     return(
+      <div>
+        { comment.sentiment}
       <TwitterCard 
       sentiment={ comment.sentiment }
       onLike={ onLike }
@@ -348,6 +354,7 @@ const fetchAllComments =  async ( ) => {
      
 
     />
+    </div>
     )
 
   } else {

@@ -16,6 +16,7 @@ import {
 import onLike from '../../helpers/onLike';
 import onDislike from '../../helpers/onDislike';
 import onBookmark from '../../helpers/onBookmark';
+import useToast from '../../hooks/useToast';
 
 
 
@@ -54,6 +55,8 @@ const Post = (props) => {
   const router = useRouter();
   if (router.isFallback)  return <div> Loading...</div>;
 
+  const [ toasts, notify ] = useToast();
+
   const renderImage = (  ) => {
 
 
@@ -86,7 +89,10 @@ const Post = (props) => {
       console.log({
         post
       });
-      const{ commentId, likes, dislikes } = post;
+      const{ commentId, likes, dislikes, sentiment } = post;
+      sentiment === "up"
+      ? notify('success', "Downvoted post")
+      : notify("info", "Removed downvote.")
       setPostLikes( likes );
       setPostDislikes( dislikes );
 
@@ -102,10 +108,14 @@ const Post = (props) => {
 
     try{
       const post = await onDislike( id );
+      
       console.log({
         post
       });
-      const{ commentId, likes, dislikes } = post;
+      const{ commentId, likes, dislikes, sentiment } = post;
+      sentiment === "down"
+      ? notify('success', "Downvoted post")
+      : notify("info", "Removed downvote.")
       setPostLikes( likes );
       setPostDislikes( dislikes );
 
@@ -144,6 +154,9 @@ const Post = (props) => {
 
         <main className="main">
           <div >
+            {
+              toasts
+            }
 
             <div 
             className="bg-white border-2 border-gray-300 rounded-lg

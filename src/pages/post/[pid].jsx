@@ -91,8 +91,8 @@ const Post = (props) => {
       });
       const{ commentId, likes, dislikes, sentiment } = post;
       sentiment === "up"
-      ? notify('success', "Downvoted post")
-      : notify("info", "Removed downvote.")
+      ? notify('success', "Upvoted post")
+      : notify("info", "Removed upvote.")
       setPostLikes( likes );
       setPostDislikes( dislikes );
 
@@ -124,6 +124,19 @@ const Post = (props) => {
     }
 
 
+  }
+
+  const onPostSave = async ( id ) => {
+    try{
+      const res = await onBookmark( id );
+      console.log({ res });
+      res.userBookmark 
+      ? notify("success", "Saved post.")
+      : notify("success", "Removed saved post.")
+
+    } catch( e ){
+      notify("error", "An error has occured");
+    }
   }
 
 
@@ -224,19 +237,12 @@ const Post = (props) => {
                   </span>
                   <span className="flex hover:cursor-pointer">
                     <BookMark 
-                      onClick={ () => onBookmark( id ) }
+                      onClick={ () => onPostSave( id ) }
                       className={`hover:cursor-pointer h-12 w-12 ${bookmarked ? 'bookmarked': ''}`}
                     />
     
                      </span>
-                  <span>
-
-                    <Remove
-                      className="h-8 w-8"
-
-                      onClick={null}
-                    />
-                  </span>
+     
                   {
                     link && (
                       <span>

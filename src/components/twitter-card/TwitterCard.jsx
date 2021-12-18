@@ -174,13 +174,7 @@ export default function TwitterCard( props ) {
                     />
     
                      </span>
-                  <span>
-      
-                    <Remove
-                    onClick={ () => onDelete( id )}
-                    className="hover:cursor-pointer h-12 w-12"
-                    />
-                      </span>
+
                       <span>
           
                       </span>

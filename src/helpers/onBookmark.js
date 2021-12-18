@@ -3,7 +3,7 @@ import axios from "axios";
 import useToast from '../hooks/useToast';
 
 
-const onBookmark = async ( id ) => {
+const onBookmark = async ( id, onSuccess ) => {
 
 
   try{
@@ -15,6 +15,10 @@ const onBookmark = async ( id ) => {
 
     const data = response.data;
     console.log({ data });
+
+    if( onSuccess instanceof Function){
+      onSuccess()
+    }
     return data;
 
     

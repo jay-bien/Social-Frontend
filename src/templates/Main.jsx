@@ -5,6 +5,8 @@ import Link from "next/link";
 import { AppConfig } from "../utils/AppConfig";
 
 import axios from "axios";
+import useToast from "../hooks/useToast";
+
 import router from "next/router";
 
 import {
@@ -28,10 +30,15 @@ import {
 import { Sidebar } from "../components";
 import useDarkMode from "../hooks/useDarkMode";
 
+
 const Main = (props) => {
 
   const [enabled, setEnabled] = useDarkMode();
   const [query, setQuery] = useState("");
+
+
+  const [ toasts, notify ] = useToast();
+
 
   const { user } = props;
   useEffect(async () => {
@@ -57,6 +64,11 @@ const Main = (props) => {
 
   const onSearch = ( e ) => {
     e.preventDefault();
+
+    if( query.length < 4){
+      notify('error', 'Search must include at least 4 characters.');
+      return;
+    }
 
     router.push({
       pathname:"/search",
@@ -86,6 +98,9 @@ const Main = (props) => {
                 Menu
               </button>
             </div>
+            {
+              toasts
+            }
  
             <div className="align-stretch">
             <div

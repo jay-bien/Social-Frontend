@@ -10,17 +10,8 @@ import useToast from "../hooks/useToast";
 import router from "next/router";
 
 import {
-  Login,
-  Logout,
-  DocumentAdd,
-  UserAdd,
   User,
-  Settings,
   Link as LinkIcon,
-  Text,
-  ThumbUp,
-  ThumbDown,
-  Chat,
   Sun,
   Moon,
   Search
@@ -47,9 +38,7 @@ const Main = (props) => {
     return () => { };
   }, [user]);
 
-  const onSignout = () => {
-    router.reload();
-  };
+
 
   const onChange = e => {
     setQuery(e.target.value);
@@ -101,9 +90,12 @@ const Main = (props) => {
             }
  
             <div className="align-stretch">
-            <div
+              {
+                user && (
+                  <>
+                              <div
               className=" p-1  flex justify-center items-center ">
-              <form
+                    <form
                 onSubmit={ onSearch }>
                 <div class="form-control">
                   <div class="relative">
@@ -152,6 +144,18 @@ const Main = (props) => {
                   </li>
                 </ul>
               </div>
+
+
+              </div>
+                  
+                  </>
+                )
+              }
+            <div
+              className=" p-1  flex justify-center items-center ">
+              
+
+
 
 
             <div className="ml-4 md:ml-10 flex">

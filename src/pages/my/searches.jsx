@@ -17,7 +17,7 @@ import { Link as LinkIcon, Text } from "../../components/icons";
 
 const Settings = (props) => {
   const [ searches, setSearches ] = useState([]);
-  
+
 
   const [errors, doRequest] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/search/history",
@@ -33,9 +33,8 @@ const Settings = (props) => {
   }, []);
 
   return (
-    <Main meta={<Meta title="DAP My Bookmarks" description=""
-      user={ }
-    />}>
+    <Main meta={ <Meta title="DAP My Bookmarks" description=""
+    /> }>
       <div className="App min-h-screen">
         <main className="main max-w-7xl">
           <div

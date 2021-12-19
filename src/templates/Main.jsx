@@ -112,7 +112,8 @@ const Main = (props) => {
                     type="text" 
                     placeholder="Search" 
                       className="w-full pr-16 input input-primary input-bordered
-                        dark:bg-gray-700 dark:border-gray-800"
+                        text-gray-800
+                        dark:bg-gray-700 dark:border-gray-800 dark:text-gray-200"
                     />
                       <button 
                         className="absolute top-0 right-0 rounded-l-none btn btn-primary
@@ -179,7 +180,9 @@ const Main = (props) => {
           </nav>
         </header>
         <nav>
-          <Sidebar />
+          <Sidebar
+            user={ user }
+          />
         </nav>
       </div>
 

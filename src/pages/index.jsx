@@ -6,67 +6,62 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { UserContext, AuthModalContext, PostFormContext } from '../context';
-import {  TwitterCard, TextCard, QACard, Header, Toast } from '../components';
+import {  TwitterCard, TextCard, QACard } from '../components';
 
 import useToast from '../hooks/useToast';
 import fetchVotes from '../helpers/fetchUserVotes';
 import onBookmark from '../helpers/onBookmark';
-import getUser from '../helpers/getUser';
-import getComments from '../helpers/getComments';
+import Link from "next/link";
+
 
 const Index = ( props ) => {
-  const router = useRouter();
   const [ showAuthModal, setShowAuthModal ] = useState(false);
   const [ showPostModal, setShowPostModal ] = useState(false);
   const [ loading, setLoading ] = useState( false );
-  const [ bookMarked, setBookmarked ] = useState([]);
 
   const [ allComments, setAllComments ] = useState([]);
 
-  const categories = [
-    "All",
-    "Psychadelics",
-    "Education",
-    "Tech",
-    "Business",
-    "World Business",
-    "Science",
-    "gaming,",
-    "Sports",
-    "Lifestyle",
-    "Career",
-    "Offbeat",
-    "Fashion",
-    "Travel",
-    "Retail",
-    "Media",
-    "Social Networks",
-];
+
 
 
 const [ toasts, notify ] = useToast();
+
+const { user } = props;
+
   
 const reconcileVotes = async () => {
-  const votes = await fetchVotes();
-  const comments = props.posts.comments;
 
-  let timer = null;
-  if( !comments || !comments.length){
-    return;
-  };
+  try{
 
-  comments.map( comment => {
-    let interaction = votes.map( vote => vote.commentId
-        ).indexOf(  comment.id );
-
-    let vote = votes[ interaction ];
-    if( !vote ){
-      return
-    } else {
-      comment.sentiment = vote.direction;
+    const votes = await fetchVotes();
+    const comments = props.posts.comments;
+    console.log({ votes });
+    if( !votes || votes.length ) return;
+  
+    let timer = null;
+    if( !comments || !comments.length){
+      return;
     };
-        setAllComments( comments )
-  })
+  
+    comments.map( comment => {
+      let interaction = votes.map( vote => vote.commentId
+          ).indexOf(  comment.id );
+  
+      let vote = votes[ interaction ];
+      if( !vote ){
+        return
+      } else {
+        comment.sentiment = vote.direction;
+      };
+          setAllComments( comments )
+    })
+
+  } catch( e ){
+
+    console.log({ e });
+
+  }
+
 }
 
 
@@ -79,7 +74,7 @@ const onPostSave = async ( id ) => {
     : notify("success", "Removed saved post.")
 
   } catch( e ){
-    notify("error", "An error has occured");
+    notify("error", "An error has occured. Try again later.");
   }
 }
 
@@ -160,7 +155,6 @@ const onPostSave = async ( id ) => {
           // errors && errors.map( err => {
           //   notify( err.msg , 'error')
           // })
-        console.log( { err } );
 
       }
       return {};
@@ -212,14 +206,12 @@ const onPostSave = async ( id ) => {
         setLoading( false );
 
 
-
       } catch( e ){
         console.log({ e });
       }
     }
 
  
-    const { user } = props;
 
   return (
     <Main
@@ -269,7 +261,12 @@ const onPostSave = async ( id ) => {
 
     <p> 
       Please be courteous and respectful. You can find our community
-      guidelines <span className="hover:cursor-pointer text-primary">Here</span>
+      guidelines
+      <Link href="/help">
+          <a className="hover:cursor-pointer text-primary">
+            Here
+          </a>
+        </Link> 
 
     </p>
 </div>
@@ -292,19 +289,6 @@ const onPostSave = async ( id ) => {
       sentiment={ comment.sentiment }
       />
       </div>
-    )
-
-  } else if( comment.type==="qa"){
-    return (
-
-      <QACard
-      onLike={ onLike }
-      onDislike={ onDislike }
-      onDelete={ onDelete }
-    key={ index } data={ comment }
-    onBookmark={ onPostSave }
-
-      />
     )
 
   } else if( comment.type ==="link"){
@@ -353,15 +337,29 @@ export async function getServerSideProps( context ) {
   const { params, req } = context;
 
   const headers = req.headers;
+  let response = {};
+  let userResponse = {};
   
+try{
+  response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post' );
 
-  const response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post' );
+} catch( e ){
+  console.log({ e });
+  response.data = null;
+}
+
+try{
   const userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
   {
     withCredentials: true,
     headers
   } );
   console.log({ userResponse });
+} catch( e ){
+  console.log({ e });
+  userResponse.data = null;
+}
+
 
   return {
     props: { posts: response.data, user: userResponse.data },

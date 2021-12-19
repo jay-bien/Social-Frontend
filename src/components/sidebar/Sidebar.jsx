@@ -7,7 +7,7 @@ import {
   Hashtag,
   BookMark,
   ThumbUp,
-  ThumbDown,
+  Login,
   SearchCircle,
   User,
   Settings,
@@ -22,7 +22,8 @@ import onSignout from "../../helpers/onSignout";
 
 const Sidebar = (props) => {
 
-
+  const { user } = props;
+  console.log({ user });
   
 
   return (
@@ -51,7 +52,20 @@ const Sidebar = (props) => {
             <SidebarIcon text="Submit Post" icon={<DocumentAdd />} />
           </a>
         </Link>
-        <Link href="/my/bookmarks">
+        {
+          !user && (
+            <Link href="/submit">
+            <a>
+              <SidebarIcon text="Signin" icon={<Login />} />
+            </a>
+          </Link>
+          )
+        }
+        
+        {
+          user && (
+            <>
+              <Link href="/my/bookmarks">
           <a>
             <SidebarIcon text="Saves" icon={<BookMark />} />
           </a>
@@ -77,6 +91,11 @@ const Sidebar = (props) => {
             <SidebarIcon text="Settings" icon={ <Settings />} />
           </a>
         </Link>
+            
+            </>
+          )
+        }
+        
 
 
       </div>

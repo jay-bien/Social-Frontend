@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 
 
@@ -24,6 +25,8 @@ const Sidebar = (props) => {
 
   const { user } = props;
   console.log({ user });
+
+  const router = useRouter();
   
 
   return (
@@ -117,7 +120,7 @@ const Sidebar = (props) => {
           </a>
         </Link>
           <a
-            onClick={() => onSignout() }
+            onClick={() => onSignout( router.reload() ) }
             >
             <SidebarIcon text="Logout" icon={<Logout />} />
           </a>

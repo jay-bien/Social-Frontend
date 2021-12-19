@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from 'next/router';
 
-const onSignout = async (  ) => {
+const onSignout = async ( callback  ) => {
 
 
   try{
@@ -15,6 +15,8 @@ const onSignout = async (  ) => {
     if( window ){
       window.localStorage.setItem('user', null);
     };
+
+    callback();
 
     return data;
 

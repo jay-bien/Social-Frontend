@@ -249,10 +249,10 @@ const Post = (props) => {
                   <span className="flex hover:cursor-pointer">
                     <BookMark 
                       onClick={ () => onPostSave( id ) }
-                      className={`hover:cursor-pointer h-12 w-12 ${bookmarked ? 'bookmarked': ''}`}
+                      className={`hover:cursor-pointer h-8 w-8 ${bookmarked ? 'bookmarked': ''}`}
                     />
     
-                     </span>
+                    </span>
      
                   {
                     link && (

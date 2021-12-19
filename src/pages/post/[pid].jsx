@@ -44,10 +44,10 @@ const categories = [
 const Post = (props) => {
 
 
+  const { user, post } = props;
 
   const { query } = useRouter();
   const { title, content, likes, id, dislikes, categories, img, link , favIcon} = props.post.comment;
-  const [user, setUser] = useState(null);
 
   const [ postLikes, setPostLikes ] = useState( likes );
   const [ postDislikes, setPostDislikes ] = useState( dislikes );
@@ -155,9 +155,7 @@ const Post = (props) => {
 
   useEffect( async () => {
 
-    const user = await localStorage.getItem("user");
-    setUser( user );
-  })
+  }, [])
 
   let bookmarked = false;
 
@@ -358,10 +356,29 @@ export async function getServerSideProps( context ) {
 
   const params = context.params;
   const postId = params.pid;
-  console.log({ params });
-  const response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post/' + postId );
+  let response = {};
+  let userResponse = {};
+  try{
+    response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post/' + postId );
+
+  } catch( e ){
+    response.data = null
+  }
+
+  try{
+    userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+    {
+      withCredentials: true,
+      headers
+    } );
+  } catch( e ){
+    console.log({ e });
+    userResponse.data = null;
+  }
+
+
   return {
-    props: { post: response.data },
+    props: { post: response.data, user: userResponse.data },
   }
 }
 

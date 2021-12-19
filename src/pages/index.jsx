@@ -69,11 +69,20 @@ const onPostSave = async ( id ) => {
   try{
     const res = await onBookmark( id );
     console.log({ res });
-    res.userBookmark 
+    if( res?.response?.data?.errors){
+      res.response.data.errors.map(
+        err => notify('error', err.msg )
+      )
+
+    } else {
+    res.userBookmark?.id 
     ? notify("success", "Saved post.")
     : notify("success", "Removed saved post.")
+    }
+
 
   } catch( e ){
+    console.log({ e });
     notify("error", "An error has occured. Try again later.");
   }
 }
@@ -116,9 +125,9 @@ const onPostSave = async ( id ) => {
 
         
       } catch( err ) {
-        const errors = err.response.data.errors;
+        const errors = err.response?.data?.errors;
         errors && errors.map( err => {
-          notify( err.msg , 'error')
+          notify( 'error', err.msg )
         })
         console.log( err );
       }
@@ -150,11 +159,11 @@ const onPostSave = async ( id ) => {
 
 
       } catch( err ) {
-        console.log({ err });
-          // const errors = err.response.data.errors;
-          // errors && errors.map( err => {
-          //   notify( err.msg , 'error')
-          // })
+          const errors = err.response?.data?.errors;
+          errors && errors.map( err => {
+            notify( 'error', err.msg )
+          })
+          console.log( err );
 
       }
       return {};

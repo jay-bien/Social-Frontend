@@ -24,6 +24,7 @@ const onBookmark = async ( id, onSuccess ) => {
     
   } catch( err ) {
     console.log( err );
+    return err;
  
   }
   return {};

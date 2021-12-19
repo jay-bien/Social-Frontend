@@ -50,21 +50,9 @@ const Search = (props) => {
 
 
 
-
-            <div className="max-w-7xl m-auto rounded-lg p-4 border-2 border-gray-400 mb-20">
-
-
-              {
-                toasts
-              }
-
-            </div>
-
-
-
             <div className="max-w-7xl m-auto ">
-              {
-                results && JSON.stringify(results)
+            {
+                toasts
               }
               {
                 ! results || !results.data || !results.data.length && (
@@ -139,14 +127,18 @@ export async function getServerSideProps(context) {
   let response = {}, userResponse = {};
 
   try {
-    response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/search/`,
+    response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/search`,
     {
       withCredentials: true,
-      headers
+      headers,
+      data:{
+        q: query.q
+      }
     });
     console.log({ response });
   
   } catch (e) {
+    response.data = null;
     console.log({ e })
   }
 

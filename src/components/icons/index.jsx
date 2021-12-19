@@ -16,7 +16,7 @@ const ThumbDown = ( props )  => (
 
 const BookMark = ( props ) => (
     <svg
-    className="h-6 w-6" {...props} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+     {...props} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
     </svg>
 )
@@ -221,6 +221,13 @@ const Search = props => (
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
   </svg>
 )
+const SearchCircle = props => (
+  <svg 
+  xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+  {...props }>
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+)
 
 export{
     ThumbUp, ThumbDown, BookMark, PaperAirplane,
@@ -231,5 +238,5 @@ export{
     SortAscending, SortDescending,
     Clock, Fire, Sun, Moon, Hashtag,
     Collections, QuestionMarkCircle, Support,
-    Search
+    Search, SearchCircle
 }

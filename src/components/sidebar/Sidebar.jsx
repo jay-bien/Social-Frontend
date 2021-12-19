@@ -8,6 +8,7 @@ import {
   BookMark,
   ThumbUp,
   ThumbDown,
+  SearchCircle,
   User,
   Settings,
   QuestionMarkCircle,
@@ -58,6 +59,11 @@ const Sidebar = (props) => {
         <Link href="/my/votes">
           <a>
             <SidebarIcon text="Votes" icon={ <ThumbUp />} />
+          </a>
+        </Link>
+        <Link href="/my/searches">
+          <a>
+            <SidebarIcon text="Searches" icon={ <SearchCircle />} />
           </a>
         </Link>
         <Link href="/my/profile">

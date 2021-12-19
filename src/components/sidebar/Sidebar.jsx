@@ -47,24 +47,34 @@ const Sidebar = (props) => {
             <SidebarIcon text="Explore" icon={<Hashtag />} />
           </a>
         </Link>
-        <Link href="/submit">
+
+        {
+          !user && (
+          
+          <> 
+            <Link href="/signin">
           <a>
             <SidebarIcon text="Submit Post" icon={<DocumentAdd />} />
           </a>
-        </Link>
-        {
-          !user && (
-            <Link href="/submit">
+        </Link>           
+          <Link href="/signin">
             <a>
               <SidebarIcon text="Signin" icon={<Login />} />
             </a>
           </Link>
+          </>
+
           )
         }
         
         {
           user && (
             <>
+        <Link href="/submit">
+          <a>
+            <SidebarIcon text="Submit Post" icon={<DocumentAdd />} />
+          </a>
+        </Link>
               <Link href="/my/bookmarks">
           <a>
             <SidebarIcon text="Saves" icon={<BookMark />} />

@@ -6,18 +6,16 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { UserContext, AuthModalContext, PostFormContext } from '../context';
-import {  TwitterCard, TextCard, QACard, Header, AuthModal, PostModal } from '../components';
+import {  TwitterCard, TextCard, QACard } from '../components';
 
-import {Clock, Fire, SortAscending, SortDescending } from '../components/icons'
-import useRequest from '../hooks/useRequest';
+import {Clock, Fire  } from '../components/icons'
 
-const Index = () => {
+const Index = ( props ) => {
   const router = useRouter();
   const [ user, setUser ] = useState(null);
   const [ showAuthModal, setShowAuthModal ] = useState(false);
   const [ showPostModal, setShowPostModal ] = useState(false);
   const [ loading, setLoading ] = useState( false );
-  const [ bookMarked, setBookmarked ] = useState([]);
   const [ sortBy, setSortBy ] = useState("time");
 
   const [ allComments, setAllComments ] = useState([]);
@@ -46,53 +44,8 @@ const Index = () => {
 
     useEffect( () => {  
   
-
-    const fetchUser = async () => {
-
-      try{
-        const response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/currentUser/' );
-        const user = response.data.user;
-        setUser( user );
-      } catch( err ) {
-        console.log( err );
-      }
-      return {};
-
-    }
-    const fetchAllComments =  async ( ) => {
-      try{
-
-
-
-        const body = JSON.stringify({
-          category: "all"
-        })
-        const response = await fetch( process.env.NEXT_PUBLIC_API_URL + '/post', {
-          method: 'get',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-          data: body
-        });
-        const json = await response.json();
-        return json.comments;
-      } catch( err ) {
-        console.log( err );
-      }
-      return [];
-    }
-      
-
-      fetchUser()
-         .then( user => {
-          setUser( user );
-         } );
-
-      fetchAllComments()
-        .then( comments => {
-          setAllComments( comments ) 
-        });
+      setAllComments( props.posts?.comments )
+      console.log({ props });
 
    
     }, []);
@@ -125,6 +78,7 @@ const Index = () => {
 
         
       } catch( err ) {
+        console.log( err.data );
         console.log( err );
       }
       return {};
@@ -402,11 +356,36 @@ export default Index;
 
 
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
 
-  console.log({ context });
+  const { params, req } = context;
+
+  const headers = req.headers;
+  let response = {};
+  let userResponse = {};
+  
+try{
+  response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post' );
+
+} catch( e ){
+  console.log({ e });
+  response.data = null;
+}
+
+try{
+  const userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+  {
+    withCredentials: true,
+    headers
+  } );
+  console.log({ userResponse });
+} catch( e ){
+  console.log({ e });
+  userResponse.data = null;
+}
+
 
   return {
-    props: {}, // will be passed to the page component as props
+    props: { posts: response.data, user: userResponse.data },
   }
 }

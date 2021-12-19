@@ -119,11 +119,17 @@ const Sidebar = (props) => {
             <SidebarIcon text="Help" icon={<QuestionMarkCircle />} />
           </a>
         </Link>
-          <a
-            onClick={() => onSignout( router.reload() ) }
-            >
-            <SidebarIcon text="Logout" icon={<Logout />} />
-          </a>
+
+        {
+          user && (
+              <a
+              onClick={() => onSignout( router.reload() ) }
+              >
+              <SidebarIcon text="Logout" icon={<Logout />} />
+            </a>
+          )
+        }
+
       </div>
     </div>
   );

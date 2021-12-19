@@ -49,12 +49,7 @@ const Sidebar = (props) => {
           <a>
             <SidebarIcon text="Explore" icon={<Hashtag />} />
           </a>
-        </Link>
-        <Link href="/submit">
-          <a>
-            <SidebarIcon text="Submit Post" icon={<DocumentAdd />} />
-          </a>
-        </Link>   
+        </Link>  
 
         {
           !user && (
@@ -125,7 +120,7 @@ const Sidebar = (props) => {
         {
           user && (
               <a
-              onClick={() => onSignout( router.reload() ) }
+              onClick={() => onSignout( router.push('/') ) }
               >
               <SidebarIcon text="Logout" icon={<Logout />} />
             </a>  

@@ -14,7 +14,6 @@ import { toast } from 'react-toastify';
 
 const Index = ( props ) => {
   const router = useRouter();
-  const [ user, setUser ] = useState(null);
   const [ showAuthModal, setShowAuthModal ] = useState(false);
   const [ showPostModal, setShowPostModal ] = useState(false);
   const [ loading, setLoading ] = useState( false );
@@ -23,6 +22,8 @@ const Index = ( props ) => {
   const [ allComments, setAllComments ] = useState([]);
 
   const [ toasts, notify ] = useToast();
+
+  const { user } = props;
 
   const categories = [
     "All",
@@ -252,6 +253,9 @@ const Index = ( props ) => {
           description="dapp app"
         />
       }
+      user = {
+        user
+      }
     >
 
       
@@ -259,7 +263,7 @@ const Index = ( props ) => {
 
     <AuthModalContext.Provider value={{ show: showAuthModal, setShow: setShowAuthModal }}>  
       <PostFormContext.Provider value={{ show: showPostModal, setShow: setShowPostModal }}> 
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user }}>
     <div className="App">
       {
         toasts
@@ -396,6 +400,7 @@ export async function getServerSideProps(context) {
   const headers = req.headers;
   let response = {};
   let userResponse = {};
+  let use = {};
   
 try{
   response = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/post' );
@@ -411,14 +416,16 @@ try{
     withCredentials: true,
     headers
   } );
-  console.log({ userResponse });
+  const data = userResponse.data;
+  const use = data?.userO;
+  console.log({ data });
 } catch( e ){
   console.log({ e });
-  userResponse.data = null;
+  use.data = null;
 }
 
 
   return {
-    props: { posts: response.data, user: userResponse.data },
+    props: { posts: response.data, user: use },
   }
 }

@@ -40,7 +40,7 @@ const Settings = (props) => {
             className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full
           dark:bg-gray-800 dark:text-white"
           >
-            <h1 className="mb-6 font-bold">My Votes</h1>
+            <h1 className="mb-6 font-bold">My Searches</h1>
 
             <div className="">
     
@@ -58,8 +58,8 @@ const Settings = (props) => {
                     const { query, created_at } = search;
                     return( 
                       <div
-                      className="flex flex-row bg-gray-200 p-6 rounded-lg mb-10 font-semibold
-          dark:bg-gray-700"
+                      className="flex flex-row-6  p-3 border-b-2 border-gray-100 font-semibold
+                      dark:border-gray-700"
                     >
                       <h5 className="w-20"></h5>
                       <h5 className="flex-1">{ query }</h5>

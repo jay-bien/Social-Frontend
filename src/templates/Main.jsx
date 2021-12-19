@@ -123,8 +123,8 @@ const Main = (props) => {
                 </div>
                 <ul tabindex="0" 
                   className="p-2 shadow menu dropdown-content
-                  text-gray-800 
-                  bg-base-100 dark:bg-gray-800 rounded-box w-52"
+                  text-gray-800 bg-white 
+                   dark:bg-gray-800 rounded-box w-52 dark:text-gray-200"
                   >
                   <li>
                     <a>

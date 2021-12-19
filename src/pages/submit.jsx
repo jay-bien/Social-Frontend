@@ -39,12 +39,13 @@ const Submit = ( props ) => {
     tags: [],
     categories: []
   });
-  const [ user, setUser ] = useState("null");
   const [ formType, setFormType ] = useState("text");
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState(false);
 
   const [ toasts, notify ] = useToast();
+  const { user } = props;
+  console.log({ user });
 
 
   const [errors, doRequest ] = useRequest({
@@ -53,7 +54,7 @@ const Submit = ( props ) => {
     body: {
       ...postInfo,
       type: formType,
-      userId: user.id
+      userId: ""
     }
   })
 
@@ -108,7 +109,6 @@ const Submit = ( props ) => {
   
       const onSubmit = async ( e ) => {
         e.preventDefault();
-        console.log( categories.length );
         if( ! postInfo.categories.length ){
           notify("error", "Please select at least 1 category.");
           return;
@@ -151,11 +151,7 @@ const Submit = ( props ) => {
       useEffect( ()=> {
 
 
-        const user = localStorage.getItem('user');
-        if( user ){
-          const parsed = JSON.parse( user );
-          setUser( parsed );
-        }
+        console.log({ user });
 
         return ()=>{
 
@@ -358,5 +354,28 @@ Category
   )
 }
 
+export async function getServerSideProps( context ) {
+
+  const params = context.params;
+  const headers = context.headers;
+  let userResponse = {};
+
+
+  try{
+    userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+    {
+      withCredentials: true,
+      headers
+    } );
+  } catch( e ){
+    console.log({ e });
+    userResponse.data = null;
+  }
+
+
+  return {
+    props: { user: userResponse.data },
+  }
+}
 
 export default Submit

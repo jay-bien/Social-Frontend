@@ -356,6 +356,7 @@ export async function getServerSideProps( context ) {
 
   const params = context.params;
   const postId = params.pid;
+  const headers = context.headers;
   let response = {};
   let userResponse = {};
   try{

@@ -16,6 +16,7 @@ import getComments from '../helpers/getComments';
 
 const Index = ( props ) => {
   const router = useRouter();
+  const [ user, setUser ] = useState(null);
   const [ showAuthModal, setShowAuthModal ] = useState(false);
   const [ showPostModal, setShowPostModal ] = useState(false);
   const [ loading, setLoading ] = useState( false );
@@ -119,6 +120,7 @@ const onPostSave = async ( id ) => {
       setAllComments( props.posts.comments );
       const { user } = props
       console.log({ user })
+      setUser( props.user );
       reconcileVotes();
  
 
@@ -255,7 +257,7 @@ const onPostSave = async ( id ) => {
     }
 
  
-    const { user } = props;
+
 
   return (
     <Main
@@ -265,8 +267,6 @@ const onPostSave = async ( id ) => {
           description="dapp app"
         />
       }
-
-      user={ user }
     >
 
       
@@ -274,7 +274,7 @@ const onPostSave = async ( id ) => {
 
     <AuthModalContext.Provider value={{ show: showAuthModal, setShow: setShowAuthModal }}>  
       <PostFormContext.Provider value={{ show: showPostModal, setShow: setShowPostModal }}> 
-    <UserContext.Provider value={{ user }}>
+    <UserContext.Provider value={{ user, setUser }}>
     <div className="App min-h-screen">
 
 

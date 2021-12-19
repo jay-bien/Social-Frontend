@@ -27,42 +27,19 @@ import { Sidebar } from "../components";
 import useDarkMode from "../hooks/useDarkMode";
 
 const Main = (props) => {
-  const [user, setUser] = useState(null);
+
   const [enabled, setEnabled] = useDarkMode();
 
+  const { user } = props;
   useEffect(async () => {
-    const fUsr = await localStorage.getItem("user");
-    if (fUsr) {
-      const usr = JSON.parse(fUsr);
-      console.warn("User Exists");
-      setUser(usr);
-    }
 
-    const fetchUser = async () => {
-      try {
-        const response = await fetch(
-          process.env.NEXT_PUBLIC_API_URL + "/currentUser/",
-          {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-          }
-        );
-        const json = await response.json();
-        return json;
-      } catch (err) {
-        console.log(err);
-      }
-      return [];
-    };
+    console.log({ user });
+    console.log( user?.user?.posts );
 
     return () => {};
-  }, []);
+  }, [ user ]);
 
   const onSignout = () => {
-    localStorage && localStorage.removeItem("user");
     router.reload();
   };
 
@@ -97,6 +74,31 @@ const Main = (props) => {
 
             <div 
             className=" p-1  flex justify-between align-between ">
+
+<div class="dropdown dropdown-end">
+  <div tabindex="0" class="m-1 btn">
+    <User
+    />
+    </div> 
+  <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+    <li>
+      <a>
+      { user && user.user.email }
+
+      </a>
+    </li>
+    <li>
+      <a>Posts:
+         { user && user.user.posts }</a>
+    </li> 
+    <li>
+      <a>Upvotes: {user && user.user.upVotes}</a>
+    </li> 
+    <li>
+      <a>Downvotes: {user && user.user.downVotes}</a>
+    </li> 
+  </ul>
+</div>
      
 
 

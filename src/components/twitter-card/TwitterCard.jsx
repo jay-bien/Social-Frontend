@@ -19,16 +19,14 @@ export default function TwitterCard( props ) {
 
     useEffect(() => {
       setCardInfo( prevState => setCardInfo( data) );
-      console.log("Card Sentiment", data.sentiment );
       if( data.sentiment){
-        console.log('Sentiment:', data.sentiment);
         if( data.sentiment === "up"){
-          console.log("Post is liked")
+          // console.log("Post is liked")
           setLiked( true )
         }
         if( data.sentiment === "down" ){
           setDisliked( true );
-          console.log("Post is disliked")
+          // console.log("Post is disliked")
         }
       }
 
@@ -111,7 +109,7 @@ export default function TwitterCard( props ) {
 
                           <span
                      key={idx }
-                          class="
+                          className="
                             text-xs
                             px-2
                             font-medium

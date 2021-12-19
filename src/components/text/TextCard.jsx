@@ -18,7 +18,6 @@ export default function TextCard( props ) {
     useEffect(() => {
       setCardInfo( prevState => setCardInfo( data) );
 
-      console.log("Card Sentiment", data.sentiment );
       if( data.sentiment){
         console.log('Sentiment:', data.sentiment);
         if( data.sentiment === "up"){
@@ -65,7 +64,6 @@ export default function TextCard( props ) {
                   <h1 
                   className="text-center font-semibold  
                   ">
-                    {data.sentiment}
                     { title }
                     </h1> 
           

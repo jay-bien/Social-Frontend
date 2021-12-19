@@ -301,7 +301,7 @@ const Index = ( props ) => {
 <div class="dropdown mb-8">
   <div tabindex="0" class="m-1 btn">Sort by { sortBy }</div> 
   <ul tabindex="0" class="p-2 shadow menu dropdown-content 
-  bg-base-100 top-6 rounded-box w-52 text-gray-800
+  bg-gray-100 top-6 rounded-box w-52 text-gray-800
   dark:bg-gray-900 dark:text-gray-400">
     <li onClick={ () => onSort('time')}>
       <span 

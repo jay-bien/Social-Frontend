@@ -7,8 +7,10 @@ import axios from 'axios';
 
 import { UserContext, AuthModalContext, PostFormContext } from '../context';
 import {  TwitterCard, TextCard, QACard } from '../components';
+import useToast from '../hooks/useToast';
 
 import {Clock, Fire  } from '../components/icons'
+import { toast } from 'react-toastify';
 
 const Index = ( props ) => {
   const router = useRouter();
@@ -19,6 +21,8 @@ const Index = ( props ) => {
   const [ sortBy, setSortBy ] = useState("time");
 
   const [ allComments, setAllComments ] = useState([]);
+
+  const [ toasts, notify ] = useToast();
 
   const categories = [
     "All",
@@ -61,7 +65,6 @@ const Index = ( props ) => {
         } );
 
         const data = response.data;
-        console.log({ data });
         
         setAllComments( comments => {
            return comments.map( comment => {
@@ -78,8 +81,13 @@ const Index = ( props ) => {
 
         
       } catch( err ) {
-        console.log( err.data );
-        console.log( err );
+        const { data } = err.response;
+        if( data?.errors ){
+          return data.errors.map(
+            err => notify('error', err.msg )
+          )
+        }
+        notify("error", "Something went wrong. Please try again later.")
       }
       return {};
     }
@@ -103,7 +111,14 @@ const Index = ( props ) => {
          })
        })
       } catch( err ) {
-        console.log( err );
+        const { data } = err.response;
+
+        if( data?.errors ){
+          return data.errors.map(
+            err => notify('error', err.msg )
+          )
+        }
+        notify("error", "Something went wrong. Please try again later.")
       }
       return {};
     }
@@ -116,6 +131,14 @@ const Index = ( props ) => {
 
       } catch( e ){
         console.log({ e });
+        const { data } = err.response;
+
+        if( data?.errors ){
+          return data.errors.map(
+            err => notify('error', err.msg )
+          )
+        }
+        notify("error", "Something went wrong. Please try again later.")
 
       }
     }
@@ -185,6 +208,14 @@ const Index = ( props ) => {
         
       } catch( err ) {
         console.log( err );
+        const { data } = err.response;
+
+        if( data?.errors ){
+          return data.errors.map(
+            err => notify('error', err.msg )
+          )
+        }
+        notify("error", "Something went wrong. Please try again later.")
       }
       return {};
 
@@ -230,7 +261,9 @@ const Index = ( props ) => {
       <PostFormContext.Provider value={{ show: showPostModal, setShow: setShowPostModal }}> 
     <UserContext.Provider value={{ user, setUser }}>
     <div className="App">
-
+      {
+        toasts
+      }
 
       <main className="pt-10">
    

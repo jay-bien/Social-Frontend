@@ -67,6 +67,13 @@ const Search = (props) => {
                 results && JSON.stringify(results)
               }
               {
+                ! results || !results.data || !results.data.length && (
+                  <h1> No Results Found </h1>
+                )
+                
+              
+              }
+              {
                 results && results.data && results.data.map(result => {
                   const { id, type, title } = result;
                   return (
@@ -129,24 +136,18 @@ export async function getServerSideProps(context) {
   const { params, req, query } = context;
 
   const headers = req.headers;
-  let response, userResponse;
+  let response = {}, userResponse = {};
 
   try {
-    response = await axios.post(process.env.NEXT_PUBLIC_API_URL + `/search`,
-      {
-        withCredentials: true,
-        headers,
-        data: {
-          q: query.q
-        }
-      });
-
-    console.log({
-      response
+    response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/search/`,
+    {
+      withCredentials: true,
+      headers
     });
+    console.log({ response });
+  
   } catch (e) {
-    const data = e.response.data;
-    console.log({ data });
+    console.log({ e })
   }
 
   try {
@@ -156,6 +157,7 @@ export async function getServerSideProps(context) {
         headers
       });
   } catch (e) {
+    userResponse.data = null
     const data = e.response.data;
     console.log({ data });
   }

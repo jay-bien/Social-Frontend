@@ -86,15 +86,19 @@ const Post = (props) => {
 
     try{
       const post = await onLike( id );
-      console.log({
-        post
-      });
-      const{ commentId, likes, dislikes, sentiment } = post;
-      sentiment === "up"
-      ? notify('success', "Upvoted post")
-      : notify("info", "Removed upvote.")
-      setPostLikes( likes );
-      setPostDislikes( dislikes );
+ 
+      if( post.response?.data?.errors ){
+        post.response.data.errors.map( err => notify( 'error', err.msg ))
+
+      }  else {
+        const{ commentId, likes, dislikes, sentiment } = post;
+        sentiment === "up"
+        ? notify('success', "Upvoted post")
+        : notify("info", "Removed upvote.")
+        setPostLikes( likes );
+        setPostDislikes( dislikes );
+      }
+ 
 
 
     } catch( e ){
@@ -108,16 +112,18 @@ const Post = (props) => {
 
     try{
       const post = await onDislike( id );
-      
-      console.log({
-        post
-      });
-      const{ commentId, likes, dislikes, sentiment } = post;
-      sentiment === "down"
-      ? notify('success', "Downvoted post")
-      : notify("info", "Removed downvote.")
-      setPostLikes( likes );
-      setPostDislikes( dislikes );
+      if( post.response?.data?.errors ){
+        post.response.data.errors.map( err => notify( 'error', err.msg ))
+
+      } else {
+        const{ commentId, likes, dislikes, sentiment } = post;
+        sentiment === "down"
+        ? notify('success', "Downvoted post")
+        : notify("info", "Removed downvote.")
+        setPostLikes( likes );
+        setPostDislikes( dislikes );
+      }
+ 
 
     } catch( e ){
       console.log({ e });
@@ -129,10 +135,17 @@ const Post = (props) => {
   const onPostSave = async ( id ) => {
     try{
       const res = await onBookmark( id );
-      console.log({ res });
-      res.userBookmark 
-      ? notify("success", "Saved post.")
-      : notify("success", "Removed saved post.")
+
+      if( res.response?.data?.errors ){
+        res.response.data.errors.map( err => notify( 'error', err.msg ))
+
+      }  else {
+        res.userBookmark 
+        ? notify("success", "Saved post.")
+        : notify("success", "Removed saved post.")
+      }
+      
+
 
     } catch( e ){
       notify("error", "An error has occured");

@@ -21,38 +21,44 @@ import {
   Chat,
   Sun,
   Moon,
+  Search
+
 } from "../components/icons";
 
 import { Sidebar } from "../components";
 import useDarkMode from "../hooks/useDarkMode";
-import { Search } from "../components/icons";
 
 const Main = (props) => {
 
   const [enabled, setEnabled] = useDarkMode();
-  const [ query, setQuery ] = useState("");
+  const [query, setQuery] = useState("");
 
   const { user } = props;
   useEffect(async () => {
 
     console.log({ user });
-    console.log( user?.user?.posts );
+    console.log(user?.user?.posts);
 
-    return () => {};
-  }, [ user ]);
+    return () => { };
+  }, [user]);
 
   const onSignout = () => {
     router.reload();
   };
 
   const onChange = e => {
-    setQuery( e.target.value );
+    setQuery(e.target.value);
   }
 
   const onSubmit = e => {
     console.log({ e });
-
     console.log({ query });
+  };
+
+  const onSearch = ( e ) => {
+    e.preventDefault();
+    console.log(query);
+
   }
 
   return (
@@ -68,69 +74,67 @@ const Main = (props) => {
         dark:bg-gray-800"
           {...props}
         >
-          <nav className="navbar text-neutral-content max-w-7xl m-auto">
-            <div className="px-2 mx-2 navbar-start"></div>
-            <div className="hidden px-2 mx-2 navbar-center lg:flex">
-              <div className="flex items-stretch">
-                {user && (
-                  <p
-                    className="text-gray-900
-                  dark:text-gray-300"
-                  >
+          <nav className="navbar text-neutral-content max-w-7xl m-auto flex justify-between">
+            <div className="px-2 mx-2 w-12">
 
-
-
-
-                  </p>
-                )}
-              </div>
+              <button>
+                Menu
+              </button>
             </div>
-            <div className="navbar-end align-middle"></div>
+ 
+            <div className="align-stretch">
+            <div
+              className=" p-1  flex justify-center items-center ">
+              <form
+                onSubmit={ onSearch }>
+                <div class="form-control">
+                  <div class="relative">
+                    <input 
+                    onChange={(e) =>{ e.preventDefault(); setQuery( e.target.value )}}
+                    type="text" 
+                    placeholder="Search" 
+                      className="w-full pr-16 input input-primary input-bordered
+                        dark:bg-gray-700 dark:border-gray-800"
+                    />
+                      <button 
+                        className="absolute top-0 right-0 rounded-l-none btn btn-primary
+                        dark:bg-gray-900 dark:border-gray-800">
+                        <Search />
+                        </button>
+                  </div>
+                </div>
+              </form>
 
-            <div 
-            className=" p-1  flex justify-between align-between ">
-              <div class="form-control">
-{/* 
-  <input type="text" placeholder="search" class="input input-bordered "
-      onChange={ onChange }
-      onSubmit={ onSubmit }
-  
-  />
-  <button className="btn">
-  <Search 
-  />
-  </button> */}
+              <div className="dropdown dropdown-end">
+                <div tabindex="0" className="m-1 btn">
+                  <User
+                  />
+                </div>
+                <ul tabindex="0" 
+                  className="p-2 shadow menu dropdown-content bg-base-100 dark:bg-gray-800 rounded-box w-52"
+                  >
+                  <li>
+                    <a>
+                      {user && user.user.email}
 
-</div>
-
-<div class="dropdown dropdown-end">
-  <div tabindex="0" class="m-1 btn">
-    <User
-    />
-    </div> 
-  <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
-    <li>
-      <a>
-      { user && user.user.email }
-
-      </a>
-    </li>
-    <li>
-      <a>Posts:
-         { user && user.user.posts }</a>
-    </li> 
-    <li>
-      <a>Upvotes: {user && user.user.upVotes}</a>
-    </li> 
-    <li>
-      <a>Downvotes: {user && user.user.downVotes}</a>
-    </li> 
-  </ul>
-</div>
-     
+                    </a>
+                  </li>
+                  <li>
+                    <a>Posts:
+                      {user && user.user.posts}</a>
+                  </li>
+                  <li>
+                    <a>Upvotes: {user && user.user.upVotes}</a>
+                  </li>
+                  <li>
+                    <a>Downvotes: {user && user.user.downVotes}</a>
+                  </li>
+                </ul>
+              </div>
 
 
-              <Sun 
+            <div className="ml-4 md:ml-10 flex">
+            <Sun
                 onClick={() => setEnabled(false)}
                 className="w-6 h-6 mr-3
                 text-yellow-400
@@ -138,15 +142,20 @@ const Main = (props) => {
                 hover:cursor-pointer 
                 "
               />
-              <Moon 
-              className="w-6 h-6
+              <Moon
+                className="w-6 h-6
               text-gray-800 text-opacity-60
               dark:text-red-400 
               hover:cursor-pointer
               "
-              onClick={() => setEnabled(true)}
-               />
+                onClick={() => setEnabled(true)}
+              />
             </div>
+
+            </div>
+            </div>
+
+            
           </nav>
         </header>
         <nav>

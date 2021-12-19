@@ -287,8 +287,7 @@ const onPostSave = async ( id ) => {
 
   if( comment.type ==="text"){
     return(
-      <div>
-        { comment.sentiment }
+ 
       <TextCard 
       onLike={ onLike }
       onDislike={ onDislike }
@@ -297,13 +296,11 @@ const onPostSave = async ( id ) => {
       key={ index } data={ comment }
       sentiment={ comment.sentiment }
       />
-      </div>
     )
 
   } else if( comment.type ==="link"){
     return(
-      <div>
-        { comment.sentiment}
+  
       <TwitterCard 
       sentiment={ comment.sentiment }
       onLike={ onLike }
@@ -314,7 +311,6 @@ const onPostSave = async ( id ) => {
      
 
     />
-    </div>
     )
 
   } else {

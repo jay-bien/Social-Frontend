@@ -97,8 +97,8 @@ const Main = (props) => {
               className=" p-1  flex justify-center items-center ">
                     <form
                 onSubmit={ onSearch }>
-                <div class="form-control">
-                  <div class="relative">
+                <div className="form-control">
+                  <div className="relative">
                     <input 
                     onChange={(e) =>{ e.preventDefault(); setQuery( e.target.value )}}
                     type="text" 
@@ -117,11 +117,11 @@ const Main = (props) => {
               </form>
 
               <div className="dropdown dropdown-end">
-                <div tabindex="0" className="m-1 btn">
+                <div tabIndex="0" className="m-1 btn">
                   <User
                   />
                 </div>
-                <ul tabindex="0" 
+                <ul tabIndex="0" 
                   className="p-2 shadow menu dropdown-content
                   text-gray-800 bg-white 
                    dark:bg-gray-800 rounded-box w-52 dark:text-gray-200"

@@ -43,8 +43,6 @@ const Main = (props) => {
   const { user } = props;
   useEffect(async () => {
 
-    console.log({ user });
-    console.log(user?.user?.posts);
 
     return () => { };
   }, [user]);
@@ -131,7 +129,9 @@ const Main = (props) => {
                   />
                 </div>
                 <ul tabindex="0" 
-                  className="p-2 shadow menu dropdown-content bg-base-100 dark:bg-gray-800 rounded-box w-52"
+                  className="p-2 shadow menu dropdown-content
+                  text-gray-800 
+                  bg-base-100 dark:bg-gray-800 rounded-box w-52"
                   >
                   <li>
                     <a>

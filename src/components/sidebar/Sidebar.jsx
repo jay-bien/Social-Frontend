@@ -50,16 +50,17 @@ const Sidebar = (props) => {
             <SidebarIcon text="Explore" icon={<Hashtag />} />
           </a>
         </Link>
+        <Link href="/submit">
+          <a>
+            <SidebarIcon text="Submit Post" icon={<DocumentAdd />} />
+          </a>
+        </Link>   
 
         {
           !user && (
           
           <> 
-            <Link href="/signin">
-          <a>
-            <SidebarIcon text="Submit Post" icon={<DocumentAdd />} />
-          </a>
-        </Link>           
+        
           <Link href="/signin">
             <a>
               <SidebarIcon text="Signin" icon={<Login />} />
@@ -69,15 +70,16 @@ const Sidebar = (props) => {
 
           )
         }
-        
-        {
-          user && (
-            <>
         <Link href="/submit">
           <a>
             <SidebarIcon text="Submit Post" icon={<DocumentAdd />} />
           </a>
         </Link>
+        
+        {
+          user && (
+            <>
+
               <Link href="/my/bookmarks">
           <a>
             <SidebarIcon text="Saves" icon={<BookMark />} />
@@ -126,7 +128,7 @@ const Sidebar = (props) => {
               onClick={() => onSignout( router.reload() ) }
               >
               <SidebarIcon text="Logout" icon={<Logout />} />
-            </a>
+            </a>  
           )
         }
 

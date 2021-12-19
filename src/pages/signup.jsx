@@ -1,13 +1,11 @@
-import router, { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import useRequest  from '../hooks/useRequest';
-import cookieCutter from 'cookie-cutter';
-import cookieJs from 'js-cookie';
+
+import useToast from '../hooks/useToast';
 
 
 
@@ -16,11 +14,11 @@ import cookieJs from 'js-cookie';
 
 const Index = () => {
  
-  const [ email, setEmail ] = React.useState('');
-  const [ password, setPassword ] = React.useState('');
-  const [ passwordConfirm, setPasswordConfirm ] = React.useState('');
+
   const [ loading, setLoading ] = React.useState(false);
-  const [ registerInfo, setRegisterInfo ] = useState({})
+  const [ registerInfo, setRegisterInfo ] = useState({});
+
+  const [ toasts, notify ] = useToast();
 
   const onChange = ( el ) => {
     setRegisterInfo({ ...registerInfo, [el.target.name]: el.target.value });
@@ -39,23 +37,11 @@ const onSignup = async (e  ) => {
   const response = await doRequest();
 
   if( response ){
-    console.log( response );
-    const auxillaryId = response.auxillaryId;
-
-    localStorage && localStorage.setItem("auxillaryId", JSON.stringify( auxillaryId ));
-    const usr = JSON.stringify( response.user )
-    localStorage && localStorage.setItem('user', usr )
-
-
-    const cookies = cookieCutter.get('Set-Cookie');
-    const cook1 = cookieJs.get('Set-Cookie');
-    const cook2 = cookieJs.get('jwt');
-    const cook3 = cookieJs.get('id');
-
-
-
-
+    notify('success', "😎  You have been registered. Welcome to the community.")
     router.push('/')
+  } else {
+    notify('error', "An error has occurred.")
+
   }
    
 
@@ -96,7 +82,7 @@ const onSignup = async (e  ) => {
     <Main
       meta={
         <Meta
-          title="DAPP Signup"
+          title="DAP Signin"
           description=""
         />
       }
@@ -133,13 +119,19 @@ const onSignup = async (e  ) => {
       <Link
         href="/signin"
       >
-          Sign in instead
+        <a className='ml-2'>
+                    Sign in instead
+
+        </a>
         </Link>
     </p>
   </div>
 
   <div className="errors">
     { errors }
+    {
+      toasts
+    }
 
   </div>
 

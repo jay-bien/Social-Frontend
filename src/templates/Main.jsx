@@ -136,19 +136,19 @@ const Main = (props) => {
                   >
                   <li>
                     <a>
-                      {user && user.user.email}
+                      {user && user.email}
 
                     </a>
                   </li>
                   <li>
                     <a>Posts:
-                      {user && user.user.posts}</a>
+                      {user && user.posts}</a>
                   </li>
                   <li>
-                    <a>Upvotes: {user && user.user.upVotes}</a>
+                    <a>Upvotes: {user && user.upVotes}</a>
                   </li>
                   <li>
-                    <a>Downvotes: {user && user.user.downVotes}</a>
+                    <a>Downvotes: {user && user.downVotes}</a>
                   </li>
                 </ul>
               </div>

@@ -358,7 +358,7 @@ try{
 }
 
 try{
-  const userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+  userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
   {
     withCredentials: true,
     headers

@@ -5,7 +5,7 @@ import { Main } from '../templates/Main';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-
+import useToast from '../hooks/useToast';
 
 
 
@@ -18,7 +18,10 @@ const Index = () => {
   const [ password, setPassword ] = React.useState('');
   const [ error, setError ] = React.useState('');
   const [ loading, setLoading ] = React.useState(false);
-  const [ registerInfo, setRegisterInfo ] = useState({})
+  const [ registerInfo, setRegisterInfo ] = useState({});
+
+
+  const [ toasts, notify ] = useToast();
 
 
 
@@ -42,14 +45,11 @@ try{
   } );
   
   const { user, auxillaryId } = response.data;
-  console.log({ response });
-  const usr = JSON.stringify( user );
-  const aux = JSON.stringify( auxillaryId );
-localStorage && localStorage.setItem('user', usr);
-localStorage && localStorage.setItem('aux', aux);
+  notify("success", "Welcome back! Logging you in.")
   router.push('/');
 } catch( e ){
   console.log({ e });
+  notify('error', "An error has occurred")
 }
 
 }

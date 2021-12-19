@@ -57,7 +57,7 @@ const Sidebar = (props) => {
         </Link>
         <Link href="/my/votes">
           <a>
-            <SidebarIcon text="Votes" icon={<ThumbUp />} />
+            <SidebarIcon text="Votes" icon={ <ThumbUp />} />
           </a>
         </Link>
         <Link href="/my/profile">

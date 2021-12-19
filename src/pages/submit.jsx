@@ -125,14 +125,7 @@ const Submit = ( props ) => {
         } else {
 
         }
-        // try{
-        //   const data = await postData( postInfo.link, postInfo.title, postInfo.content, postInfo.categories, formType );
-        //   console.log({ data });
-        //   setLoading( false );
-        // } catch( e ){
 
-        // }
- 
       };
 
 
@@ -140,8 +133,8 @@ const Submit = ( props ) => {
       const renderFormTypeClassNames = ( type ) =>{
           return type === formType 
           ?
-          ("sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-indigo-500 tracking-wider rounded-t dark:bg-gray-900 dark:text-white")
-          : ("sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider ")
+          ("sm:px-10 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-indigo-500 tracking-wider rounded-t dark:bg-gray-900 dark:text-white")
+          : ("sm:px-10 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider ")
       }
 
 
@@ -219,15 +212,6 @@ const Submit = ( props ) => {
 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
 </svg>
       Link
-    </button>
-    <button className={ renderFormTypeClassNames('qa')}
-      onClick={ () => setFormType("qa")}
-
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-</svg>
-      QA
     </button>
 
   </div>

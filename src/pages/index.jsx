@@ -50,53 +50,26 @@ const reconcileVotes = async () => {
   const votes = await fetchVotes();
   const comments = props.posts.comments;
 
-  console.log(" Reconcile votes.");
   let timer = null;
   if( !comments || !comments.length){
     return;
   };
 
-  console.log("Ok should run reconcile votes now");
-
   comments.map( comment => {
     let interaction = votes.map( vote => vote.commentId
         ).indexOf(  comment.id );
 
-    console.log( votes[ interaction ]);
     let vote = votes[ interaction ];
-    console.log({ vote });
     if( !vote ){
       return
     } else {
       comment.sentiment = vote.direction;
-      console.log({ comment });
     };
-
         setAllComments( comments )
   })
 }
 
-// const fetchAllComments =  async ( ) => {
-//   try{
-//     const body = JSON.stringify({
-//       category: "all"
-//     })
-//     const response = await fetch( process.env.NEXT_PUBLIC_API_URL + '/post', {
-//       method: 'get',
-//       credentials:'same-origin',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Access-Control-Allow-Origin': '*',
-//       },
-//       data: body
-//     });
-//     const json = await response.json();
-//     return json.comments;
-//   } catch( err ) {
-//     console.log( err );
-//   }
-//   return [];
-// }
+
 const onPostSave = async ( id ) => {
   try{
     const res = await onBookmark( id );
@@ -110,20 +83,11 @@ const onPostSave = async ( id ) => {
   }
 }
 
-
     useEffect( () => {  
 
-
-    
-
       setAllComments( props.posts.comments );
-      const { user } = props
-      console.log({ user })
       reconcileVotes();
- 
 
-
-   
     }, []);
 
 
@@ -397,6 +361,7 @@ export async function getServerSideProps( context ) {
     withCredentials: true,
     headers
   } );
+  console.log({ userResponse });
 
   return {
     props: { posts: response.data, user: userResponse.data },

@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react';
 const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
-      const item = window && window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      if( typeof window !== undefined ){
+        const item = window.localStorage.getItem(key);
+        return item ? JSON.parse(item) : initialValue;
+      }
+
     } catch (error) {
       console.log(error);
       return initialValue;
@@ -17,7 +20,10 @@ const useLocalStorage = (key, initialValue) => {
 
       setStoredValue(valueToStore);
 
-      window && window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      if( typeof window !== undefined ){
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      }
+
     } catch (error) {
       console.log(error);
     }
@@ -31,9 +37,13 @@ const useDarkMode = () => {
 
   useEffect(() => {
     const className = 'dark';
-    const bodyClass = window && window.document.body.classList;
 
-    isEnabled ? bodyClass.add(className) : bodyClass.remove(className);
+    let bodyClass;
+    if( typeof window !== undefined ){
+      bodyClass = window.document.body.classList;
+      isEnabled ? bodyClass.add(className) : bodyClass.remove(className);
+    }
+
   }, [enabled, isEnabled]);
 
   return [enabled, setEnabled];

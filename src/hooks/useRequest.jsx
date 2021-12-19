@@ -10,7 +10,6 @@ const useRequest =  ( {
 
   const doRequest = async  ( ) => {
 
-    console.log({ body }, {method }, { url }, { onSuccess});
     try{
       setErrors( null );
       // const response = await axios[method]( url, body, );
@@ -20,7 +19,6 @@ const useRequest =  ( {
         url,
         withCredentials: true
       })
-      console.log({ response });
       if( onSuccess ){
         onSuccess( response.data );
       }

@@ -16,7 +16,6 @@ const onSignout = async (  ) => {
     if( window ){
       window.localStorage.setItem('user', null);
     };
-    router.push('/');
 
     return data;
 

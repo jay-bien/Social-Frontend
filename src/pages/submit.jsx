@@ -4,8 +4,9 @@ import router, { useRouter } from 'next/router';
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import useRequest from '../hooks/useRequest';
+
+import useToast from '../hooks/useToast';
 
 
 const categories = [
@@ -19,10 +20,10 @@ const categories = [
   "Sports",
   "Lifestyle",
   "Career",
-  "offbeat",
+  "Offbeat",
   "Fashion",
   "Travel",
-  "Reatail",
+  "Retail",
   "Media",
   "Social Networks",
 ]
@@ -42,6 +43,9 @@ const Submit = ( props ) => {
   const [ formType, setFormType ] = useState("text");
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState(false);
+
+  const [ toasts, notify ] = useToast();
+
 
   const [errors, doRequest ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + '/post/',
@@ -104,6 +108,12 @@ const Submit = ( props ) => {
   
       const onSubmit = async ( e ) => {
         e.preventDefault();
+        console.log( categories.length );
+        if( ! postInfo.categories.length ){
+          notify("error", "Please select at least 1 category.");
+          return;
+        }
+
         setLoading( true );
         setError( false );
 
@@ -159,8 +169,8 @@ const Submit = ( props ) => {
     <Main
     meta={
       <Meta
-        title="Next.js Boilerplate Presentation"
-        description="Next js Boilerplate is the perfect starter code for your project. Build your React application with the Next.js framework."
+        title="DAP Submit Post"
+        description=""
       />
     }
   >
@@ -175,7 +185,9 @@ const Submit = ( props ) => {
     <main className="main">
 
 
-
+    {
+      toasts
+    }
 
 
 

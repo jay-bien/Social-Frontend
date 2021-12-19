@@ -57,6 +57,11 @@ const Main = (props) => {
 
   const onSearch = ( e ) => {
     e.preventDefault();
+
+    router.push({
+      pathname:"/search",
+      query: { q: query}
+    })
     console.log(query);
 
   }

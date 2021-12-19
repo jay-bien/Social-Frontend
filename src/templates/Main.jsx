@@ -25,10 +25,12 @@ import {
 
 import { Sidebar } from "../components";
 import useDarkMode from "../hooks/useDarkMode";
+import { Search } from "../components/icons";
 
 const Main = (props) => {
 
   const [enabled, setEnabled] = useDarkMode();
+  const [ query, setQuery ] = useState("");
 
   const { user } = props;
   useEffect(async () => {
@@ -42,6 +44,16 @@ const Main = (props) => {
   const onSignout = () => {
     router.reload();
   };
+
+  const onChange = e => {
+    setQuery( e.target.value );
+  }
+
+  const onSubmit = e => {
+    console.log({ e });
+
+    console.log({ query });
+  }
 
   return (
     <div
@@ -65,7 +77,10 @@ const Main = (props) => {
                     className="text-gray-900
                   dark:text-gray-300"
                   >
-                    Welcome {user.email}
+
+
+
+
                   </p>
                 )}
               </div>
@@ -74,6 +89,19 @@ const Main = (props) => {
 
             <div 
             className=" p-1  flex justify-between align-between ">
+              <div class="form-control">
+{/* 
+  <input type="text" placeholder="search" class="input input-bordered "
+      onChange={ onChange }
+      onSubmit={ onSubmit }
+  
+  />
+  <button className="btn">
+  <Search 
+  />
+  </button> */}
+
+</div>
 
 <div class="dropdown dropdown-end">
   <div tabindex="0" class="m-1 btn">

@@ -137,14 +137,13 @@ export async function getServerSideProps(context) {
         withCredentials: true,
         headers
       });
-
-      if( userResponse.response.status !== 200 ){
+      console.log({ userResponse });
+      if( userResponse.status !== 200 ){
         use = null
       } else {
         use = userResponse.data;
       }
 
-      console.log({ use });
   } catch (e) {
     use = null;
     // const data = e?.response?.data;

@@ -25,6 +25,7 @@ const Saves = (props) => {
   const [bookmarks, setBookmarks] = useState([]);
 
   const { user } = props;
+  console.log({ user })
   let u = user?.userO;
 
   const [errors, doRequest] = useRequest({

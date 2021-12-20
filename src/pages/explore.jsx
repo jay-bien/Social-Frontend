@@ -24,6 +24,7 @@ const Index = ( props ) => {
   const [ toasts, notify ] = useToast();
 
   const { user } = props;
+  console.log({ user });
 
   const categories = [
     "All",
@@ -417,15 +418,14 @@ try{
     headers
   } );
   const data = userResponse.data;
-  const use = data?.userO;
-  console.log({ data });
+
 } catch( e ){
   console.log({ e });
-  use.data = null;
+  userResponse.data = null;
 }
 
 
   return {
-    props: { posts: response.data, user: use },
+    props: { posts: response.data, user: userResponse.data },
   }
 }

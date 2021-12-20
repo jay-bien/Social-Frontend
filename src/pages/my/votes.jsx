@@ -14,56 +14,22 @@ dayjs.extend(relativeTime);
 
 import { Link as LinkIcon, Text } from "../../components/icons";
 
-const categories = [
-  "Psychadelics",
-  "Education",
-  "Tech",
-  "Business",
-  "World business",
-  "Science",
-  "gaming,",
-  "Sports",
-  "Lifestyle",
-  "Career",
-  "offbeat",
-  "Fashion",
-  "Travel",
-  "Reatail",
-  "Media",
-  "Social Networks",
-];
 
-const Settings = (props) => {
+const Votes = (props) => {
+
   const [votes, setVotes] = useState([]);
   const [downVotes, setDownvotes] = useState([]);
   const [upVotes, setUpVotes] = useState([]);
-  const [user, setUser] = useState("null");
   const [voteType, setVoteType] = useState("up");
 
   const [errors, doRequest] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/history",
     method: "get",
   });
-  let images = null;
-  let favIcon = null;
 
-  const renderImage = (data) => {
-    console.log({ data });
-    if (data.link?.metadata?.twitter_card?.images) {
-      return data.link.metadata.twitter_card.images[0].url;
-    }
-    if (data?.link?.metadata?.open_graph?.images) {
-      return data.link.metadata.open_graph.images[0].url;
-    }
-    if (images && images.length) {
-      return images[0].url;
-    }
+  const { user } = props;
+  let u = user.userO;
 
-    if (favIcon) {
-      return favIcon;
-    }
-    return null;
-  };
 
   const toggleVoteType = () => {
     if (voteType === "up") {
@@ -80,11 +46,12 @@ const Settings = (props) => {
     setUpVotes(res.upVotes);
     setDownvotes(res.downVotes);
     setVotes(res.upVotes);
-    console.log({ res });
   }, []);
 
   return (
-    <Main meta={<Meta title="DAP My Bookmarks" description="" />}>
+    <Main meta={<Meta title="DAP My Bookmarks" description="" />}
+    user={ u }
+    >
       <div className="App min-h-screen">
         <main className="main max-w-7xl">
           <div
@@ -154,4 +121,37 @@ const Settings = (props) => {
   );
 };
 
-export default Settings;
+
+export async function getServerSideProps(context) {
+
+  const { params, req, query } = context;
+
+  const headers = req.headers;
+  let  userResponse = {};
+  let use = {};
+
+
+  try {
+    userResponse = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+      {
+        withCredentials: true,
+        headers
+      });
+      use = userResponse.data;
+
+      console.log({ use });
+  } catch (e) {
+    use = null;
+    // const data = e?.response?.data;
+    console.log({ e });
+    // console.log({ data });
+  }
+
+
+  return {
+    props: { user: userResponse.data },
+  }
+}
+
+
+export default Votes;

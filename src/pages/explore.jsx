@@ -417,14 +417,16 @@ try{
     withCredentials: true,
     headers
   } );
-  const data = userResponse.data;
-  use = userResponse.data.userO;
-  console.log({ data });
+  if( userResponse.response.status !== 200 ){
+    use = null
+  } else {
+    use = userResponse.data;
+  }
 
 } catch( e ){
   console.log({ e });
   userResponse.data = null;
-  user = null;
+  use = null;
 }
 
 

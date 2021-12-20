@@ -20,31 +20,12 @@ import {
 
 
 
-
-const categories = [
-  "Psychadelics",
-  "Education",
-  "Tech",
-  "Business",
-  "World business",
-  "Science",
-  "gaming,",
-  "Sports",
-  "Lifestyle",
-  "Career",
-  "offbeat",
-  "Fashion",
-  "Travel",
-  "Reatail",
-  "Media",
-  "Social Networks",
-];
-
-const Settings = (props) => {
+const Saves = (props) => {
 
   const [bookmarks, setBookmarks] = useState([]);
-  const [user, setUser] = useState("null");
 
+  const { user } = props;
+  let u = user.userO;
 
   const [errors, doRequest] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/history",
@@ -86,6 +67,7 @@ const Settings = (props) => {
           description=""
         />
       }
+      user={ u }
     >
       <div className="App min-h-screen">
         <main className="main max-w-7xl">
@@ -174,4 +156,36 @@ const Settings = (props) => {
   );
 };
 
-export default Settings;
+export default Saves;
+
+
+export async function getServerSideProps(context) {
+
+  const { params, req, query } = context;
+
+  const headers = req.headers;
+  let  userResponse = {};
+  let use = {};
+
+
+  try {
+    userResponse = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+      {
+        withCredentials: true,
+        headers
+      });
+      use = userResponse.data;
+
+      console.log({ use });
+  } catch (e) {
+    use = null;
+    // const data = e?.response?.data;
+    console.log({ e });
+    // console.log({ data });
+  }
+
+
+  return {
+    props: { user: userResponse.data },
+  }
+}

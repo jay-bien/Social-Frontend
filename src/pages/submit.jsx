@@ -16,7 +16,7 @@ const categories = [
   "Business",
   "World business",
   "Science",
-  "gaming,",
+  "Gaming",
   "Sports",
   "Lifestyle",
   "Career",

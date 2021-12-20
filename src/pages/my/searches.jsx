@@ -1,6 +1,5 @@
 import React from "react";
-import router, { useRouter } from "next/router";
-import Link from "next/link";
+
 
 import { Meta } from "../../layout/Meta";
 import { Main } from "../../templates/Main";
@@ -8,6 +7,7 @@ import { useEffect, useState } from "react";
 import useRequest from "../../hooks/useRequest";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import axios from 'axios';
 
 dayjs.extend(relativeTime);
 
@@ -15,7 +15,7 @@ import { Link as LinkIcon, Text } from "../../components/icons";
 
 
 
-const Settings = (props) => {
+const Searches = (props) => {
   const [ searches, setSearches ] = useState([]);
 
 
@@ -23,6 +23,9 @@ const Settings = (props) => {
     url: process.env.NEXT_PUBLIC_API_URL + "/search/history",
     method: "get",
   });
+
+  const { user } =props;
+  let u = user.userO;
 
 
   useEffect(async () => {
@@ -34,7 +37,10 @@ const Settings = (props) => {
 
   return (
     <Main meta={ <Meta title="DAP My Bookmarks" description=""
-    /> }>
+    /> }
+    
+    user={ u }
+    >
       <div className="App min-h-screen">
         <main className="main max-w-7xl">
           <div
@@ -81,4 +87,36 @@ const Settings = (props) => {
   );
 };
 
-export default Settings;
+
+
+export async function getServerSideProps(context) {
+
+  const { params, req, query } = context;
+
+  const headers = req.headers;
+  let response = {}, userResponse = {};
+
+
+
+
+  try {
+    userResponse = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+      {
+        withCredentials: true,
+        headers
+      });
+
+      console.log({ userResponse });
+  } catch (e) {
+    userResponse.data = null;
+    // const data = e?.response?.data;
+    console.log({ e });
+    // console.log({ data });
+  }
+
+
+  return {
+    props: { user: userResponse.data },
+  }
+}
+export default Searches;

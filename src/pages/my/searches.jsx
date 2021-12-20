@@ -25,12 +25,12 @@ const Searches = (props) => {
   });
 
   const { user } =props;
-  let u = user.userO;
+  let u = user?.userO;
 
 
   useEffect(async () => {
     let res = await doRequest();
-    setSearches( res.searches );
+    setSearches( res?.searches );
     console.log({ res });
 
   }, []);

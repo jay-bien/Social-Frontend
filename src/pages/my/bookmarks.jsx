@@ -25,7 +25,7 @@ const Saves = (props) => {
   const [bookmarks, setBookmarks] = useState([]);
 
   const { user } = props;
-  let u = user.userO;
+  let u = user?.userO;
 
   const [errors, doRequest] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/history",
@@ -174,9 +174,12 @@ export async function getServerSideProps(context) {
         withCredentials: true,
         headers
       });
-      use = userResponse.data;
+      if( userResponse.response.status !== 200 ){
+        use = null
+      } else {
+        use = userResponse.data;
+      }
 
-      console.log({ use });
   } catch (e) {
     use = null;
     // const data = e?.response?.data;
@@ -186,6 +189,6 @@ export async function getServerSideProps(context) {
 
 
   return {
-    props: { user: userResponse.data },
+    props: { user: use },
   }
 }

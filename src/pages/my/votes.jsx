@@ -28,7 +28,7 @@ const Votes = (props) => {
   });
 
   const { user } = props;
-  let u = user.userO;
+  let u = user?.userO;
 
 
   const toggleVoteType = () => {
@@ -137,7 +137,12 @@ export async function getServerSideProps(context) {
         withCredentials: true,
         headers
       });
-      use = userResponse.data;
+
+      if( userResponse.response.status !== 200 ){
+        use = null
+      } else {
+        use = userResponse.data;
+      }
 
       console.log({ use });
   } catch (e) {
@@ -149,7 +154,7 @@ export async function getServerSideProps(context) {
 
 
   return {
-    props: { user: userResponse.data },
+    props: { user: use },
   }
 }
 

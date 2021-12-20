@@ -26,7 +26,6 @@ const useRequest =  ( {
     } catch( e ){
 
       const errors = e.response.data.errors;
-      console.log({ errors });
       setErrors(
           errors && errors.map( ( err, idx) => {
           return(

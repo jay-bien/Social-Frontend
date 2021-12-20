@@ -19,7 +19,7 @@ const Searches = (props) => {
   const [ searches, setSearches ] = useState([]);
 
 
-  const [errors, doRequest] = useRequest({
+  const [ doRequest, errors ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/search/history",
     method: "get",
   });
@@ -94,7 +94,8 @@ export async function getServerSideProps(context) {
   const { params, req, query } = context;
 
   const headers = req.headers;
-  let response = {}, userResponse = {};
+  let userResponse = {};
+
 
 
 

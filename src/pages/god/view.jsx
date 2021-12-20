@@ -25,11 +25,12 @@ const God = (props) => {
   const [upVotes, setUpVotes] = useState([]);
   const [voteType, setVoteType] = useState("up");
   const [ comments, setComments ] = useState([]);
+  const [ users, setUsers ] = useState([]);
 
 
   const [ viewType, setViewType ] = useState("user");
 
-  const [errors, doRequest] = useRequest({
+  const [doRequest, errors ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/history",
     method: "get",
   });
@@ -64,7 +65,9 @@ const God = (props) => {
   useEffect(async () => {
     let res = await doRequest();
     let comments = await getComments();
-    let users = await getUsers();
+    let userRes = await getUsers();
+    setUsers( userRes.users )
+    
     console.log({ users });
     setUpVotes(res.upVotes);
     setDownvotes(res.downVotes);
@@ -101,6 +104,20 @@ const God = (props) => {
   })
 }
   </ul>
+</div>
+{
+  viewType === "user" && "TRUE"
+}
+<div>
+{viewType === "user" && users.map( user => {
+  
+  return(
+    <div>
+      <div> { user.email } </div>
+    </div>
+  )
+})}
+
 </div>
               
             </div>

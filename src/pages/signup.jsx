@@ -40,40 +40,12 @@ const onSignup = async (e  ) => {
 
   if( response ){
     notify('success', "😎  You have been registered. Welcome to the community.")
-    router.push('/')
+    setTimeout( ()=> router.push('/'), 800 )
   } else {
     notify('error', "An error has occurred.")
 
   }
    
-
-
-// try{
-//   let response = await axios.post( 
-//       process.env.NEXT_PUBLIC_API_URL + '/signup/', {
-//       ...registerInfo
-//   });
-
- 
-
-
-
-//   if( response.status === 201 ){
-//     console.log('SUCCESS');
-//     const user = response.data;
-//   }
-// } catch( e ){
-//   console.log(" bad reqiuest ")
-//   const errors = e.response.data;
-//   console.log( typeof errors );
-//   console.log({ errors });
-
-//   if( Array.isArray( errors.errors )){
-//     console.log(" is array ");
-//     setErrors( errors.errors )
-//   }
-
-// }
 
 }
 

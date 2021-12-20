@@ -45,6 +45,7 @@ const Post = (props) => {
 
 
   const { user, post } = props;
+  let u = user?.userO;
 
   const { query } = useRouter();
   const { title, content, likes, id, dislikes, categories, img, link , favIcon} = props.post.comment;
@@ -167,6 +168,7 @@ const Post = (props) => {
           description=""
         />
       }
+      user={ u }
     >
 
 
@@ -349,14 +351,18 @@ const Post = (props) => {
 //     fallback: true,
 //   };
 // }
+
+
+
+
+export async function getServerSideProps(context) {
+
+  const { params, req } = context;
+
+  let use = {};
   
-
-
-export async function getServerSideProps( context ) {
-
-  const params = context.params;
   const postId = params.pid;
-  const headers = context.headers;
+  const headers = req.headers;
   let response = {};
   let userResponse = {};
   try{
@@ -366,22 +372,31 @@ export async function getServerSideProps( context ) {
     response.data = null
   }
 
-  try{
-    userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
-    {
-      withCredentials: true,
-      headers
-    } );
-  } catch( e ){
+
+  try {
+    userResponse = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+      {
+        withCredentials: true,
+        headers
+      });
+      use = userResponse.data
+  } catch (e) {
+    use = null;
+    // const data = e?.response?.data;
     console.log({ e });
-    userResponse.data = null;
+    // console.log({ data });
   }
+
+
 
 
   return {
-    props: { post: response.data, user: userResponse.data },
+    props: { post: response.data, user: use },
   }
 }
+  
+
+
 
 
 

@@ -27,6 +27,8 @@ const Index = ( props ) => {
 const [ toasts, notify ] = useToast();
 
 const { user } = props;
+let u = user?.userO;
+
 
   
 const reconcileVotes = async () => {
@@ -231,7 +233,7 @@ const onPostSave = async ( id ) => {
         />
       }
 
-      user={ user }
+      user={ u }
     >
 
       

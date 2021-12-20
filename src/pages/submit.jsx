@@ -5,7 +5,7 @@ import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 import { useEffect, useState } from 'react';
 import useRequest from '../hooks/useRequest';
-
+import axios from 'axios';
 import useToast from '../hooks/useToast';
 
 
@@ -45,6 +45,7 @@ const Submit = ( props ) => {
 
   const [ toasts, notify ] = useToast();
   const { user } = props;
+  console.log({ props });
   console.log({ user });
 
 
@@ -163,6 +164,7 @@ const Submit = ( props ) => {
 
   return (
     <Main
+    user={ user }
     meta={
       <Meta
         title="DAP Submit Post"
@@ -354,27 +356,35 @@ Category
   )
 }
 
-export async function getServerSideProps( context ) {
+export async function getServerSideProps(context) {
 
-  const params = context.params;
-  const headers = context.headers;
+  const { params, req } = context;
+
+  const headers = req.headers;
   let userResponse = {};
+  let use = {};
+  
 
 
-  try{
-    userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
-    {
-      withCredentials: true,
-      headers
-    } );
-  } catch( e ){
-    console.log({ e });
-    userResponse.data = null;
-  }
+try{
+  const userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+  {
+    withCredentials: true,
+    headers
+  } );
+  const data = userResponse.data;
+  use = userResponse.data.userO;
+  console.log({ data });
+
+} catch( e ){
+  console.log({ e });
+  userResponse.data = null;
+  use = null;
+}
 
 
   return {
-    props: { user: userResponse.data },
+    props: { user: use },
   }
 }
 

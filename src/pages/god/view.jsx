@@ -113,7 +113,15 @@ const God = (props) => {
   
   return(
     <div>
-      <div> { user.email } </div>
+      <ul>
+        <li className="flex flex-row justify-between">
+          <div>{ user.email}</div>
+          <div>{ user.username}</div>
+          <div>{ dayjs( user.created_at ).fromNow() }</div>
+        </li>
+
+
+      </ul>
     </div>
   )
 })}

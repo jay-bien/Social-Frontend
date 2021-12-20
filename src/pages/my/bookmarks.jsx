@@ -28,7 +28,7 @@ const Saves = (props) => {
   console.log({ user })
   let u = user?.userO;
 
-  const [errors, doRequest] = useRequest({
+  const [doRequest, errors ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/history",
     method: "get",
   });

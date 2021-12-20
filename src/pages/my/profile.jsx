@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Main } from '../../templates/Main';
 
+import { useRouter } from 'next/router';
+
 import { Meta } from "../../layout/Meta";
 
 
@@ -9,20 +11,29 @@ import { Meta } from "../../layout/Meta";
 
 const Profile = props => {
 
-  const [ profile, setProfile ] = useState({
-
-  });
 
 
+  const router = useRouter();
 
+  const { user } = props;
+
+
+  useEffect(() => {
+  
+    router.push('/');
+    return () => {
+     
+    }
+  }, [])
   return(
     <Main
     meta={
       <Meta
-        title="DAP My Bookmarks"
+        title="DAP My Profile"
         description=""
       />
     }
+  
   >
     <div className="App min-h-screen">
       <main className="main max-w-7xl">
@@ -32,13 +43,6 @@ const Profile = props => {
          mt-8 sm:mx-auto sm:w-full
          dark:bg-transparent">
           <h1 className="mb-6 font-bold">My Profile</h1>
-
-
-
-
-
-          
-
         </div>
       </main>
     </div>
@@ -49,3 +53,5 @@ const Profile = props => {
 
 
 export default Profile;
+
+

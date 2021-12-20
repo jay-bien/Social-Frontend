@@ -90,11 +90,7 @@ const Sidebar = (props) => {
             <SidebarIcon text="Searches" icon={ <SearchCircle />} />
           </a>
         </Link>
-        <Link href="/my/profile">
-          <a>
-            <SidebarIcon text="Profile" icon={<User />} />
-          </a>
-        </Link>
+
 
         <Link href="/settings">
           <a>

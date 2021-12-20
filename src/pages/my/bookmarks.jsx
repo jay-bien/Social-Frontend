@@ -175,7 +175,7 @@ export async function getServerSideProps(context) {
         withCredentials: true,
         headers
       });
-      if( userResponse.response.status !== 200 ){
+      if( userResponse.status !== 200 ){
         use = null
       } else {
         use = userResponse.data;

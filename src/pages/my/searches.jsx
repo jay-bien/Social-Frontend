@@ -107,7 +107,6 @@ export async function getServerSideProps(context) {
         headers
       });
 
-      console.log({ userResponse });
   } catch (e) {
     userResponse.data = null;
     // const data = e?.response?.data;

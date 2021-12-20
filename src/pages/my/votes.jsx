@@ -22,7 +22,7 @@ const Votes = (props) => {
   const [upVotes, setUpVotes] = useState([]);
   const [voteType, setVoteType] = useState("up");
 
-  const [errors, doRequest] = useRequest({
+  const [doRequest, errors ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/history",
     method: "get",
   });
@@ -137,7 +137,6 @@ export async function getServerSideProps(context) {
         withCredentials: true,
         headers
       });
-      console.log({ userResponse });
       if( userResponse.status !== 200 ){
         use = null
       } else {

@@ -92,11 +92,6 @@ const Sidebar = (props) => {
         </Link>
 
 
-        <Link href="/settings">
-          <a>
-            <SidebarIcon text="Settings" icon={ <Settings />} />
-          </a>
-        </Link>
             
             </>
           )

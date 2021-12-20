@@ -120,7 +120,7 @@ const Sidebar = (props) => {
         {
           user && (
               <a
-              onClick={() => onSignout( router.push('/', null, { shallow: false}) ) }
+              onClick={() => onSignout( () => router.push('/', null, { shallow: false }) ) }
               >
               <SidebarIcon text="Logout" icon={<Logout />} />
             </a>  

@@ -65,6 +65,7 @@ const God = (props) => {
     let res = await doRequest();
     let comments = await getComments();
     let users = await getUsers();
+    console.log({ users });
     setUpVotes(res.upVotes);
     setDownvotes(res.downVotes);
     setVotes(res.upVotes);

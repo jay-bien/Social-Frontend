@@ -47,7 +47,7 @@ const useRequest =  ( {
   };
 
 
-  return [  errors, doRequest ]
+  return [ doRequest,  errors ]
 }
 
 export default useRequest;

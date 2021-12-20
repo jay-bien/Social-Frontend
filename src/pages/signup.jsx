@@ -7,7 +7,7 @@ import useRequest  from '../hooks/useRequest';
 
 import useToast from '../hooks/useToast';
 
-
+import { useRouter } from 'next/router';
 
 
 
@@ -19,6 +19,8 @@ const Index = () => {
   const [ registerInfo, setRegisterInfo ] = useState({});
 
   const [ toasts, notify ] = useToast();
+
+  const router = useRouter();
 
   const onChange = ( el ) => {
     setRegisterInfo({ ...registerInfo, [el.target.name]: el.target.value });

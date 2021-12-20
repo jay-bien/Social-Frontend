@@ -4,6 +4,8 @@ import { Sidebar } from "../components";
 import { Main } from "../templates/Main";
 import { Meta } from '../layout/Meta';
 
+import axios from 'axios';
+
 
 const helpTopics = [
   {
@@ -39,6 +41,9 @@ const helpTopics = [
 ];
 
 const Help = ( props ) => {
+
+  const { user } = props;
+  let u = user?.userO;
   return (
     <div>
      <Main
@@ -48,6 +53,7 @@ const Help = ( props ) => {
           description="DAP HELP"
         />
       }
+      user={ u }
     >
 
       
@@ -93,6 +99,37 @@ const Help = ( props ) => {
   </Main>
   </div>
   );
+}
+
+export async function getServerSideProps(context) {
+
+  const { params, req, query } = context;
+
+  const headers = req.headers;
+  let response = {}, userResponse = {};
+
+
+
+
+  try {
+    userResponse = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+      {
+        withCredentials: true,
+        headers
+      });
+
+      console.log({ userResponse });
+  } catch (e) {
+    userResponse.data = null;
+    // const data = e?.response?.data;
+    console.log({ e });
+    // console.log({ data });
+  }
+
+
+  return {
+    props: { user: userResponse.data },
+  }
 }
 
 export default Help;

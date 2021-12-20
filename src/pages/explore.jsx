@@ -418,14 +418,17 @@ try{
     headers
   } );
   const data = userResponse.data;
+  use = userResponse.data.userO;
+  console.log({ data });
 
 } catch( e ){
   console.log({ e });
   userResponse.data = null;
+  user = null;
 }
 
 
   return {
-    props: { posts: response.data, user: userResponse.data },
+    props: { posts: response.data, user: use },
   }
 }

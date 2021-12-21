@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 
 
-import { 
+import {
   Hashtag,
   BookMark,
   ThumbUp,
@@ -37,12 +37,12 @@ const Sidebar = (props) => {
     "
     >
       <div>
-      <div className="group">
-      {
-          toggler
-        }
-    </div>
- 
+        <div className="group">
+          {
+            toggler
+          }
+        </div>
+
 
         <Link href={"/"}>
           <a>
@@ -54,19 +54,19 @@ const Sidebar = (props) => {
           <a>
             <SidebarIcon text="Explore" icon={<Hashtag />} />
           </a>
-        </Link>  
+        </Link>
 
         {
           !user && (
-          
-          <> 
-        
-          <Link href="/signin">
-            <a>
-              <SidebarIcon text="Signin" icon={<Login />} />
-            </a>
-          </Link>
-          </>
+
+            <>
+
+              <Link href="/signin">
+                <a>
+                  <SidebarIcon text="Signin" icon={<Login />} />
+                </a>
+              </Link>
+            </>
 
           )
         }
@@ -75,39 +75,39 @@ const Sidebar = (props) => {
             <SidebarIcon text="Submit Post" icon={<DocumentAdd />} />
           </a>
         </Link>
-        
+
         {
           user && (
             <>
 
               <Link href="/my/bookmarks">
-          <a>
-            <SidebarIcon text="Saves" icon={<BookMark />} />
-          </a>
-        </Link>
-        <Link href="/my/votes">
-          <a>
-            <SidebarIcon text="Votes" icon={ <ThumbUp />} />
-          </a>
-        </Link>
-        <Link href="/my/searches">
-          <a>
-            <SidebarIcon text="Searches" icon={ <SearchCircle />} />
-          </a>
-        </Link>
+                <a>
+                  <SidebarIcon text="Saves" icon={<BookMark />} />
+                </a>
+              </Link>
+              <Link href="/my/votes">
+                <a>
+                  <SidebarIcon text="Votes" icon={<ThumbUp />} />
+                </a>
+              </Link>
+              <Link href="/my/searches">
+                <a>
+                  <SidebarIcon text="Searches" icon={<SearchCircle />} />
+                </a>
+              </Link>
 
 
-            
+
             </>
           )
         }
-        
+
 
 
       </div>
-  
+
       <div className="">
-      <Link href="/help">
+        <Link href="/help">
           <a>
             <SidebarIcon text="Help" icon={<QuestionMarkCircle />} />
           </a>
@@ -115,11 +115,11 @@ const Sidebar = (props) => {
 
         {
           user && (
-              <a
-              onClick={() => onSignout( () => router.push('/', null, { shallow: false }) ) }
-              >
+            <a
+              onClick={() => onSignout(() => router.push('/', null, { shallow: false }))}
+            >
               <SidebarIcon text="Logout" icon={<Logout />} />
-            </a>  
+            </a>
           )
         }
 

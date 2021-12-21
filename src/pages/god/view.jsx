@@ -17,6 +17,8 @@ import { Link as LinkIcon, Text } from "../../components/icons";
 import getComments from "../../helpers/getComments";
 import getUsers from "../../helpers/getUsers";
 
+import useToast from "../../hooks/useToast";
+
 
 const God = (props) => {
 
@@ -30,10 +32,94 @@ const God = (props) => {
 
   const [ viewType, setViewType ] = useState("user");
 
+  const [ toasts, notify ] = useToast();
+
   const [doRequest, errors ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/history",
     method: "get",
   });
+
+  const getSearches = async ( ) => {
+
+    try{
+
+      let res = await axios.get(
+        process.env.NEXT_PUBLIC_API_URL + `/search/all`,
+        {
+          withCredentials: true
+        }
+      );
+      const searches = res.data;
+      console.log({
+        searches
+      })
+      if( true ){
+        notify("success", "Removed user")
+      } else {
+        notify("error", "Could not complete that operation.")
+      }
+
+    } catch( e ){
+
+      console.log( { e });
+      notify("error", "Could not complete that operation. Please try again later.")
+
+    }
+  }
+
+  const removeUser = async ( id ) =>{
+
+    try{
+
+      let res = await axios.delete(
+        process.env.NEXT_PUBLIC_API_URL + `/users/${id}`,
+        {
+          withCredentials: true
+        }
+      );
+
+      if( res.status === 202 && res.data?.deletedCount > 0){
+        notify("success", "Removed user")
+      } else {
+        notify("error", "Could not complete that operation.")
+      }
+
+    } catch( e ){
+
+      console.log( { e });
+      notify("error", "Could not complete that operation. Please try again later.")
+
+    }
+
+  }
+
+  const removeComment = async ( id ) =>{
+
+    try{
+
+      let res = await axios.delete(
+        process.env.NEXT_PUBLIC_API_URL + `/users/${id}`,
+        {
+          withCredentials: true
+        }
+      );
+
+      if( res.status === 202 && res.data?.deletedCount > 0){
+        notify("success", "Removed user")
+      } else {
+        notify("error", "Could not complete that operation.")
+      }
+
+    } catch( e ){
+
+      console.log( { e });
+      notify("error", "Could not complete that operation. Please try again later.")
+
+    }
+
+  }
+
+
 
   const { user } = props;
   let u = user?.userO;
@@ -43,19 +129,7 @@ const God = (props) => {
       title: "user"
     },
     {
-      title: "search"
-    },
-    {
-      title:"bookmark",
-    },
-    {
-      title:"vote"
-    },
-    {
       title: "post"  
-    },
-    {
-      title:"comment"
     }
   ]
 
@@ -66,9 +140,10 @@ const God = (props) => {
     let res = await doRequest();
     let comments = await getComments();
     let userRes = await getUsers();
-    setUsers( userRes.users )
+    setUsers( userRes.users );
+    setComments( comments.comments );
     
-    console.log({ users });
+    console.log({ comments });
     setUpVotes(res.upVotes);
     setDownvotes(res.downVotes);
     setVotes(res.upVotes);
@@ -80,6 +155,9 @@ const God = (props) => {
     >
       <div className="App min-h-screen">
         <main className="main max-w-7xl">
+          {
+            toasts
+          }
           <div
             className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full
           dark:bg-gray-800 dark:text-white"
@@ -88,15 +166,18 @@ const God = (props) => {
 
             <div className="">
             <div class="dropdown">
-  <div tabindex="0" class="m-1 btn">Dropdown</div> 
-  <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 text-gray-700 rounded-box w-52
+  <div tabIndex="0" class="m-1 btn">
+    Filter 
+    </div> 
+  <ul tabIndex="0" class="p-2 shadow menu dropdown-content bg-gray-100 text-gray-700 rounded-box w-52
   
   dark:bg-gray-800 dark:text-gray-300">
 {
-  viewTypes && viewTypes.map( type => {
+  viewTypes && viewTypes.map( ( type, idx ) => {
     const { title } = type;
     return(
-      <li className="hover:cursor-pointer"
+      <li key={ idx }
+      className="hover:cursor-pointer"
       onClick={ () => setViewType( title )}>
         {title }
     </li>
@@ -105,19 +186,25 @@ const God = (props) => {
 }
   </ul>
 </div>
-{
-  viewType === "user" && "TRUE"
-}
+
+{/* users */}
 <div>
-{viewType === "user" && users.map( user => {
+{viewType === "user" &&  users && users.map( ( user, idx ) => {
   
   return(
-    <div>
+    <div key={ idx }>
       <ul>
         <li className="flex flex-row justify-between">
           <div>{ user.email}</div>
           <div>{ user.username}</div>
           <div>{ dayjs( user.created_at ).fromNow() }</div>
+          <div>
+            <button className="btn btn-warning"
+              onClick={ () => removeUser( user.id )}
+            >
+                Remove 
+            </button>
+          </div>
         </li>
 
 
@@ -125,7 +212,32 @@ const God = (props) => {
     </div>
   )
 })}
+</div>
+{/* posts */}
+<div>
+{ viewType === "post" &&  comments && comments.map( ( comment, idx ) => {
+  
+  return(
+    <div key={ idx }>
+      <ul>
+        <li className="flex flex-row justify-between">
+          <div className="flex-1 pr-4">{ comment.title }</div>
+          {/* <div>{ user.username}</div> */}
+          <div className="w-40">{ dayjs( comment.created_at ).fromNow() }</div>
+          <div>
+            <button className="btn btn-warning"
+              onClick={ () => removeComment( comment.id )}
+            >
+                Remove 
+            </button>
+          </div>
+        </li>
 
+
+      </ul>
+    </div>
+  )
+})}
 </div>
               
             </div>
@@ -152,7 +264,6 @@ export async function getServerSideProps(context) {
         withCredentials: true,
         headers
       });
-      console.log({ userResponse });
       if( userResponse.status !== 200 ){
         use = null
       } else {

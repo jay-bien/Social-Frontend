@@ -77,6 +77,8 @@ const Votes = (props) => {
                   votes.map((bkmk, idx) => {
                     const comment = bkmk.commentId;
 
+                    if( !comment ) return;
+
                     return (
                       <Link key={ idx }
                       href="../post/[pid]" as={`../post/${comment.id}`}

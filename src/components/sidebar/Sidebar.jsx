@@ -23,21 +23,27 @@ import onSignout from "../../helpers/onSignout";
 
 const Sidebar = (props) => {
 
-  const { user } = props;
+  const { user, toggler } = props;
 
   const router = useRouter();
-  
 
   return (
     <div
       className="fixed top-0 p-3
-    left-0 h-screen w-20 bg-gray-100 text-gray-800
+    left-0 h-screen w-24 bg-gray-100 text-gray-800
     shadow-2xl z-50
     dark:bg-gray-900
     dark:text-white-100 flex flex-col justify-between
     "
     >
       <div>
+      <div className="group">
+      {
+          toggler
+        }
+    </div>
+ 
+
         <Link href={"/"}>
           <a>
             <SidebarIcon text="Home" icon={<h1>DAP</h1>} />

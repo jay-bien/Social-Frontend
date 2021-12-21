@@ -28,7 +28,7 @@ const Main = (props) => {
   const [enabled, setEnabled] = useDarkMode();
   const [query, setQuery] = useState("");
 
-
+  
   const [toasts, notify] = useToast();
 
 
@@ -192,6 +192,12 @@ const Main = (props) => {
     <label for="my-drawer" class="drawer-overlay"></label> 
     <Sidebar
       user={ user }
+      toggler = { 
+        ( <label for="my-drawer" class="btn bg-white text-gray-700 w-full drawer-button lg:hidden">
+          <MenuAlt 
+          />
+        </label> )
+        }
     />
   </div>
 </div>

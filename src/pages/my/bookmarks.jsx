@@ -25,7 +25,6 @@ const Saves = (props) => {
   const [bookmarks, setBookmarks] = useState([]);
 
   const { user } = props;
-  console.log({ user })
   let u = user?.userO;
 
   const [doRequest, errors ] = useRequest({
@@ -92,12 +91,17 @@ const Saves = (props) => {
 
           const comment = bkmk.commentId;
           
+          if( !comment ){
+            //comment may have been removed
+            return null
+          }
 
           return(
             <Link
+            key={ idx }
             href="../post/[pid]"
             as={
-              `../post/${comment.id}`
+              `../post/${comment?.id}`
             }
             >
             <div 
@@ -108,13 +112,13 @@ const Saves = (props) => {
             dark:hover:bg-secondary dark:hover:bg-opacity-5` }>
             <h5 className="w-20">
             {
-               comment.type === "link" && (
+               comment?.type === "link" && (
                  <LinkIcon
                  />
                )
              }
              {
-               comment.type === "text" && (
+               comment?.type === "text" && (
                  <Text
                  />
                )
@@ -122,11 +126,12 @@ const Saves = (props) => {
             </h5>
             <h5 className="flex-1 ">
               {
-                comment.title
+                comment?.title
               }
                         <br/>
-          { comment.categories && comment.categories.map( cat => (
-                <span class="badge badge-outline badge-sm mr-2
+          { comment?.categories && comment.categories.map( ( cat, idx ) => (
+                <span key={ idx }
+                 className="badge badge-outline badge-sm mr-2
                 dark:border-gray-100 dark:text-gray-300
                 ">{ cat }</span>
           ))} 

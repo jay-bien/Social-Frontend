@@ -44,11 +44,7 @@ const Main = (props) => {
     setQuery(e.target.value);
   }
 
-  const onSubmit = e => {
-    console.log({ e });
-    console.log({ query });
-  };
-
+ 
   const onSearch = ( e ) => {
     e.preventDefault();
 
@@ -61,7 +57,6 @@ const Main = (props) => {
       pathname:"/search",
       query: { q: query}
     })
-    console.log(query);
 
   }
 

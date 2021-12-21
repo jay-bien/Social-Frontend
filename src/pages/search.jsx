@@ -21,7 +21,6 @@ const Search = (props) => {
 
   const { results, user } = props;
   let u = user.userO;
-  console.log({ user })
 
 
   const [toasts, notify] = useToast();
@@ -117,6 +116,46 @@ const Search = (props) => {
 
 export default Search;
 
+export async function getServerSideProps(context) {
+
+  const { params, req, query } = context;
+
+  const headers = req.headers;
+  let response = {}, userResponse = {};
+
+  try {
+    response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/search`,
+    {
+      withCredentials: true,
+      headers,
+      data:{
+        q: query.q
+      }
+    });
+    console.log({ response });
+  
+  } catch (e) {
+    response.data = null;
+    console.log({ e })
+  }
+
+  try {
+    userResponse = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+      {
+        withCredentials: true,
+        headers
+      });
+  } catch (e) {
+    userResponse.data = null
+    const data = e.response.data;
+    console.log({ data });
+  }
+
+
+  return {
+    props: { results: response.data, user: userResponse.data },
+  }
+}
 
 
 

@@ -18,6 +18,7 @@ import onDislike from '../../helpers/onDislike';
 import onBookmark from '../../helpers/onBookmark';
 import useToast from '../../hooks/useToast';
 import useRequest from '../../hooks/useRequest';
+import { comment } from 'postcss';
 
 
 
@@ -45,7 +46,7 @@ const categories = [
 const Post = (props) => {
 
 
-  const { user, post } = props;
+  const { user, post, comments } = props;
   let u = user?.userO;
 
   const { query } = useRouter();
@@ -185,7 +186,7 @@ const Post = (props) => {
 
 
   useEffect( async () => {
-
+    console.log({ comments });
   }, [])
 
   let bookmarked = false;
@@ -405,6 +406,15 @@ export async function getServerSideProps(context) {
   }
 
 
+  // 
+  let commentResponse = {};
+  try{
+    commentResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + '/comment/' + postId );
+
+  } catch( e ){
+    commentResponse.data = null
+  }
+
   try {
     userResponse = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
       {
@@ -423,7 +433,7 @@ export async function getServerSideProps(context) {
 
 
   return {
-    props: { post: response.data, user: use },
+    props: { post: response.data, user: use, comments: commentResponse.data },
   }
 }
   

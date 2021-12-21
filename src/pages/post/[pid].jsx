@@ -170,14 +170,11 @@ const Post = (props) => {
     } else {
       notify('error', 'Something went wrong.');
     }
-    console.log({
-      res
-    })
+
   }
 
 
   useEffect(async () => {
-    console.log({ comments });
   }, [])
 
   let bookmarked = false;
@@ -231,7 +228,7 @@ const Post = (props) => {
 
                       <span
                         key={idx}
-                        class="
+                        className="
                             text-xs
                             px-2
                             font-medium
@@ -355,10 +352,11 @@ const Post = (props) => {
 
             <div className='mt-10'>
               {
-                comments && comments.comments && comments.comments.map(com => {
+                comments && comments.comments && comments.comments.map( ( com, idx ) => {
 
                   return (
-                    <div className='max-w-prose m-auto border-2 border-gray-200 rounded-lg p-4 mb-5'>
+                    <div key={ idx }
+                    className='max-w-prose m-auto border-2 border-gray-200 rounded-lg p-4 mb-5'>
                       <div className='flex flex-row justify-between items-end'>
                         <p>
                           {com.author.username ? com.author.username : com.author.email}

@@ -243,6 +243,10 @@ const Index = ( props ) => {
       return;
     }
 
+    console.log({
+      props
+    })
+
 
   return (
     <Main
@@ -410,27 +414,18 @@ try{
 }
 
 try{
-  const userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+  userResponse = await axios.get( process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
   {
     withCredentials: true,
     headers
   } );
-  if( userResponse.response.status !== 200 ){
-    use = null
-  } else {
-    use = userResponse.data;
-  }
-
-
-
 } catch( e ){
   console.log({ e });
   userResponse.data = null;
-  use = null;
 }
 
 
   return {
-    props: { posts: response.data, user: use },
+    props: { posts: response.data, user: userResponse.data },
   }
 }

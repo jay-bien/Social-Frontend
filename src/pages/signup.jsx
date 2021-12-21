@@ -88,7 +88,7 @@ const onSignup = async (e  ) => {
 
     {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" /> */}
     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
-    <p className="mt-2 text-center text-sm text-gray-600 max-w">
+    <p className="mt-2 text-center text-sm text-gray-600 max-w dark:text-gray-200">
       Already registered?
       <Link
         href="/signin"
@@ -110,39 +110,40 @@ const onSignup = async (e  ) => {
   </div>
 
   <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
+    <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10
+    dark:bg-gray-800">
       <form className="mb-0 space-y-6" onSubmit={ onSignup } method="POST">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">Email address</label>
           <div className="mt-1">
             <input
             onChange={ onChange } 
             id="email" name="email" type="email" autoComplete="email" required 
             className="w-full border border-grey-400 px-3 py-2 rounded-lg shadow-sm
-            focus:outline-none focus:border-indigo-500" 
+            focus:outline-none focus:border-indigo-500 dark:text-gray-800" 
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">Password</label>
           <div className="mt-1">
             <input
             onChange={  onChange } 
             className="w-full border border-grey-400 px-3 py-2 rounded-lg shadow-sm
-            focus:outline-none focus:border-indigo-500" 
+            focus:outline-none focus:border-indigo-500 dark:text-gray-800" 
             id="password" name="password" type="password" autoComplete="current-password" required
             />
           </div>
         </div>
 
             <div>
-            <label htmlFor="password2" className="block text-sm font-medium text-gray-700">Password Confirmation</label>
+            <label htmlFor="password2" className="block text-sm font-medium text-gray-700 dark:text-gray-200">Password Confirmation</label>
             <div className="mt-1">
               <input
               onChange={ onChange } 
               className="w-full border border-grey-400 px-3 py-2 rounded-lg shadow-sm
-              focus:outline-none focus:border-indigo-500" 
+              focus:outline-none focus:border-indigo-500 dark:text-gray-800" 
               id="password2" name="password2" type="password" required
               />
             </div>
@@ -152,11 +153,11 @@ const onSignup = async (e  ) => {
 
         <div className="flex items-center">
           <input id="terms-and-privacy" name="terms-and-privacy" type="checkbox" className="" />
-          <label for="terms-and-privacy" className="ml-2 block text-sm text-gray-900"
+          <label for="terms-and-privacy" className="ml-2 block text-sm text-gray-900 dark:text-gray-200"
             >I agree to the
-            <a href="#" className="text-indigo-600 hover:text-indigo-500">Terms</a>
+            <a href="#" className="text-indigo-600 hover:text-indigo-500 mx-2">Terms</a>
             and
-            <a href="#" className="text-indigo-600 hover:text-indigo-500">Privacy Policy</a>.
+            <a href="#" className="text-indigo-600 hover:text-indigo-500 mx-2">Privacy Policy</a>.
           </label>
         </div>
 

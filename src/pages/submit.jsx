@@ -180,7 +180,9 @@ const Submit = ( props ) => {
 
 
     <main className="main">
-
+    {
+      errors
+    }
 
     {
       toasts

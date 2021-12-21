@@ -43,9 +43,9 @@ const Votes = (props) => {
 
   useEffect(async () => {
     let res = await doRequest();
-    setUpVotes(res.upVotes);
-    setDownvotes(res.downVotes);
-    setVotes(res.upVotes);
+    setUpVotes(res?.upVotes);
+    setDownvotes(res?.downVotes);
+    setVotes(res?.upVotes);
   }, []);
 
   return (

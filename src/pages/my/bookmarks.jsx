@@ -56,8 +56,7 @@ const Saves = (props) => {
 
   useEffect(async () => {
     let res = await doRequest();
-    setBookmarks(res.bookmarks);
-    console.log({ res });
+    setBookmarks( res?.bookmarks );
   }, []);
 
   return (

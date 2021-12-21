@@ -31,7 +31,6 @@ const Searches = (props) => {
   useEffect(async () => {
     let res = await doRequest();
     setSearches( res?.searches );
-    console.log({ res });
 
   }, []);
 
@@ -61,10 +60,11 @@ const Searches = (props) => {
                   <h5 className="w-200">Time</h5>
                 </div>
                 {
-                  searches && searches.map( search => {
+                  searches && searches.map( ( search, idx ) => {
                     const { query, created_at } = search;
                     return( 
                       <div
+                      key={ idx }
                       className="flex flex-row-6  p-3 border-b-2 border-gray-100 font-semibold
                       dark:border-gray-700"
                     >

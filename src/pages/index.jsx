@@ -37,7 +37,6 @@ const reconcileVotes = async () => {
 
     const votes = await fetchVotes();
     const comments = props.posts.comments;
-    console.log({ votes });
     if( !votes || votes.length ) return;
   
     let timer = null;
@@ -70,7 +69,6 @@ const reconcileVotes = async () => {
 const onPostSave = async ( id ) => {
   try{
     const res = await onBookmark( id );
-    console.log({ res });
     if( res?.response?.data?.errors){
       res.response.data.errors.map(
         err => notify('error', err.msg )
@@ -107,7 +105,6 @@ const onPostSave = async ( id ) => {
         } );
 
         const data = response.data;
-        console.log({ data });
         
         setAllComments( comments => {
            return comments.map( comment => {
@@ -361,7 +358,6 @@ try{
     withCredentials: true,
     headers
   } );
-  console.log({ userResponse });
 } catch( e ){
   console.log({ e });
   userResponse.data = null;

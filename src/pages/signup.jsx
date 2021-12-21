@@ -37,6 +37,9 @@ const onSignup = async (e  ) => {
   e.preventDefault();
 
   const response = await doRequest();
+  console.log({
+    response
+  })
 
   if( response ){
     notify('success', "😎  You have been registered. Welcome to the community.")

@@ -98,7 +98,7 @@ const God = (props) => {
     try{
 
       let res = await axios.delete(
-        process.env.NEXT_PUBLIC_API_URL + `/users/${id}`,
+        process.env.NEXT_PUBLIC_API_URL + `/post/${id}`,
         {
           withCredentials: true
         }
@@ -162,7 +162,7 @@ const God = (props) => {
             className="bg-white py-8 px-6 shadow-sm rounded-lg sm:px-10 mt-8 sm:mx-auto sm:w-full
           dark:bg-gray-800 dark:text-white"
           >
-            <h1 className="mb-6 font-bold">View: { viewType } </h1>
+            <h1 className="mb-6 font-bold">View: { viewType.toUpperCase() }S </h1>
 
             <div className="">
             <div class="dropdown">

@@ -45,11 +45,10 @@ const Submit = ( props ) => {
 
   const [ toasts, notify ] = useToast();
   const { user } = props;
-  console.log({ props });
-  console.log({ user });
+ 
 
 
-  const [errors, doRequest ] = useRequest({
+  const [ doRequest, errors ] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + '/post/',
     method: 'post',
     body: {

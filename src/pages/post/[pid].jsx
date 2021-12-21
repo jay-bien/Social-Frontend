@@ -17,6 +17,7 @@ import onLike from '../../helpers/onLike';
 import onDislike from '../../helpers/onDislike';
 import onBookmark from '../../helpers/onBookmark';
 import useToast from '../../hooks/useToast';
+import useRequest from '../../hooks/useRequest';
 
 
 
@@ -52,6 +53,7 @@ const Post = (props) => {
 
   const [ postLikes, setPostLikes ] = useState( likes );
   const [ postDislikes, setPostDislikes ] = useState( dislikes );
+  const [ commentInfo, setCommentInfo ] = useState("");
 
   const router = useRouter();
   if (router.isFallback)  return <div> Loading...</div>;
@@ -109,8 +111,6 @@ const Post = (props) => {
 
   }
   const onPostDislike = async ( id ) => {
-
-
     try{
       const post = await onDislike( id );
       if( post.response?.data?.errors ){
@@ -151,6 +151,36 @@ const Post = (props) => {
     } catch( e ){
       notify("error", "An error has occured");
     }
+  }
+
+
+  const onCommentChange = e => {
+    e.preventDefault();
+    setCommentInfo( e.target.value );
+
+  }
+  const [ doRequest, errors ] = useRequest({
+    url: process.env.NEXT_PUBLIC_API_URL + '/comment/',
+    method: 'post',
+    body: {
+      content: commentInfo,
+      parentId: id,
+      rootId: id
+    }
+  })
+
+  const onPostComment = async ( e )=> {
+    e.preventDefault();
+
+    if( !commentInfo || commentInfo.length < 1){
+      notify('error', 'Comment cannot be empty.');
+      return;
+    }
+
+    const res = await doRequest();
+    console.log({
+      res
+    })
   }
 
 
@@ -301,7 +331,9 @@ const Post = (props) => {
                   user && (
                     <form 
                     className="max-w-prose m-auto mt-10 text-gray-800
-                    dark:text-gray-100">
+                    dark:text-gray-100"
+                      onSubmit={ onPostComment }
+                    >
 
                       <div className="form-control">
                         <label className="label">
@@ -314,7 +346,7 @@ const Post = (props) => {
                         dark:bg-gray-700"
                           placeholder="Text required"
                           name="comment"
-                          onChange={() => { }}
+                          onChange={ onCommentChange }
                         ></textarea>
                       </div>
                       <button className="btn mt-4">

@@ -70,19 +70,20 @@ const Help = ( props ) => {
 
 <div className="max-w-7xl m-auto">
   {
-    helpTopics && helpTopics.map( help => {
+    helpTopics && helpTopics.map( ( help, idx ) => {
       const { title, icon, text } = help;
 
       return(
-        <div class="collapse border rounded-box border-base-300 collapse-arrow">
+        <div key={ idx }
+        className="collapse border rounded-box border-base-300 collapse-arrow">
   <input type="checkbox" /> 
-  <div class="collapse-title text-xl font-medium">
+  <div className="collapse-title text-xl font-medium">
   <span className="mr-6">
   { icon }
     </span>
 { title }
   </div> 
-  <div class="collapse-content"> 
+  <div className="collapse-content"> 
     <p>
         { text }
 

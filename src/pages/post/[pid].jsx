@@ -5,11 +5,10 @@ import Link from 'next/link';
 import { Meta } from '../../layout/Meta';
 import { Main } from '../../templates/Main';
 import axios from 'axios';
-import track from 'react-tracking';
 
 import {
-  Chat, ThumbUp, ThumbDown,
-  BookMark, PaperAirplane, Remove,
+  ThumbUp, ThumbDown,
+  BookMark, 
   ExternalLink
 } from '../../components/icons';
 
@@ -18,7 +17,10 @@ import onDislike from '../../helpers/onDislike';
 import onBookmark from '../../helpers/onBookmark';
 import useToast from '../../hooks/useToast';
 import useRequest from '../../hooks/useRequest';
-import { comment } from 'postcss';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend( relativeTime );
 
 
 
@@ -359,6 +361,26 @@ const Post = (props) => {
 
 
               </div>
+            </div>
+
+
+            <div className='mt-10'>
+                {
+                  comments && comments.comments && comments.comments.map( com => {
+
+                    return(
+                      <div className='max-w-prose m-auto border-2 border-gray-200 rounded-lg p-4'>
+                        <div>
+                          { com.author.username ? com.author.username : com.author.email }
+
+                          { dayjs( com.created_at ).fromNow()}
+                        </div>
+                          { com.content }
+                      </div>
+                    )
+                  })
+                }
+
             </div>
 
           </div>

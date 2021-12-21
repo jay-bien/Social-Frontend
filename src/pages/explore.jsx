@@ -24,7 +24,6 @@ const Index = ( props ) => {
   const [ toasts, notify ] = useToast();
 
   const { user } = props;
-  console.log({ user });
 
   const categories = [
     "All",
@@ -51,7 +50,6 @@ const Index = ( props ) => {
     useEffect( () => {  
   
       setAllComments( props.posts?.comments )
-      console.log({ props });
 
    
     }, []);
@@ -303,9 +301,9 @@ const Index = ( props ) => {
   </h2>
 
 
-<div class="dropdown mb-8">
-  <div tabindex="0" class="m-1 btn">Sort by { sortBy }</div> 
-  <ul tabindex="0" class="p-2 shadow menu dropdown-content 
+<div className="dropdown mb-8">
+  <div tabIndex="0" className="m-1 btn">Sort by { sortBy }</div> 
+  <ul tabIndex="0" className="p-2 shadow menu dropdown-content 
   bg-gray-100 top-6 rounded-box w-52 text-gray-800
   dark:bg-gray-900 dark:text-gray-400">
     <li onClick={ () => onSort('time')}>
@@ -422,6 +420,8 @@ try{
   } else {
     use = userResponse.data;
   }
+
+
 
 } catch( e ){
   console.log({ e });

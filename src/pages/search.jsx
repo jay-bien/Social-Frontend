@@ -62,10 +62,11 @@ const Search = (props) => {
               
               }
               {
-                results && results.data && results.data.map(result => {
+                results && results.data && results.data.map( ( result, idx ) => {
                   const { id, type, title } = result;
                   return (
                     <Link
+                    key={ idx }
                       href="post/[pid]"
                       as={
                         `/post/${id}`

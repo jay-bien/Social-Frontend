@@ -24,7 +24,6 @@ import onSignout from "../../helpers/onSignout";
 const Sidebar = (props) => {
 
   const { user } = props;
-  console.log({ user });
 
   const router = useRouter();
   

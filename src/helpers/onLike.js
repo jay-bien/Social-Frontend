@@ -13,7 +13,6 @@ const onLike = async ( id ) => {
     return data;
 
   } catch( err ) {
-    console.log( err );
     return err;
   }
   return {};

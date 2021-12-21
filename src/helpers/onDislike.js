@@ -16,7 +16,6 @@ const onDislike = async ( id, onSuccess ) => {
     return data;
 
   } catch( err ) {
-    console.log( err );
     return err;
   }
   return {};

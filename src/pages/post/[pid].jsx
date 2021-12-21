@@ -91,7 +91,7 @@ const Post = (props) => {
 
 
     } catch (e) {
-      console.log({ e });
+      // console.log({ e });
     }
 
 
@@ -113,7 +113,6 @@ const Post = (props) => {
 
 
     } catch (e) {
-      console.log({ e });
     }
 
 
@@ -391,14 +390,6 @@ const Post = (props) => {
 
 
 
-// export async function getStaticPaths() {
-
-//   console.log("get oaths");
-//   return {
-//     paths: [{ params: { postSlug: 'sth' } }, { params: { postSlug: 'sth-else' } }],
-//     fallback: true,
-//   };
-// }
 
 
 
@@ -441,7 +432,6 @@ export async function getServerSideProps(context) {
     use = null;
     // const data = e?.response?.data;
     console.log({ e });
-    // console.log({ data });
   }
 
 

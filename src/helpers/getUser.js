@@ -12,7 +12,6 @@ const getUser= async (  ) => {
     return data;
 
   } catch( err ) {
-    console.log( err );
     return err;
   }
   return {};

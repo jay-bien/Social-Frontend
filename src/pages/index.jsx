@@ -91,7 +91,7 @@ const onPostSave = async ( id ) => {
 
     useEffect( () => {  
 
-      setAllComments( props.posts.comments );
+      setAllComments( props.posts?.comments );
       reconcileVotes();
 
     }, []);

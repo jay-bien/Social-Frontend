@@ -151,7 +151,6 @@ const Submit = ( props ) => {
       useEffect( ()=> {
 
 
-        console.log({ user });
 
         return ()=>{
 
@@ -327,7 +326,7 @@ Category
                   <label 
                   className="label-text text-gray-800 mr-2
                   dark:text-white"
-                  for={cat}>{cat}</label> 
+                  htmlFor={cat}>{cat}</label> 
                   <input 
                     name={cat}
                     type="checkbox"

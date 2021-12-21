@@ -243,9 +243,6 @@ const Index = ( props ) => {
       return;
     }
 
-    console.log({
-      props
-    })
 
 
   return (

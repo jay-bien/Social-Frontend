@@ -24,24 +24,7 @@ dayjs.extend( relativeTime );
 
 
 
-const categories = [
-  "Psychadelics",
-  "Education",
-  "Tech",
-  "Business",
-  "World business",
-  "Science",
-  "gaming,",
-  "Sports",
-  "Lifestyle",
-  "Career",
-  "offbeat",
-  "Fashion",
-  "Travel",
-  "Reatail",
-  "Media",
-  "Social Networks",
-]
+
 
 
 
@@ -181,6 +164,12 @@ const Post = (props) => {
     }
 
     const res = await doRequest();
+    if( res && res.data?.id ){
+      notify('success', 'Comment posted.');
+      router.reload();
+    } else {
+      notify('error', 'Something went wrong.');
+    }
     console.log({
       res
     })
@@ -369,11 +358,17 @@ const Post = (props) => {
                   comments && comments.comments && comments.comments.map( com => {
 
                     return(
-                      <div className='max-w-prose m-auto border-2 border-gray-200 rounded-lg p-4'>
-                        <div>
-                          { com.author.username ? com.author.username : com.author.email }
+                      <div className='max-w-prose m-auto border-2 border-gray-200 rounded-lg p-4 mb-5'>
+                        <div className='flex flex-row justify-between items-end'>
+                          <p>
+                                                      { com.author.username ? com.author.username : com.author.email }
 
-                          { dayjs( com.created_at ).fromNow()}
+                          </p>
+                          <p>
+                                                      { dayjs( com.created_at ).fromNow()}
+
+                          </p>
+
                         </div>
                           { com.content }
                       </div>

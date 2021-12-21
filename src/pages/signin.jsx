@@ -134,7 +134,7 @@ try{
           <div className="mt-1">
             <input 
             className="w-full border border-grey-400 px-3 py-2 rounded-lg shadow-sm
-            focus:outline-none focus:border-indigo-500" 
+            focus:outline-none focus:border-indigo-500 dark:bg-gray-600" 
             id="password" name="password" type="password" autoComplete="current-password" required
             onChange={ onChange }
             />

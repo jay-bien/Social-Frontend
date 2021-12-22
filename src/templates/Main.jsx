@@ -77,7 +77,7 @@ const Main = (props) => {
           <nav className="navbar text-neutral-content max-w-7xl m-auto flex justify-between">
             <div className="px-2 mx-2 w-12">
 
-            <label for="my-drawer" class="btn  drawer-button lg:hidden">
+            <label for="my-drawer" class="btn  drawer-button">
               <MenuAlt 
               />
             </label>
@@ -183,7 +183,7 @@ const Main = (props) => {
         </header>
       </div>
 
-<div class="rounded-lg shadow bg-base-200 drawer drawer-mobile">
+<div class="rounded-lg shadow bg-base-200 drawer ">
   <input id="my-drawer" type="checkbox" class="drawer-toggle"/> 
   <div class="drawer-content max-w-7xl mx-auto">
 

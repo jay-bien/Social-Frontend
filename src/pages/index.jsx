@@ -205,7 +205,7 @@ const onPostSave = async ( id ) => {
 
         let filter = data.comments.filter(
           comment => (
-            comment.categories.includes( category )
+            comment?.categories?.includes( category )
           )
         )
 

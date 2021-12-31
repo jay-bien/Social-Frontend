@@ -25,6 +25,7 @@
     "styled-jsx-plugin-postcss": "^4.0.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.16.7",
     "@next/bundle-analyzer": "^12.0.2",
     "autoprefixer": "^10.4.0",
     "cross-env": "^7.0.3",

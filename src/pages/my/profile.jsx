@@ -29,7 +29,7 @@ const Profile = props => {
     <Main
     meta={
       <Meta
-        title="DAP My Profile"
+        title="Fluance"
         description=""
       />
     }

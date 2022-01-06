@@ -46,7 +46,11 @@ const Sidebar = (props) => {
 
         <Link href={"/"}>
           <a>
-            <SidebarIcon text="Home" icon={<h1>DAP</h1>} />
+            <SidebarIcon text="Home" icon={
+              <h1>
+                Social
+              </h1>
+            } />
           </a>
         </Link>
 

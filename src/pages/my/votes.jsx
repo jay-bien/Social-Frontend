@@ -49,7 +49,7 @@ const Votes = (props) => {
   }, []);
 
   return (
-    <Main meta={<Meta title="DAP My Bookmarks" description="" />}
+    <Main meta={<Meta title="Social | My Bookmarks" description="" />}
     user={ u }
     >
       <div className="App min-h-screen">

@@ -182,7 +182,7 @@ const Post = (props) => {
     <Main
       meta={
         <Meta
-          title="Dapp Post"
+          title={ `Social | ${ title }` }
           description=""
         />
       }

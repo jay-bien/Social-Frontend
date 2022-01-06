@@ -62,7 +62,7 @@ const Saves = (props) => {
     <Main
       meta={
         <Meta
-          title="DAP My Bookmarks"
+          title="Social | My Bookmarks"
           description=""
         />
       }

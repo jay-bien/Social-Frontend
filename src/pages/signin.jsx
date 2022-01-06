@@ -92,7 +92,7 @@ try{
 
   <div className="sm:mx-auto sm:w-full sm:max-w-md">
     <h1 className="text-6xl font-bold mx-auto text-center">
-        DAP WIKI
+        Social
     </h1>
 
     {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" /> */}

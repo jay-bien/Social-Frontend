@@ -26,7 +26,7 @@ const Header = ( props ) => {
             <div className="navbar text-neutral-content max-w-7xl m-auto">
   <div className="px-2 mx-2 navbar-start">
     <span className="text-lg font-bold hover:cursor-pointer">
-            DAPP
+            Social
           </span>
   </div> 
   <div className="hidden px-2 mx-2 navbar-center lg:flex">

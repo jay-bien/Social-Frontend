@@ -1,6 +1,6 @@
 export const AppConfig = {
-  site_name: 'DAPP',
-  title: 'DAPP',
-  description: 'DAPP SHARING APP',
+  site_name: 'Social',
+  title: 'Social',
+  description: 'Social SHARING APP',
   locale: 'en',
 };

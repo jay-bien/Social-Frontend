@@ -249,8 +249,8 @@ const Index = ( props ) => {
     <Main
       meta={
         <Meta
-          title="DAPP"
-          description="dapp app"
+          title="Social"
+          description="Social media app"
         />
       }
       user = {

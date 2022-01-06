@@ -182,7 +182,7 @@ const Post = (props) => {
     <Main
       meta={
         <Meta
-          title={ `Social | ${ title }` }
+          title={`Social | ${title}`}
           description=""
         />
       }
@@ -351,11 +351,11 @@ const Post = (props) => {
 
             <div className='mt-10'>
               {
-                comments && comments.comments && comments.comments.map( ( com, idx ) => {
+                comments && comments.comments && comments.comments.map((com, idx) => {
 
                   return (
-                    <div key={ idx }
-                    className='max-w-prose m-auto border-2 border-gray-200 rounded-lg p-4 mb-5'>
+                    <div key={idx}
+                      className='max-w-prose m-auto border-2 border-gray-200 rounded-lg p-4 mb-5'>
                       <div className='flex flex-row justify-between items-end'>
                         <p>
                           {com.author.username ? com.author.username : com.author.email}

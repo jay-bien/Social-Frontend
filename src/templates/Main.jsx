@@ -28,7 +28,7 @@ const Main = (props) => {
   const [enabled, setEnabled] = useDarkMode();
   const [query, setQuery] = useState("");
 
-  
+
   const [toasts, notify] = useToast();
 
 
@@ -77,10 +77,10 @@ const Main = (props) => {
           <nav className="navbar text-neutral-content max-w-7xl m-auto flex justify-between">
             <div className="px-2 mx-2 w-12">
 
-            <label for="my-drawer" class="btn  drawer-button">
-              <MenuAlt 
-              />
-            </label>
+              <label for="my-drawer" class="btn  drawer-button">
+                <MenuAlt
+                />
+              </label>
 
             </div>
             {
@@ -183,31 +183,31 @@ const Main = (props) => {
         </header>
       </div>
 
-<div class="rounded-lg shadow bg-base-200 drawer ">
-  <input id="my-drawer" type="checkbox" class="drawer-toggle"/> 
-  <div class="drawer-content max-w-7xl mx-auto">
+      <div class="rounded-lg shadow bg-base-200 drawer ">
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content max-w-7xl mx-auto">
 
-  </div> 
-  <div class="drawer-side">
-    <label for="my-drawer" class="drawer-overlay"></label> 
-    <Sidebar
-      user={ user }
-      toggler = { 
-        ( <label for="my-drawer" class="btn bg-white text-gray-700 w-full drawer-button lg:hidden">
-          <MenuAlt 
+        </div>
+        <div class="drawer-side">
+          <label for="my-drawer" class="drawer-overlay"></label>
+          <Sidebar
+            user={user}
+            toggler={
+              (<label for="my-drawer" class="btn bg-white text-gray-700 w-full drawer-button lg:hidden">
+                <MenuAlt
+                />
+              </label>)
+            }
           />
-        </label> )
-        }
-    />
-  </div>
-</div>
+        </div>
+      </div>
 
-<div>
-{
-      props.children
-    }
-</div>
-      
+      <div>
+        {
+          props.children
+        }
+      </div>
+
 
 
     </div>

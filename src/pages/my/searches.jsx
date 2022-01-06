@@ -16,29 +16,29 @@ import { Link as LinkIcon, Text } from "../../components/icons";
 
 
 const Searches = (props) => {
-  const [ searches, setSearches ] = useState([]);
+  const [searches, setSearches] = useState([]);
 
 
-  const [ doRequest, errors ] = useRequest({
+  const [doRequest, errors] = useRequest({
     url: process.env.NEXT_PUBLIC_API_URL + "/search/history",
     method: "get",
   });
 
-  const { user } =props;
+  const { user } = props;
   let u = user?.userO;
 
 
   useEffect(async () => {
     let res = await doRequest();
-    setSearches( res?.searches );
+    setSearches(res?.searches);
 
   }, []);
 
   return (
-    <Main meta={ <Meta title="DAP My Bookmarks" description=""
-    /> }
-    
-    user={ u }
+    <Main meta={<Meta title="Social | My Bookmarks" description=""
+    />}
+
+      user={u}
     >
       <div className="App min-h-screen">
         <main className="main max-w-7xl">
@@ -49,7 +49,7 @@ const Searches = (props) => {
             <h1 className="mb-6 font-bold">My Searches</h1>
 
             <div className="">
-    
+
               <div className="">
                 <div
                   className="flex flex-row bg-gray-200 p-6 rounded-lg mb-10 font-semibold
@@ -60,24 +60,24 @@ const Searches = (props) => {
                   <h5 className="w-200">Time</h5>
                 </div>
                 {
-                  searches && searches.map( ( search, idx ) => {
+                  searches && searches.map((search, idx) => {
                     const { query, created_at } = search;
-                    return( 
+                    return (
                       <div
-                      key={ idx }
-                      className="flex flex-row-6  p-3 border-b-2 border-gray-100 font-semibold
+                        key={idx}
+                        className="flex flex-row-6  p-3 border-b-2 border-gray-100 font-semibold
                       dark:border-gray-700"
-                    >
-                      <h5 className="w-20"></h5>
-                      <h5 className="flex-1">{ query }</h5>
-                      <h5 className="w-200">
-                        { dayjs( created_at ).fromNow()}
-                      </h5>
-                    </div>
+                      >
+                        <h5 className="w-20"></h5>
+                        <h5 className="flex-1">{query}</h5>
+                        <h5 className="w-200">
+                          {dayjs(created_at).fromNow()}
+                        </h5>
+                      </div>
                     )
                   })
                 }
-                
+
               </div>
             </div>
           </div>

@@ -33,13 +33,13 @@ const Profile = props => {
          dark:bg-transparent">
             <h1 className="mb-6 font-bold">Settings</h1>
 
-            
 
 
 
-          
 
-        </div>
+
+
+          </div>
         </main>
       </div>
     </Main>

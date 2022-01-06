@@ -10,7 +10,7 @@ import axios from 'axios';
 const helpTopics = [
   {
     icon: "🖥",
-    title: "Using Dap",
+    title: "Using Social",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
@@ -40,65 +40,65 @@ const helpTopics = [
   },
 ];
 
-const Help = ( props ) => {
+const Help = (props) => {
 
   const { user } = props;
   let u = user?.userO;
   return (
     <div>
-     <Main
-      meta={
-        <Meta
-          title="DAP Help"
-          description="DAP HELP"
-        />
-      }
-      user={ u }
-    >
-
-      
- 
-
-  
-    <div className="App min-h-screen">
-
-
-      <main className="pt-10">
-   
+      <Main
+        meta={
+          <Meta
+            title="Social Help"
+            description="Social HELP"
+          />
+        }
+        user={u}
+      >
 
 
 
-<div className="max-w-7xl m-auto">
-  {
-    helpTopics && helpTopics.map( ( help, idx ) => {
-      const { title, icon, text } = help;
 
-      return(
-        <div key={ idx }
-        className="collapse border rounded-box border-base-300 collapse-arrow">
-  <input type="checkbox" /> 
-  <div className="collapse-title text-xl font-medium">
-  <span className="mr-6">
-  { icon }
-    </span>
-{ title }
-  </div> 
-  <div className="collapse-content"> 
-    <p>
-        { text }
 
-    </p>
-  </div>
-</div> 
-      )
-    })
-  }
-  </div>
-  </main>
-  </div>
+        <div className="App min-h-screen">
 
-  </Main>
-  </div>
+
+          <main className="pt-10">
+
+
+
+
+            <div className="max-w-7xl m-auto">
+              {
+                helpTopics && helpTopics.map((help, idx) => {
+                  const { title, icon, text } = help;
+
+                  return (
+                    <div key={idx}
+                      className="collapse border rounded-box border-base-300 collapse-arrow">
+                      <input type="checkbox" />
+                      <div className="collapse-title text-xl font-medium">
+                        <span className="mr-6">
+                          {icon}
+                        </span>
+                        {title}
+                      </div>
+                      <div className="collapse-content">
+                        <p>
+                          {text}
+
+                        </p>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </main>
+        </div>
+
+      </Main>
+    </div>
   );
 }
 
@@ -119,7 +119,7 @@ export async function getServerSideProps(context) {
         headers
       });
 
-      console.log({ userResponse });
+    console.log({ userResponse });
   } catch (e) {
     userResponse.data = null;
     // const data = e?.response?.data;

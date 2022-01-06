@@ -30,12 +30,12 @@ const Search = (props) => {
     <Main
       meta={
         <Meta
-          title="DAP"
-          description="Dap app"
+          title="Social"
+          description="Social app"
         />
       }
 
-      user={ u }
+      user={u}
     >
 
 
@@ -51,22 +51,22 @@ const Search = (props) => {
 
 
             <div className="max-w-7xl m-auto ">
-            {
+              {
                 toasts
               }
               {
-                ! results || !results.data || !results.data.length && (
+                !results || !results.data || !results.data.length && (
                   <h1> No Results Found </h1>
                 )
-                
-              
+
+
               }
               {
-                results && results.data && results.data.map( ( result, idx ) => {
+                results && results.data && results.data.map((result, idx) => {
                   const { id, type, title } = result;
                   return (
                     <Link
-                    key={ idx }
+                      key={idx}
                       href="post/[pid]"
                       as={
                         `/post/${id}`
@@ -126,15 +126,15 @@ export async function getServerSideProps(context) {
 
   try {
     response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/search`,
-    {
-      withCredentials: true,
-      headers,
-      data:{
-        q: query.q
-      }
-    });
+      {
+        withCredentials: true,
+        headers,
+        data: {
+          q: query.q
+        }
+      });
     console.log({ response });
-  
+
   } catch (e) {
     response.data = null;
     console.log({ e })

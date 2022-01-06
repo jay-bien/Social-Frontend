@@ -59,7 +59,7 @@ const Index = () => {
     <Main
       meta={
         <Meta
-          title="DAP Signin"
+          title="Social Signin"
           description=""
         />
       }

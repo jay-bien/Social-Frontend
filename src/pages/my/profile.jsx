@@ -43,6 +43,9 @@ const Profile = props => {
          mt-8 sm:mx-auto sm:w-full
          dark:bg-transparent">
           <h1 className="mb-6 font-bold">My Profile</h1>
+          <div>
+            
+          </div>
         </div>
       </main>
     </div>

@@ -372,9 +372,8 @@ export async function getServerSideProps(context) {
         withCredentials: true,
         headers
       });
-    const data = userResponse.data;
-    use = userResponse.data.userO;
-    console.log({ data });
+    const use = userResponse.data;
+    
 
   } catch (e) {
     console.log({ e });

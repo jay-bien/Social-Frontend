@@ -49,7 +49,13 @@ const Index = () => {
       router.push('/');
     } catch (e) {
       console.log({ e });
-      notify('error', "An error has occurred")
+      if( e.response?.data?.errors && Array.isArray( e.response.data.errors)){
+        e.response.data.errors.map( error => {
+          notify('error', error.msg );
+        })
+      } else{
+        notify('error', "An error has occurred")
+      }
     }
 
   }

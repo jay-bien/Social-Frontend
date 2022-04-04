@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": "^7.17.8",
     "@tailwindcss/line-clamp": "^0.2.2",
     "axios": "^0.24.0",
     "daisyui": "^1.16.2",

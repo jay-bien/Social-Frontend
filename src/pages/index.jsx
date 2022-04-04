@@ -27,7 +27,6 @@ const Index = (props) => {
   const [toasts, notify] = useToast();
 
   const { user } = props;
-  let u = user?.userO;
 
 
 
@@ -230,7 +229,7 @@ const Index = (props) => {
         />
       }
 
-      user={u}
+      user={user}
     >
 
 
@@ -342,30 +341,35 @@ export async function getServerSideProps(context) {
 
   const headers = req.headers;
   let response = {};
-  let userResponse = {};
+  let user = {};
+  let posts= {};
 
   try {
-    response = await axios.get(process.env.NEXT_PUBLIC_API_URL + '/post');
+   let response = await axios.get(process.env.NEXT_PUBLIC_API_URL + '/post');
+    posts = response.data;
+    console.log({response});
+    console.log({response});
 
   } catch (e) {
     console.log({ e });
-    response.data = null;
+    posts = null;
   }
 
   try {
-    userResponse = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
+    let response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/currentUser`,
       {
         withCredentials: true,
         headers
       });
+      user = response.data;
   } catch (e) {
     console.log({ e });
-    userResponse.data = null;
+    user = null;
   }
 
 
   return {
-    props: { posts: response.data, user: userResponse.data },
+    props: { posts: posts, user: user },
   }
 }
 

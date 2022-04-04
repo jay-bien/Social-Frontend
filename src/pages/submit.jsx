@@ -362,7 +362,7 @@ export async function getServerSideProps(context) {
 
   const headers = req.headers;
   let userResponse = {};
-  let use = {};
+  let user = {};
 
 
 
@@ -372,18 +372,18 @@ export async function getServerSideProps(context) {
         withCredentials: true,
         headers
       });
-    const use = userResponse.data;
+    const user = userResponse.data;
     
 
   } catch (e) {
     console.log({ e });
     userResponse.data = null;
-    use = null;
+    user = null;
   }
 
 
   return {
-    props: { user: use },
+    props: { user: user },
   }
 }
 
